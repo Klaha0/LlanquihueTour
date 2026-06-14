@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Tour {
     static int idContador = 0; //Contador estático para obtener id desde aquí
-    private int idTour; //Propiedad id sin acceso externo y autoincrementable
+    private int idTour; //Propiedad id sin acceso externo se incrementa cuando se crea un objeto
     private String tipoTour;
     private String lugarTour;
     private int capacidadDePersonas;
@@ -58,7 +58,7 @@ public class Tour {
 
 
     /**
-     * Obtiene el tipo de tour.
+     * Para obtener el tipo de tour.
      * @return el tipo de tour.
      */
     public String getTipoTour() {
@@ -67,7 +67,7 @@ public class Tour {
     }
 
     /**
-     * Asigna el tipo de tour previa validación.
+     * Setea el tipo de tour, primero se valida.
      * @param tipoTour: tipo de experiencia que ofrece el tour.
      * @throws TourException si el tipo de tour es inválido.
      */
@@ -99,7 +99,7 @@ public class Tour {
     }
 
     /**
-     * Obtiene la capacidad de personas del tour.
+     * Obtener la capacidad de personas del tour.
      * @return la capacidad de personas del tour.
      */
     public int getCapacidadDePersonas() {
@@ -127,7 +127,7 @@ public class Tour {
     }
 
     /**
-     * Asigna la distancia del tour previa validación.
+     * Setea la distancia del tour previa validación.
      * @param distanciaEnKm: distancia del recorrido en kilómetros.
      * @throws TourException si la distancia es inválida.
      */
@@ -139,7 +139,7 @@ public class Tour {
     }
         
     /**
-     * Devuelve una representación en texto con todos los datos del tour.
+     * sobreescribe el método toString con formato personalizado
      * @return el texto descriptivo del tour.
      */
     @Override

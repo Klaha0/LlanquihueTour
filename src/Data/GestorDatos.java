@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class GestorDatos {
     private ArrayList<Tour> tours = new ArrayList<Tour>();
     /**
-     * Lee el archivo línea por línea, crea los tours y los carga en un ArrayList.
+     * Lee el archivo línea por línea, crea los tours y los carga en el ArrayList.
      * @param leerDatos: archivo de texto con los datos de los tours.
      * @return la lista de tours cargados desde el archivo.
      * @throws TourException si ocurre un error al crear algún tour.
@@ -23,39 +23,36 @@ public class GestorDatos {
     {
         
         try {
-                //Si el archivo no existe, se crea uno nuevo y se retorna la lista vacía (sin datos para mostrar)
-                if (!leerDatos.exists()) 
-                {
-                    leerDatos.createNewFile();
-                    System.out.println("Sin datos para mostrar");
-                    return tours; //SI SE CREÓ RECIÉN EL ARCHIVO ESTÁ EN BLANCO
-                }
-                //Se utiliza try-with-resources para asegurar el cierre del BufferedReader
-            try (BufferedReader br = new BufferedReader(new FileReader(leerDatos))) {
-                String linea;
-
-                while ((linea = br.readLine()) != null) {
-                    String[] datos = linea.split(";");
-                    String tipoTour = datos[1];
-                    String lugarTour = datos[2];
-                    String capacidadPersonas = datos[3];
-                    String distanciaEnKm = datos[4];
-                    int capacidad = Integer.parseInt(capacidadPersonas);
-                    double distancia = Double.parseDouble(distanciaEnKm);
-                    //Pasamos la lista que se va construyendo: la línea actual aún no está
-                    //en ella, así que se reconstruye bien. Si el archivo trae una línea
-                    //duplicada, el constructor lanza TourException y la omitimos.
-                    try {
-                        Tour tour = new Tour(tipoTour, lugarTour, capacidad, distancia, tours);
-                        tours.add(tour);
-                        } catch (TourException e) {
-                        System.out.println("Se omitió un registro porque ya existía o tenía datos inválidos: ");
-                    }
-                }
-                br.close();
+            //Si el archivo no existe, se crea uno nuevo y se retorna la lista vacía (sin datos para mostrar)
+            if (!leerDatos.exists()) 
+            {
+                leerDatos.createNewFile();
+                System.out.println("Sin datos para mostrar");
+                return tours; //SI SE CREÓ RECIÉN EL ARCHIVO ESTÁ EN BLANCO
             }
+            //Se utiliza try-with-resources para asegurar el cierre del BufferedReader
+        try (BufferedReader br = new BufferedReader(new FileReader(leerDatos))) {
+            String linea;
 
-        } 
+            while ((linea = br.readLine()) != null) {
+                String[] datos = linea.split(";");
+                String tipoTour = datos[1];
+                String lugarTour = datos[2];
+                String capacidadPersonas = datos[3];
+                String distanciaEnKm = datos[4];
+                int capacidad = Integer.parseInt(capacidadPersonas);
+                double distancia = Double.parseDouble(distanciaEnKm);            
+                try {
+                    Tour tour = new Tour(tipoTour, lugarTour, capacidad, distancia, tours);
+                    tours.add(tour);
+                    } catch (TourException e) {
+                    System.out.println("Se omitió un registro porque ya existía o tenía datos inválidos: ");
+                }
+            }
+            br.close();
+        }
+
+    } 
         catch (IOException e) 
         {
             System.out.println("Se ha producido un error al leer el archivo");
@@ -96,9 +93,9 @@ public class GestorDatos {
     }
     
     /**
-     * Recorre la lista y arma un texto con la información de todos los tours.
+     * Recorre la lista y arma un String con la información de todos los tours.
      * @param tours: lista de tours que se desea mostrar.
-     * @return el texto con todos los tours o un aviso si está vacía.
+     * @return un String con todos los tours o notifica si está vacía la lista.
      */
     public String MostrarTours(ArrayList<Tour> tours)
     {

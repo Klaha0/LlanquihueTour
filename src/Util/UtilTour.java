@@ -8,6 +8,7 @@ import static java.util.Objects.isNull;
 
 public class UtilTour {
 
+
     /**
      * Verifica si un tour ya existe en la lista comparando por contenido.
      * @param nuevo: tour que se desea comprobar.
@@ -107,4 +108,22 @@ public class UtilTour {
         
         return toursFiltrados;
     }       
+    
+    /**
+     * Crea y agrega un tour a la lista solo si no existe y sus datos son válidos.
+     * @param tipoTour: tipo de experiencia que ofrece el tour.
+     * @param lugarTour: lugar donde se hace el tour.
+     * @param capacidad: cantidad máxima de personas del tour.
+     * @param distancia: distancia del recorrido en kilómetros.
+     * @param tours: Arraylist de tours existentes para comprobar si el que se está agregando ya existe.
+     */
+    public void agregarTour(String tipoTour, String lugarTour, int capacidad, double distancia, ArrayList<Tour> tours){
+        try {
+            Tour tour = new Tour(tipoTour, lugarTour, capacidad, distancia, tours);
+            tours.add(tour);
+        } 
+        catch (TourException e) {
+            System.out.println("No se agregó el tour: " + tipoTour + " - " + lugarTour + ": " + e.getMessage());
+        }
+    }
 }
