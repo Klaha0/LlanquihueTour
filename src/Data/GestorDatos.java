@@ -71,8 +71,7 @@ public class GestorDatos {
      */
     public void GuardarArchivo(File guardarDatos, ArrayList<Tour> tours) throws IOException
     {
-        //PONEMOS APPEND = FALSE PORQUE PARTIMOS CARGANDO TODO EL DOCUMENTO AL ARRAY Y AL FINALIZAR LO GUARDAMOS TODO
-        //CON APPEND = TRUE ESTABAMOS VOLVIENDO A AGREGAR MÁS REGISTROS INCLUSO CUANDO LOS ELIMINABAMOS
+        //Ponemos append = false porque partimos cargando todo el documento al array, y luego lo guardamos completo al finalizar
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(guardarDatos, false)))
         {
             
