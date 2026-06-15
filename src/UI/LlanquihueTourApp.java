@@ -14,7 +14,10 @@ public class LlanquihueTourApp {
     static ArrayList<Tour> tours;
     static UtilTour util = new Util.UtilTour();
     static final File archivo = new File(REGISTRO_TOURS);
-
+    /**
+     * Bloque estático para cargar los tours desde el archivo al iniciar la aplicación.
+      * Si el archivo no existe, se crea uno nuevo y se inicializa la lista vacía.
+     */
     static {
         try {
             tours = datos.CargarTours(archivo);

@@ -93,7 +93,7 @@ public class GestorDatos {
     }
     
     /**
-     * Recorre la lista y arma un String con la información de todos los tours.
+     * Recorre la lista de tours y arma un String con la información de todos los tours.
      * @param tours: lista de tours que se desea mostrar.
      * @return un String con todos los tours o notifica si está vacía la lista.
      */

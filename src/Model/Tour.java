@@ -3,6 +3,10 @@ import ExceptionTour.TourException;
 import Util.UtilTour;
 import java.util.ArrayList;
 
+/**
+ * Clase que representa un tour con sus propiedades y validaciones.
+ * Cada tour tiene un identificador único, tipo, lugar, capacidad y distancia.
+ */
 public class Tour {
     static int idContador = 0; //Contador estático para obtener id desde aquí
     private int idTour; //Propiedad id sin acceso externo se incrementa cuando se crea un objeto
@@ -49,7 +53,7 @@ public class Tour {
     }
 
     /**
-     * Obtiene el identificador único del tour.
+     * getter del identificador único del tour.
      * @return el id del tour.
      */
     public int getIdTour() {
@@ -58,7 +62,7 @@ public class Tour {
 
 
     /**
-     * Para obtener el tipo de tour.
+     * Getter del tipo de tour.
      * @return el tipo de tour.
      */
     public String getTipoTour() {
@@ -67,7 +71,7 @@ public class Tour {
     }
 
     /**
-     * Setea el tipo de tour, primero se valida.
+     * Setter del tipo de tour, primero se valida.
      * @param tipoTour: tipo de experiencia que ofrece el tour.
      * @throws TourException si el tipo de tour es inválido.
      */
@@ -79,7 +83,7 @@ public class Tour {
     }
 
     /**
-     * Obtiene el lugar del tour.
+     * Getter de lugar del tour.
      * @return el lugar del tour.
      */
     public String getLugarTour() {
@@ -87,7 +91,7 @@ public class Tour {
     }
 
     /**
-     * Asigna el lugar del tour previa validación.
+     * Setter del lugar del tour, primero se valida.
      * @param lugarTour: lugar donde se hace el tour.
      * @throws TourException si el lugar del tour es inválido.
      */
@@ -99,7 +103,7 @@ public class Tour {
     }
 
     /**
-     * Obtener la capacidad de personas del tour.
+     * Getter de la capacidad de personas del tour.
      * @return la capacidad de personas del tour.
      */
     public int getCapacidadDePersonas() {
@@ -107,7 +111,7 @@ public class Tour {
     }
 
     /**
-     * Asigna la capacidad de personas previa validación.
+     * Setter de la capacidad de personas del tour, primero se valida.
      * @param capacidadDePersonas: cantidad máxima de personas del tour.
      * @throws TourException si la capacidad es inválida.
      */
@@ -119,7 +123,7 @@ public class Tour {
     }
 
     /**
-     * Obtiene la distancia del tour en kilómetros.
+     * Getter de la distancia del tour en kilómetros.
      * @return la distancia del tour en kilómetros.
      */
     public double getDistanciaEnKm() {
@@ -127,7 +131,7 @@ public class Tour {
     }
 
     /**
-     * Setea la distancia del tour previa validación.
+     * Setter de la distancia del tour, primero se valida.
      * @param distanciaEnKm: distancia del recorrido en kilómetros.
      * @throws TourException si la distancia es inválida.
      */
