@@ -1,4 +1,5 @@
-# 🧠 Evaluación Individual Semana 5 – Desarrollo Orientado a Objetos I
+# 🧠 Actividad sumativa individual "Organización modular y creación de una librería personalizada" 
+#                          Semana 5 - Desarrollo Orientado a Objetos I
 
 ## 👤 Autor del proyecto
 
@@ -10,7 +11,7 @@
 
 ## 📘 Descripción general del sistema
 
-Este proyecto corresponde a la actividad sumativa de la semana 5 de la asignatura *Desarrollo Orientado a Objetos I*, llamada **"Organización modular y creación de una librería personalizada"**, y es la continuación directa del proyecto trabajado en la Evaluación 1.
+Este proyecto corresponde a la actividad sumativa individual de la semana 5 - asignatura *Desarrollo Orientado a Objetos I*, llamada **"Organización modular y creación de una librería personalizada"**.
 
 Es un sistema desarrollado en Java que gestiona los tours de la agencia de turismo **Llanquihue Tour**, ubicada en la Región de Los Lagos. La aplicación permite registrar, listar, filtrar y persistir tours junto con la información de su **guía turístico** y la **dirección** de éste, aplicando los principios de encapsulamiento, composición entre clases, manejo de excepciones personalizadas y persistencia de datos en archivos.
 
@@ -34,31 +35,11 @@ El código está organizado en paquetes funcionales según su rol:
 └── tours.txt    # Archivo de texto donde se persisten los tours registrados.
 ```
 
----
-
-## 📦 Paquetes y clases implementadas
-
-| Paquete | Clase | Responsabilidad |
-|---------|-------|-----------------|
-| `UI` | `LlanquihueTourApp` | Clase principal con el método `main`; carga, agrega, filtra, muestra y guarda los tours. |
-| `Model` | `Tour` | Modela un tour con su tipo, lugar, capacidad, distancia y guía turístico asignado. |
-| `Model` | `GuiaTuristico` | Modela un guía turístico con su nombre, edad y dirección. |
-| `Model` | `Direccion` | Modela la dirección de un guía (calle, número, comuna y ciudad). |
-| `Data` | `GestorDatos` | Carga los tours desde el archivo, los guarda y los muestra por consola. |
-| `Exception` | `TourException` | Excepción personalizada para errores en la creación y manejo de tours. |
-| `Exception` | `GuiaTuristicoException` | Excepción personalizada para errores de validación de guías turísticos. |
-| `Exception` | `DireccionException` | Excepción personalizada para errores de validación de direcciones. |
-| `Util` | `UtilTour` | Validaciones, filtrado, control de duplicados y creación de tours. |
-| `Util` | `UtilGuiaTuristico` | Validaciones de los datos de un guía turístico. |
-| `Util` | `UtilDireccion` | Validaciones de los datos de una dirección. |
-
----
-
 ## 🔗 Relaciones entre clases (composición)
 
 El proyecto aplica **composición** para reflejar las relaciones del dominio:
 
-* Un `Tour` contiene un `GuiaTuristico` (cada tour tiene asignado un guía).
+* Un `Tour` tiene un `GuiaTuristico` (cada tour tiene asignado un guía).
 * Un `GuiaTuristico` contiene una `Direccion` (cada guía tiene una dirección).
 
 ---
@@ -91,4 +72,4 @@ git clone https://github.com/Klaha0/LlanquihueTour.git
 
 ---
 
-© Duoc UC | Escuela de Informática y Telecomunicaciones | Actividad sumativa
+© Duoc UC | Escuela de Informática y Telecomunicaciones | Actividad sumativa individual
