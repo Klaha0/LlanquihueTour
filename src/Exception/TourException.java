@@ -1,4 +1,4 @@
-package ExceptionTour;
+package Exception;
 
 /**
  * Excepción personalizada para errores relacionados con la creación y manejo de tours.

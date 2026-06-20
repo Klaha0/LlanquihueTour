@@ -1,11 +1,17 @@
 package Util;
 
-import ExceptionTour.TourException;
+import Exception.GuiaTuristicoException;
+import Exception.TourException;
+import Model.GuiaTuristico;
 import Model.Tour;
 import java.util.ArrayList;
 import static java.util.Objects.isNull;
 
 
+/**
+ * Clase para validar y gestionar los datos de un Tour.
+ * Incluye validaciones de campos, filtrado, creación y control de duplicados.
+ */
 public class UtilTour {
 
 
@@ -115,15 +121,24 @@ public class UtilTour {
      * @param lugarTour: lugar donde se hace el tour.
      * @param capacidad: cantidad máxima de personas del tour.
      * @param distancia: distancia del recorrido en kilómetros.
+     * @param guia: guía turístico asignado al tour.
      * @param tours: Arraylist de tours existentes para comprobar si el que se está agregando ya existe.
      */
-    public void agregarTour(String tipoTour, String lugarTour, int capacidad, double distancia, ArrayList<Tour> tours){
+    public void agregarTour(String tipoTour, String lugarTour, int capacidad, double distancia, GuiaTuristico guia, ArrayList<Tour> tours){
         try {
-            Tour tour = new Tour(tipoTour, lugarTour, capacidad, distancia, tours);
+            Tour tour = new Tour(tipoTour, lugarTour, capacidad, distancia, guia, tours);
             tours.add(tour);
         } 
         catch (TourException e) {
             System.out.println("No se agregó el tour: " + tipoTour + " - " + lugarTour + ": " + e.getMessage());
-        }
+        }        
+    }
+    /**
+     * Validamos que el tour no sea nulo
+     * @param tour: un objeto de la clase Tour
+     * @return False si es nulo el Tour
+     */
+    public boolean esValidoTour(Tour tour){        
+            return isNull(tour) ? false : true;                
     }
 }

@@ -1,7 +1,11 @@
 package UI;
 
 import Data.GestorDatos;
-import ExceptionTour.TourException;
+import Exception.DireccionException;
+import Exception.GuiaTuristicoException;
+import Exception.TourException;
+import Model.Direccion;
+import Model.GuiaTuristico;
 import Model.Tour;
 import Util.UtilTour;
 import java.io.File;
@@ -15,16 +19,11 @@ public class LlanquihueTourApp {
     static UtilTour util = new Util.UtilTour();
     static final File archivo = new File(REGISTRO_TOURS);
     /**
-     * Bloque estático para cargar los tours desde el archivo al iniciar la aplicación.
+      * Bloque estático para cargar los tours desde el archivo al iniciar la aplicación.
       * Si el archivo no existe, se crea uno nuevo y se inicializa la lista vacía.
      */
     static {
-        try {
-            tours = datos.CargarTours(archivo);
-        } catch (TourException e) {
-            tours = new ArrayList<>();
-            System.out.println("Error al cargar tours");
-        }
+        tours = datos.CargarTours(archivo);
     }
 
     
@@ -36,14 +35,30 @@ public class LlanquihueTourApp {
      * @throws IOException si ocurre un error al guardar el archivo.
      * @throws TourException si ocurre un error al filtrar los tours.
      */
-    public static void main(String[] args) throws IOException, TourException {
+    public static void main(String[] args) throws IOException, TourException{
         System.setOut(new java.io.PrintStream(System.out, true, java.nio.charset.StandardCharsets.UTF_8));
-        
-        util.agregarTour("Trekking","Panguipulli",12, 60.5, tours);
-        util.agregarTour("Gastronómico","Puerto Varas",8, 45.2, tours);
-        util.agregarTour("Gastronómico","Frutillar",15, 25.1, tours);
-        util.agregarTour("Escalada","Osorno",10, 50.9, tours);
-        util.agregarTour("Trekking","Llanquihue",20, 10.9, tours);
+        try{
+            Direccion direccion1 = new Direccion("Las golondrinas",10589, "Coñaripe","Villarrica");
+            GuiaTuristico guia1 = new GuiaTuristico("Daniel Opazo",32, direccion1);    
+
+            Direccion direccion2 = new Direccion("Caupolicán",1145, "Pucón","Villarrica");
+            GuiaTuristico guia2 = new GuiaTuristico("Jaime Falpe",28, direccion2); 
+
+            Direccion direccion3 = new Direccion("Los Tulipanes",7847, "Lican ray","Villarrica");
+            GuiaTuristico guia3 = new GuiaTuristico("Daniel Quinteros",28, direccion3); 
+
+            util.agregarTour("Trekking","Panguipulli",12, 60.5, guia1, tours);
+            util.agregarTour("Gastronómico","Puerto Varas",8, 45.2, guia1, tours);
+            util.agregarTour("Gastronómico","Frutillar",15, 25.1, guia2, tours);
+            util.agregarTour("Escalada","Osorno",10, 50.9, guia2, tours);
+            util.agregarTour("Trekking","Llanquihue",20, 10.9, guia3, tours);
+        }
+        catch(GuiaTuristicoException e){
+            System.out.println("Error con GuiaTuristico: " + e.getMessage());
+        }
+        catch(DireccionException e){
+            System.out.println("Error con Direccion: " + e.getMessage());
+        }
         
         var filtro = "Trekking";
         var filtroTours = util.filtrarPorTipoTour(filtro, tours);

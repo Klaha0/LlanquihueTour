@@ -1,5 +1,6 @@
 package Model;
-import ExceptionTour.TourException;
+import Exception.TourException;
+import Util.UtilGuiaTuristico;
 import Util.UtilTour;
 import java.util.ArrayList;
 
@@ -14,6 +15,7 @@ public class Tour {
     private String lugarTour;
     private int capacidadDePersonas;
     private double distanciaEnKm;
+    private GuiaTuristico guiaTuristico;
 
     /**
      * Crea un tour validando sus datos y verificando que no exista previamente.
@@ -21,14 +23,16 @@ public class Tour {
      * @param lugarTour: lugar donde se hace el tour.
      * @param capacidadDePersonas: cantidad máxima de personas del tour.
      * @param distanciaEnKm: distancia del recorrido en kilómetros.
+     * @param guia: guía turístico asignado al tour.
      * @param existentes: lista de tours ya cargados para evitar duplicados.
      * @throws TourException si los datos son inválidos o el tour ya existe.
      */
-    public Tour(String tipoTour, String lugarTour, int capacidadDePersonas, double distanciaEnKm,
+    public Tour(String tipoTour, String lugarTour, int capacidadDePersonas, double distanciaEnKm, GuiaTuristico guia,
             ArrayList<Tour> existentes)
             throws TourException
     {
         UtilTour util = new UtilTour();
+        UtilGuiaTuristico utilGuiaTuristico = new UtilGuiaTuristico();
 
         if(util.ValidarTipoTour(tipoTour)){
             this.tipoTour = tipoTour;
@@ -42,10 +46,14 @@ public class Tour {
         if(util.ValidarDistancia(distanciaEnKm)){
             this.distanciaEnKm = distanciaEnKm;
         }
+        if(utilGuiaTuristico.esValidoGuiaTuristico(guia)){
+            this.guiaTuristico = guia;
+        }
         //Validamos contra la lista ya cargada: si el tour ya existe, no lo creamos.        
         if(util.ExisteTour(this, existentes)){
             throw new TourException("El tour ya existe en los registros");
-        }
+        }        
+        
         //Asignamos el id único
         this.idTour = Tour.idContador;
 
@@ -141,6 +149,23 @@ public class Tour {
             this.distanciaEnKm = distanciaEnKm;
         }
     }
+
+    /**
+     * Getter del guía turístico asignado al tour.
+     * @return el guía turístico del tour.
+     */
+    public GuiaTuristico getGuiaTuristico() {
+        return guiaTuristico;
+    }
+
+    /**
+     * Setter del guía turístico asignado al tour.
+     * @param guiaTuristico: guía turístico que se asigna al tour.
+     */
+    public void setGuiaTuristico(GuiaTuristico guiaTuristico) {
+            this.guiaTuristico = guiaTuristico;
+    }
+    
         
     /**
      * sobreescribe el método toString con formato personalizado
@@ -153,6 +178,7 @@ public class Tour {
               "\nTipo de tour  : " + this.tipoTour +
               "\nLugar de tour : " + this.lugarTour + 
               "\nCapacidad     : " + this.capacidadDePersonas+
-              "\nDistancia     : " + String.format("%.2f Km",this.distanciaEnKm);
+              "\nDistancia     : " + String.format("%.2f Km",this.distanciaEnKm)+"\n"+
+                guiaTuristico.toString();
     }
 }
