@@ -54,6 +54,38 @@ El proyecto aplica **composición** para reflejar las relaciones del dominio:
 
 ---
 
+## 📄 Formato del archivo de entrada (`resources/tours.txt`)
+
+Cada línea del archivo representa **un tour** y contiene **11 campos separados por punto y coma (`;`)**, con un `;` final. El orden de los campos es el siguiente:
+
+```plaintext
+id;tipo;lugar;capacidad;distancia;nombreGuia;edadGuia;calle;numeracion;comuna;ciudad;
+```
+
+| Posición | Campo | Tipo | Descripción |
+|----------|-------|------|-------------|
+| 0 | `id` | entero | Identificador del tour (se reasigna al cargar). |
+| 1 | `tipo` | texto | Tipo de tour (ej. Trekking, Gastronómico). |
+| 2 | `lugar` | texto | Lugar donde se realiza el tour. |
+| 3 | `capacidad` | entero | Cantidad máxima de personas. |
+| 4 | `distancia` | decimal | Distancia del recorrido en kilómetros. |
+| 5 | `nombreGuia` | texto | Nombre del guía turístico. |
+| 6 | `edadGuia` | entero | Edad del guía turístico. |
+| 7 | `calle` | texto | Calle de la dirección del guía. |
+| 8 | `numeracion` | entero | Numeración de la dirección. |
+| 9 | `comuna` | texto | Comuna de la dirección. |
+| 10 | `ciudad` | texto | Ciudad de la dirección. |
+
+**Ejemplo de línea válida:**
+
+```plaintext
+0;Trekking;Panguipulli;12;60.5;Daniel Opazo;32;Las golondrinas;10589;Coñaripe;Villarrica;
+```
+
+Si una línea no tiene exactamente 11 campos, o algún dato numérico está mal escrito, el programa **omite solo ese registro**, informa por consola y continúa cargando el resto del archivo.
+
+---
+
 ## ⚙️ Instrucciones para clonar y ejecutar el proyecto
 
 1. Clona el repositorio desde GitHub:
