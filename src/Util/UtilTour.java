@@ -113,7 +113,34 @@ public class UtilTour {
         }
         
         return toursFiltrados;
-    }       
+    }
+    
+    /**
+     * Filtra la lista y devuelve solo los tours que imparte el guía buscado.
+     * @param nombreGuia: nombre del guía por el cual se desea filtrar.
+     * @param tours: lista de tours sobre la que se aplica el filtro.
+     * @return la lista de tours que coinciden con el guía indicado.
+     * @throws GuiaTuristicoException si el nombre para filtrar es nulo o vacío.
+     */
+    public ArrayList<Tour> filtrarPorGuia(String nombreGuia, ArrayList<Tour> tours) throws GuiaTuristicoException{
+        if(isNull(nombreGuia) || nombreGuia.trim().isEmpty())
+        {
+            throw new GuiaTuristicoException("Debe proporcionar un nombre válido");
+        }
+        
+        ArrayList<Tour> toursFiltrados = new ArrayList<>();
+        String guiaLimpio = nombreGuia.trim();
+        
+        for(Tour tour : tours){
+            if(tour.getGuiaTuristico().getNombre().equalsIgnoreCase(guiaLimpio)){
+                toursFiltrados.add(tour);
+            }
+        }
+        if(toursFiltrados.size()==0){
+            System.out.println("No existen guías con el nombre proporcionado");
+        }
+        return toursFiltrados;
+    }
     
     /**
      * Crea y agrega un tour a la lista solo si no existe y sus datos son válidos.

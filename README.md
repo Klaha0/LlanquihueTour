@@ -50,6 +50,7 @@ El proyecto aplica **composición** para reflejar las relaciones del dominio:
 * **Agregar tours:** Se crean tours nuevos validando sus datos y los de su guía y dirección, evitando duplicados.
 * **Mostrar tours:** Se despliega en consola la lista completa de tours registrados.
 * **Filtrar por tipo:** Permite obtener solo los tours de un tipo determinado (ej. "Trekking").
+* **Filtrar por guia:** Permite obtener solo los tours que imparte un guía determinado (ej. "Ariel Quinteros").
 * **Guardar en archivo:** Al finalizar, todos los tours se escriben de vuelta en el archivo.
 
 ---
