@@ -4,13 +4,20 @@ import Model.ExcursionCultural;
 import Model.PaseoLacustre;
 import Model.RutaGastronomica;
 import Model.ServicioTuristico;
-/**
+import java.util.ArrayList;
+
+/**SEMANA 6 y 7
  * @GestorServicios 
+ * (Semana 6)
  * Clase para poder crear 2 instancias de: 
  * PaseoLacustre - RutaGastronomica - ExcursionCultural
+ * 
+ * (Semana 7)
+ * o bien crear un ArrayList de servicios turísticos
+ * con 6 instancias de los 3 tipos de servicios.
  */
 public class GestorServicios {
-
+    //Métodos SEMANA 6
     public ServicioTuristico crearPaseoLacustre1(){
        return new PaseoLacustre("Conoce el lago calafquén", 2.5, "lancha");        
     }
@@ -30,4 +37,20 @@ public class GestorServicios {
         return new ExcursionCultural("El arte desde otra perspectiva", 2.0, "Museo Nacional de bellas artes");
     }
 
+    //Método SEMANA 7
+    /**Método crearServiciosTuristicos
+     * utiliza los métodos de creación de instancias de la semana 6 para 
+     * generar una lista de servicios turísticos.
+     * @return ArrayList<ServicioTuristico> con 6 instancias de servicios turísticos
+     */
+    public ArrayList<ServicioTuristico> crearServiciosTuristicos() {
+        ArrayList<ServicioTuristico> servicios = new ArrayList<>();
+        servicios.add(crearPaseoLacustre1());
+        servicios.add(crearPaseoLacustre2());
+        servicios.add(crearRutaGastronomica1());
+        servicios.add(crearRutaGastronomica2());
+        servicios.add(crearExcursionCultural1());
+        servicios.add(crearExcursionCultural2());
+        return servicios;
+    }
 }

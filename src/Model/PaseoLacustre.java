@@ -22,12 +22,12 @@ public class PaseoLacustre extends ServicioTuristico{
         this.tipoEmbarcacion = tipoEmbarcacion;
     }
 
-    /**
-     * @toString (sobrescritura)
+    /**Método mostrarInformacion
+     * Muestra la información del servicio turístico PaseoLacustre.
      * @return String de servicio PaseoLacustre formateado
      */
     @Override
-    public String toString() {        
+    public String mostrarInformacion() {        
         return "Paseo Lacustre: " + getNombre() + 
                ", Duración: " + getDuracionHoras() + 
                " horas, Tipo de Embarcación: " + tipoEmbarcacion;

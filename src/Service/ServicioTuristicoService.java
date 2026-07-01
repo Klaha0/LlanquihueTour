@@ -1,0 +1,40 @@
+package Service;
+
+import Model.ExcursionCultural;
+import Model.PaseoLacustre;
+import Model.RutaGastronomica;
+import Model.ServicioTuristico;
+import java.util.ArrayList;
+
+/**@ServicioTuristicoService (Semana 7)
+ * Clase de servicio encargada de recorrer y mostrar por consola una
+ * colección de servicios turísticos.
+ */
+public class ServicioTuristicoService {
+
+    /**Método mostrarServicioTuristico
+     * Recorre la colección con un bucle for-each y muestra por consola
+     * la información de cada servicio turístico invocando su método
+     * sobrescrito mostrarInformacion().
+     * @param servicios ArrayList de servicios turísticos a mostrar.
+     */
+    public void mostrarServicioTuristico(ArrayList<ServicioTuristico> servicios) {
+        
+        System.out.println("--==** SERVICIOS TURÍSTICOS DISPONIBLES **==--");
+        for (ServicioTuristico servicio : servicios) {
+
+            if(servicio instanceof PaseoLacustre) 
+            {
+                System.out.println(((PaseoLacustre) servicio).mostrarInformacion());
+            } 
+            else if(servicio instanceof RutaGastronomica) 
+            {
+                System.out.println(((RutaGastronomica) servicio).mostrarInformacion());
+            } 
+            else if(servicio instanceof ExcursionCultural) 
+            {
+                System.out.println(((ExcursionCultural) servicio).mostrarInformacion());
+            }
+        }
+    }
+}

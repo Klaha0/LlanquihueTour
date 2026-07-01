@@ -30,12 +30,12 @@ public class ServicioTuristico {
     public void setDuracionHoras(double duracionHoras) {
         this.duracionHoras = duracionHoras;
     }
-    /**
-     *@toString (sobrescritura)
+    /**Método mostrarInformacion
+     * Muestra la información del servicio turístico.
      * @return String de servicio formateado
      */
-    @Override
-    public String toString() {
+   
+    public String mostrarInformacion() {
         return "Servicio Turístico: " + nombre + 
                " tiene una duración de: " + duracionHoras + 
                "hrs.";

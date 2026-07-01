@@ -1,5 +1,5 @@
-# 🧠 Actividad formativa individual "Creando jerarquías de clases con herencia simple"
-#                          Semana 6 - Desarrollo Orientado a Objetos I
+# 🧠 Actividad formativa individual "Aplicando polimorfismo y colecciones genéricas"
+#                          Semana 7 - Desarrollo Orientado a Objetos I
 
 ## 👤 Autor del proyecto
 
@@ -9,39 +9,41 @@
 
 ---
 
-## 🎯 Objetivo de la semana 6
+## 🎯 Objetivo de la semana 7
 
-Esta semana, la actividad **"Creando jerarquías de clases con herencia simple"** tiene como objetivo
-implementar una **clase base con atributos comunes** y un conjunto de **subclases que extiendan su
-funcionalidad**, aplicando los conceptos de **herencia simple**, **atributos heredados**,
-**sobrescritura de métodos (`toString()`)**, uso de **`super(...)`** en los constructores y
-**composición** entre las clases que ejecutan el programa.
+Esta semana, la actividad **"Aplicando polimorfismo y colecciones genéricas"** tiene como objetivo
+**extender la jerarquía de clases** construida en la semana 6 para gestionar los servicios turísticos
+de forma **dinámica y polimórfica**. Para ello se incorpora una **colección genérica**
+(`List<ServicioTuristico>` / `ArrayList<ServicioTuristico>`) que almacena distintos tipos de servicio
+en una misma estructura, y se recorre invocando el método **sobrescrito `mostrarInformacion()`** desde
+referencias de la **superclase**, evidenciando el **polimorfismo** y la **sobrescritura de métodos**.
 
-En el contexto del caso de la agencia **Llanquihue Tour**, se modelan jerárquicamente los distintos
-tipos de servicios turísticos que ofrece la empresa (rutas gastronómicas, paseos lacustres y
-excursiones culturales), reutilizando la información básica común (nombre y duración) y especializando
-los atributos propios de cada categoría. De esta forma el sistema queda preparado para incorporar
-fácilmente nuevos tipos de servicio en el futuro.
+En el contexto del caso de la agencia **Llanquihue Tour**, esto permite **escalar el sistema de forma
+flexible**: se pueden incorporar nuevas subclases de servicio sin modificar la lógica de recorrido y
+despliegue, ya que cada objeto sabe cómo mostrar su propia información.
 
 ---
 
-## 🆕 ¿Qué se hizo esta semana? (sobre el proyecto de la semana 5)
+## 🆕 ¿Qué se hizo esta semana? (sobre el proyecto de la semana 6)
 
-El trabajo se realizó **sobre el mismo proyecto `LlanquihueTourApp`** desarrollado en las semanas
-anteriores, manteniendo la organización modular ya existente. Concretamente:
+El trabajo se realizó **sobre el mismo proyecto `LlanquihueTourApp`** de las semanas anteriores,
+manteniendo la organización modular ya existente. Concretamente:
 
-* Se **agregó la jerarquía de clases** de la semana 6 en el paquete `Model/`:
-  `ServicioTuristico` (superclase) y sus subclases `RutaGastronomica`, `PaseoLacustre` y
-  `ExcursionCultural`.
-* Se **agregó la clase `GestorServicios`** en el paquete `Data/`, encargada de crear las instancias
-  de prueba de cada subclase.
-* Se **agregó la clase `Main`** en el paquete `UI/`, que ejecuta el programa de la semana 6.
-* **El código de la semana 5 NO se eliminó:** dentro de `Main` se dejó **comentado** todo el código
-  correspondiente a la actividad de la semana 5 (carga, agregado, filtrado y guardado de tours), y a
-  continuación se **agregó el nuevo código** que cumple con las instrucciones de la semana 6 (creación
-  y muestra por consola de los servicios turísticos mediante herencia).
+* Se **renombró la sobrescritura `toString()` a `mostrarInformacion()`** en la superclase
+  `ServicioTuristico` y en todas sus subclases (`RutaGastronomica`, `PaseoLacustre`,
+  `ExcursionCultural`), conservando la anotación `@Override` en las subclases.
+* Se **agregó el método `crearServiciosTuristicos()`** en la clase `GestorServicios` (paquete `Data/`),
+  que reutiliza los métodos de creación de la semana 6 para devolver un
+  **`ArrayList<ServicioTuristico>` con 6 instancias** (dos de cada subclase).
+* Se **agregó el paquete `Service/`** con la clase **`ServicioTuristicoService`**, encargada de
+  **recorrer la colección** con un bucle `for-each` y **mostrar cada servicio por consola** invocando
+  su método sobrescrito `mostrarInformacion()`.
+* Se **actualizó la clase `Main`** (paquete `UI/`) para: solicitar la lista al `GestorServicios`,
+  entregarla al `ServicioTuristicoService` y mostrar el resultado por consola.
+* **El código de las semanas 5 y 6 NO se eliminó:** dentro de `Main` quedó **comentado** (agrupado en
+  regiones `<editor-fold>`), manteniendo la trazabilidad de la evolución del proyecto.
 * Las clases de las semanas anteriores (`Tour`, `GuiaTuristico`, `Direccion`, gestores, utilidades y
-  excepciones) **se conservan** en el proyecto como parte del historial de avance del sistema.
+  excepciones) **se conservan** en el proyecto.
 
 > 📝 De esta manera se mantiene la trazabilidad del trabajo realizado en todas las semanas, dejando a
 > la vista cómo evolucionó el proyecto sin perder lo construido anteriormente.
@@ -56,8 +58,9 @@ El código está organizado en paquetes funcionales según su responsabilidad:
 📁 src/
 ├── UI/          # Clase Main, contiene el método main que ejecuta el programa (capa de presentación).
 ├── Model/       # Jerarquía de clases: ServicioTuristico, RutaGastronomica, PaseoLacustre,
-│                #   ExcursionCultural (semana 6) + Tour, GuiaTuristico, Direccion (semanas previas).
-├── Data/        # Clase GestorServicios (crea instancias de prueba) + GestorDatos (semanas previas).
+│                #   ExcursionCultural (semanas 6-7) + Tour, GuiaTuristico, Direccion (semanas previas).
+├── Data/        # Clase GestorServicios (crea instancias y la colección) + GestorDatos (semanas previas).
+├── Service/     # Clase ServicioTuristicoService: recorre la colección y muestra los servicios (semana 7).
 ├── Exception/   # Excepciones personalizadas de semanas previas.
 └── Util/        # Clases de validación y operaciones de semanas previas.
 
@@ -67,22 +70,24 @@ El código está organizado en paquetes funcionales según su responsabilidad:
 
 ---
 
-## 🧬 Jerarquía de clases creada (semana 6)
+## 🧬 Jerarquía de clases y polimorfismo (semana 7)
 
 ```plaintext
                  ServicioTuristico            (superclase)
                  - nombre : String
                  - duracionHoras : double
+                 + mostrarInformacion()       (método sobrescribible)
                         ▲
         ┌───────────────┼─────────────────┐
         │               │                 │
  RutaGastronomica  PaseoLacustre   ExcursionCultural
  + numeroDeParadas + tipoEmbarcacion + lugarHistorico
+ + mostrarInformacion() @Override (en cada subclase)
 ```
 
 | Clase | Tipo | Atributos | Descripción |
 |-------|------|-----------|-------------|
-| `ServicioTuristico` | Superclase | `nombre`, `duracionHoras` | Clase base con la información común a todo servicio turístico. |
+| `ServicioTuristico` | Superclase | `nombre`, `duracionHoras` | Clase base con la información común y el método `mostrarInformacion()` con implementación base. |
 | `RutaGastronomica` | Subclase | `+ numeroDeParadas` | Ruta con paradas gastronómicas. Hereda de `ServicioTuristico`. |
 | `PaseoLacustre` | Subclase | `+ tipoEmbarcacion` | Paseo en el lago según el tipo de embarcación. Hereda de `ServicioTuristico`. |
 | `ExcursionCultural` | Subclase | `+ lugarHistorico` | Excursión a un lugar histórico. Hereda de `ServicioTuristico`. |
@@ -91,24 +96,32 @@ Todas las subclases:
 
 * **Heredan** de `ServicioTuristico` mediante `extends`.
 * **Invocan a `super(nombre, duracionHoras)`** en su constructor para inicializar los atributos heredados.
-* **Sobrescriben `toString()`** con `@Override` para mostrar su información completa (atributos
-  heredados + atributo propio).
+* **Sobrescriben `mostrarInformacion()`** con `@Override` para mostrar su información completa
+  (atributos heredados + atributo propio).
 
-Además, la clase `GestorServicios` (paquete `Data/`) aplica **composición**: `Main` crea un objeto
-`GestorServicios` y lo utiliza para generar las instancias de prueba de cada subclase.
+**Polimorfismo aplicado:** los 6 objetos se almacenan en una única colección
+`ArrayList<ServicioTuristico>` y se recorren con un bucle `for-each`. Al invocar
+`mostrarInformacion()`, cada objeto ejecuta **su propia versión sobrescrita** según su tipo real,
+sin necesidad de conocer de antemano de qué subclase se trata.
+
+Además, las clases `GestorServicios` (paquete `Data/`) y `ServicioTuristicoService` (paquete
+`Service/`) aplican **composición**: `Main` las instancia y las utiliza para generar y mostrar la
+colección de servicios.
 
 ---
 
-## 🔍 Funcionalidad principal (semana 6)
+## 🔍 Funcionalidad principal (semana 7)
 
-* **`GestorServicios`** expone métodos que crean **dos instancias de cada subclase**
-  (`PaseoLacustre`, `RutaGastronomica`, `ExcursionCultural`).
-* **`Main`** instancia `GestorServicios`, solicita los objetos y los **muestra por consola** invocando
-  el método `toString()` de cada uno, evidenciando la herencia y la sobrescritura.
+* **`GestorServicios.crearServiciosTuristicos()`** construye y devuelve un
+  `ArrayList<ServicioTuristico>` con **dos instancias de cada subclase**.
+* **`ServicioTuristicoService.mostrarServicioTuristico(...)`** recorre la colección con `for-each` y
+  muestra cada servicio por consola mediante su método sobrescrito `mostrarInformacion()`.
+* **`Main`** orquesta el flujo: pide la colección al gestor y la entrega al servicio para su despliegue.
 
 **Salida esperada por consola:**
 
 ```plaintext
+--==** SERVICIOS TURÍSTICOS DISPONIBLES **==--
 Paseo Lacustre: Conoce el lago calafquén, Duración: 2.5 horas, Tipo de Embarcación: lancha
 Paseo Lacustre: Crucero romántico al atardecer, Duración: 3.0 horas, Tipo de Embarcación: Yate de lujo
 Ruta Gastronómica: Ruta del curánto, Duración: 4.0 horas, Número de Paradas: 4
@@ -129,12 +142,25 @@ git clone https://github.com/Klaha0/LlanquihueTour.git
 
 2. Abre el proyecto en tu IDE (NetBeans o IntelliJ IDEA).
 3. Ejecuta la clase principal **`Main.java`**, ubicada en el paquete `UI`.
-4. Observa en la consola las **dos instancias de cada subclase** (`PaseoLacustre`, `RutaGastronomica`
-   y `ExcursionCultural`) mostradas mediante su método `toString()`.
+4. Observa en la consola las **6 instancias** almacenadas en la colección, mostradas de forma
+   **polimórfica** mediante su método `mostrarInformacion()`.
 
-> ℹ️ El código de la semana 5 está **comentado** dentro de `Main`. Si deseas volver a ejecutarlo, basta
-> con descomentar ese bloque (y los `import` y atributos estáticos asociados) y comentar el bloque de
-> la semana 6.
+### 💻 Compilación y ejecución por consola (alternativa)
+
+Desde la raíz del proyecto:
+
+```bash
+# Compilar TODO el código fuente del proyecto en la carpeta build/classes
+javac -encoding UTF-8 -d build/classes \
+  src/Model/*.java src/Data/*.java src/Service/*.java \
+  src/Exception/*.java src/Util/*.java src/UI/*.java
+
+# Ejecutar la clase principal
+java -cp build/classes UI.Main
+```
+
+> ℹ️ El código de las semanas 5 y 6 está **comentado** dentro de `Main` (agrupado en regiones
+> `<editor-fold>`). Si deseas volver a ejecutarlo, basta con descomentar el bloque correspondiente.
 
 ---
 
@@ -143,8 +169,11 @@ git clone https://github.com/Klaha0/LlanquihueTour.git
 * **Semana 4-5:** Sistema de gestión de tours con encapsulamiento, composición (`Tour` →
   `GuiaTuristico` → `Direccion`), excepciones personalizadas, persistencia en archivo y filtrado por
   tipo y por guía.
-* **Semana 6 (actual):** Jerarquía de servicios turísticos con herencia simple, `super(...)`,
-  sobrescritura de `toString()` y composición a través de `GestorServicios`.
+* **Semana 6:** Jerarquía de servicios turísticos con herencia simple, `super(...)`, sobrescritura de
+  `toString()` y composición a través de `GestorServicios`.
+* **Semana 7 (actual):** Polimorfismo y colecciones genéricas: colección `ArrayList<ServicioTuristico>`,
+  método sobrescrito `mostrarInformacion()`, recorrido `for-each` desde referencias de la superclase y
+  nuevo paquete `Service/`.
 
 ---
 

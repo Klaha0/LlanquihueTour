@@ -3,9 +3,11 @@ package UI;
 import Data.GestorServicios;
 import Exception.GuiaTuristicoException;
 import Exception.TourException;
+import Service.ServicioTuristicoService;
 import java.io.IOException;
 
 public class Main {
+// <editor-fold defaultstate="collapsed" desc="SEMANAS ANTERIORES">
     /*
     static final String REGISTRO_TOURS = "resources/tours.txt";
     static GestorDatos datos = new GestorDatos();
@@ -34,6 +36,7 @@ public class Main {
      *  Se crean distintas instancias predefinidas de:
      * @RutaGastronomica, @PaseoLacustre y @ExcursionCultural y se muestran en consola.     
      */
+// </editor-fold>
     public static void main(String[] args) 
             throws IOException, TourException, GuiaTuristicoException
     {
@@ -42,6 +45,7 @@ public class Main {
         //Se crea instamcia de GestorServicios para crear objetos pre-definidos
         GestorServicios gestor = new GestorServicios();
         
+// <editor-fold defaultstate="collapsed" desc="SEMANAS ANTERIORES">
         //Se deja comentado código de la SEMANA 5
         /*
         try{
@@ -79,6 +83,7 @@ public class Main {
         System.out.println(datos.MostrarTours(filtroTours));
         datos.GuardarArchivo(archivo, tours);*/
         
+        /*
         //Comienza Código SEMANA 6
         
         //Se Crean 2 instancias de cada clase
@@ -98,6 +103,21 @@ public class Main {
         System.out.println(rutaGastronomica2.toString());
         System.out.println(excursionCultural1.toString());
         System.out.println(excursionCultural2.toString());
+        */
+// </editor-fold>
+
+        //Comienza Código SEMANA 7
+        //Se crea lista de servicios turísticos ayudados del gestor
+        var serviciosTuristicos = gestor.crearServiciosTuristicos();
+        //Se crea una instancia del servicio que nos va a 
+        //ayudar a mostrar los servicios turísticos
+        var serviciosService = new ServicioTuristicoService();
+        serviciosService.mostrarServicioTuristico(serviciosTuristicos);
+                
+        
+        //También se puede utilizar este forEach que nos permite ahorrar mucho código
+        //solo a modo de ejemplo (a este solo le pasamos la colección sin procesar)
+        //serviciosTuristicos.forEach(servicio -> System.out.println(servicio.mostrarInformacion()));
     }    
 
 }
