@@ -21,12 +21,12 @@ public class ExcursionCultural extends ServicioTuristico {
         this.lugarHistorico = lugarHistorico;
     }
 
-    /**
-     * @toString (sobrescritura)
+    /**Método mostrarInformacion
+     * Muestra la información del servicio turístico ExcursionCultural.
      * @return String de servicio ExcursionCultural formateado
      */
     @Override
-    public String toString() {        
+    public String mostrarInformacion() {        
         return "Excursion Cultural: " + getNombre() + 
                ", Duración: " + getDuracionHoras() + 
                " horas, Lugar Histórico: " + lugarHistorico;
