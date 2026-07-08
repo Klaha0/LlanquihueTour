@@ -5,7 +5,7 @@ package Model;
  * hereda de clase @ServicioTuristico
  * @tipoEmbarcacion: Representa el tipo de embarcación utilizada en el paseo.
  */
-public class PaseoLacustre extends ServicioTuristico{
+public class PaseoLacustre extends ServicioTuristico implements Registrable{
     private String tipoEmbarcacion; 
     
     public PaseoLacustre(String nombre, double duracionHoras, String tipoEmbarcacion) {
@@ -33,5 +33,8 @@ public class PaseoLacustre extends ServicioTuristico{
                " horas, Tipo de Embarcación: " + tipoEmbarcacion;
     }
     
-    
+    @Override
+    public String mostrarResumen() {
+        return this.mostrarInformacion();
+    }
 }

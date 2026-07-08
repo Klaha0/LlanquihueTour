@@ -6,7 +6,7 @@ package Model;
  * @numeroDeParadas: Representa la cantidad de detenciones
  * de la ruta, cada parada, una visita distinta.
  */
-public class RutaGastronomica extends ServicioTuristico{
+public class RutaGastronomica extends ServicioTuristico implements Registrable{
     private int numeroDeParadas;
 
     public RutaGastronomica(String nombre, double duracionHoras, int numeroDeParadas) {
@@ -32,4 +32,9 @@ public class RutaGastronomica extends ServicioTuristico{
                ", Duración: " + getDuracionHoras() + 
                " horas, Número de Paradas: " + numeroDeParadas;
     }    
+    
+    @Override
+    public String mostrarResumen() {
+        return this.mostrarInformacion();
+    }
 }
