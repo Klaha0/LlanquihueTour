@@ -1,80 +1,122 @@
 package Util;
 
-import Exception.DireccionException;
 import Model.Direccion;
 import static java.util.Objects.isNull;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  * Clase para validar campos de Dirección
  * Validaciones de todos los campos 
  * Retornos boolean
  */
-public class UtilDireccion {
+public class UtilDireccion extends JFrame{
     
     /**
      * Método ValidarCalle
      * @param calle: nombre de la calle de la dirección
      * @return true si el campo es válido
-     * @throws DireccionException si el campo no es válido
      */           
-    public boolean ValidarCalle(String calle) throws DireccionException{
+    public boolean ValidarCalle(String calle) 
+    {
         if(isNull(calle))
         {
-            throw new DireccionException("El campo calle no debe ser nulo");            
+            JOptionPane.showMessageDialog(this, "Debe ingresar una calle válida","Error",JOptionPane.ERROR_MESSAGE);
+            return false;
         }
         if(calle.trim().isBlank())
         {
-            throw new DireccionException("El campo calle no estar en blanco");            
+            JOptionPane.showMessageDialog(this, "El campo calle no puede estar en blanco","Error",JOptionPane.ERROR_MESSAGE);
+            return false;
         }
         return true;
     }
     
     /**
      * Método ValidarComuna
-     * @param Comuna: nombre de la comuna de la dirección
-     * @return true si el campo es válido
-     * @throws DireccionException si el campo no es válido
-     */ 
-    public boolean ValidarComuna(String comuna) throws DireccionException{
+     * @param comuna
+     * @return 
+     */
+    public boolean ValidarComuna(String comuna) 
+    {
         if(isNull(comuna))
         {
-            throw new DireccionException("El campo comuna no debe ser nulo");            
+            JOptionPane.showMessageDialog(this, "Debe ingresar una comuna válida","Error",JOptionPane.ERROR_MESSAGE);
+            return false;
         }
         if(comuna.trim().isBlank())
         {
-            throw new DireccionException("El campo comuna no debe estar en blanco");            
+            JOptionPane.showMessageDialog(this, "El campo comuna no puede estar en blanco","Error",JOptionPane.ERROR_MESSAGE);
+            return false;
         }
         return true;
     }
     
-    /**
-     * Método ValidarCiudad
-     * @param Ciudad: nombre de la ciudad de la dirección
-     * @return true si el campo es válido
-     * @throws DireccionException si el campo no es válido
-     */ 
-    public boolean ValidarCiudad(String ciudad) throws DireccionException{
+   /**     
+    * Método ValidarCiudad
+    * @param ciudad
+    * @return 
+    */
+    public boolean ValidarCiudad(String ciudad) 
+    {
         if(isNull(ciudad))
         {
-            throw new DireccionException("El campo ciudad no debe ser nulo");            
+            JOptionPane.showMessageDialog(this, "Debe ingresar una ciudad válida","Error",JOptionPane.ERROR_MESSAGE);
+            return false;
         }
         if(ciudad.trim().isBlank())
         {
-            throw new DireccionException("El campo ciudad no debe estar en blanco");            
+            JOptionPane.showMessageDialog(this, "El campo ciudad no puede estar en blanco","Error",JOptionPane.ERROR_MESSAGE);
+            return false;           
         }
         return true;
     }
     
     /**
      * Método ValidarNumeracion
-     * @param Numeracion: numeración de la comuna de la dirección.
-     * @return true si el campo es válido
-     * @throws DireccionException si el campo no es válido.
-     */ 
-    public boolean ValidarNumeracion(int numeracion) throws DireccionException{
-        if(numeracion < 0)
+     * @param numero
+     * @return 
+     */
+    public boolean ValidarNumeracion(String numero) 
+    {                  
+        var numeracion = ParseNumeracionDireccion(numero);
+        if (numeracion < 0)
         {
-            throw new DireccionException("La numeracion debe ser mayor o igual a 0");
+            JOptionPane.showMessageDialog(this, "La numeración debe ser mayor o igual que 0","Error",JOptionPane.ERROR_MESSAGE);                
+            return false;
+        }            
+        return true;
+    }
+    
+    /**
+     * 
+     * @param numeroString
+     * @return 
+     */
+    private int ParseNumeracionDireccion (String numeroString)
+    {
+        int numero = 0;
+        try
+        {
+            numero = Integer.parseInt(numeroString);  
+            return numero;
+        }
+        catch(NumberFormatException e)
+        {
+            JOptionPane.showMessageDialog(this, "Debe ingresar un número válido","Error",JOptionPane.ERROR_MESSAGE);            
+        }      
+        return numero;
+    }
+    
+    public boolean EsEntero(String valor)
+    {
+        try
+        {            
+            var numero = Integer.parseInt(valor);            
+        }        
+        catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(this, "Debe ingresar una numeración mayor que o igual 0","Error",JOptionPane.ERROR_MESSAGE);                
+            return false;
         }
         return true;
     }

@@ -5,7 +5,7 @@ package Model;
  * hereda de clase @ServicioTuristico
  * @lugarHistorico: Representa el lugar histórico visitado durante la excursión.
  */
-public class ExcursionCultural extends ServicioTuristico implements Registrable {
+public class ExcursionCultural extends ServicioTuristico{
     private String lugarHistorico;
 
     public ExcursionCultural(String nombre, double duracionHoras, String lugarHistorico) {

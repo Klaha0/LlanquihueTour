@@ -1,13 +1,15 @@
 package Model;
-import Exception.GuiaTuristicoException;
+
 import Util.UtilDireccion;
 import Util.UtilGuiaTuristico;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  * Clase que representa un guía turístico con sus datos personales y dirección.
  * Cada guía tiene un nombre, una edad y una dirección asociada.
  */
-public class GuiaTuristico {
+public class GuiaTuristico extends JFrame implements Registrable{
     private UtilGuiaTuristico util = new UtilGuiaTuristico();
     private UtilDireccion utilDireccion = new UtilDireccion();
     private String nombre;
@@ -17,20 +19,27 @@ public class GuiaTuristico {
     /**
      * Crea un guía turístico validando sus datos antes de asignarlos.
      * @param nombre: nombre del guía turístico.
-     * @param edad: edad del guía turístico.
+     * @param edadString: edad del guía turístico.
      * @param direccion: dirección del guía turístico.
-     * @throws GuiaTuristicoException si el nombre o la edad son inválidos.
      */
-    public GuiaTuristico(String nombre, int edad, Direccion direccion) throws GuiaTuristicoException {
-
-        if(util.ValidarNombre(nombre))
-            this.nombre = nombre;
-
-        if(util.ValidarEdad(edad))
-            this.Edad = edad;
-
-        if(utilDireccion.esValidaDireccion(direccion))
-        this.direccion = direccion;
+    public GuiaTuristico(String nombre, String edadString, Direccion direccion)
+    {
+        if(!util.EsEntero(edadString) || !util.ValidarEdad(edadString)){
+            return;
+        }        
+        int edad = Integer.parseInt(edadString);
+        this.Edad = edad;
+        
+        if(!util.ValidarNombre(nombre)){
+            return;        
+        }
+        this.nombre = nombre;
+                      
+        if(!utilDireccion.esValidaDireccion(direccion) || !util.esValidoGuiaTuristico(this))
+        {
+            return;
+        }        
+        this.direccion = direccion;        
     }
 
     /**
@@ -78,7 +87,11 @@ public class GuiaTuristico {
      * Setter de la edad del guía turístico.
      * @param Edad: edad del guía turístico.
      */
-    public void setEdad(int Edad) {
+    public void setEdad(String edadString) {
+        if(!util.EsEntero(edadString) || !util.ValidarEdad(edadString)){
+            return;
+        }
+        int edad = Integer.parseInt(edadString);
         this.Edad = Edad;
     }
 
@@ -88,9 +101,13 @@ public class GuiaTuristico {
      */
     @Override
     public String toString() {
-        return "\t***Datos Guía Turístico***\n"+
+        return //"\t***Datos Guía Turístico***\n"+  DEBERIA ELIMINAR ESTO
                "Nombre: " + nombre + " Edad: " + Edad + "\n"+ 
-                direccion.toString();
+                direccion.mostrarResumen();
     }
-
+    
+    @Override
+    public String mostrarResumen() {
+        return this.toString();
+    }
 }

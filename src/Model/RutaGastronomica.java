@@ -6,7 +6,7 @@ package Model;
  * @numeroDeParadas: Representa la cantidad de detenciones
  * de la ruta, cada parada, una visita distinta.
  */
-public class RutaGastronomica extends ServicioTuristico implements Registrable{
+public class RutaGastronomica extends ServicioTuristico{
     private int numeroDeParadas;
 
     public RutaGastronomica(String nombre, double duracionHoras, int numeroDeParadas) {

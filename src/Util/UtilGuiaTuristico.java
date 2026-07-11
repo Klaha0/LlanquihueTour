@@ -1,49 +1,91 @@
 package Util;
-import Exception.GuiaTuristicoException;
+
 import Model.GuiaTuristico;
 import static java.util.Objects.isNull;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  * Clase para validar campos de GuiaTuristico
  * Validaciones de todos los campos
  * Retornos boolean
  */
-public class UtilGuiaTuristico{
+public class UtilGuiaTuristico extends JFrame{
 
     /**
      * Método ValidarNombre
-     * @param nombre: nombre de la persona
-     * @return true si el campo es válido
-     * @throws GuiaTuristicoException si el campo no es válido
+     * @param nombre
+     * @return 
      */
-    public boolean ValidarNombre(String nombre) throws GuiaTuristicoException{
+    public boolean ValidarNombre(String nombre)
+    {
         if(isNull(nombre))
         {
-            throw new GuiaTuristicoException("El campo nombre no debe ser nulo");            
+            JOptionPane.showMessageDialog(this, "Debe ingresar un nombre válido","Error",JOptionPane.ERROR_MESSAGE);
+            return false;          
         }
         if(nombre.trim().isBlank())
         {
-            throw new GuiaTuristicoException("El campo nombre no estar en blanco");            
+            JOptionPane.showMessageDialog(this, "El campo nombre no puede estar en blanco","Error",JOptionPane.ERROR_MESSAGE);
+            return false;        
         }
         return true;
     }
     
     /**
-     * Método ValidarEdad
-     * @param edad: Edad de la persona.
-     * @return true si el campo es válido
-     * @throws GuiaTuristicoException si el campo no es válido.
-     */
-    public boolean ValidarEdad(int edad) throws GuiaTuristicoException{        
-        if(edad < 0)
+     * Método ValidarYParseEdad
+     * @param edadString
+     * @return int edad
+     */ 
+    private int ParseEdad(String edadString)
+    {
+        int edad = 0;
+        try
         {
-            throw new GuiaTuristicoException("La edad debe ser mayor o igual a 0");
+            edad = Integer.parseInt(edadString);  
+            return edad;
         }
-        else if(edad < 18){
-            throw new GuiaTuristicoException("Para trabajar debe ser mayor de 18");
+        catch(NumberFormatException e)
+        {
+            JOptionPane.showMessageDialog(this, "Debe ingresar una edad válida","Error",JOptionPane.ERROR_MESSAGE);            
+        }      
+        return edad;
+    }
+    
+    /**
+     * 
+     * @param edad
+     * @return 
+     */
+    public boolean ValidarEdad(String edadString)
+    {
+        var edad =ParseEdad(edadString);
+        if(edad < 0)
+            {
+                JOptionPane.showMessageDialog(this, "Debe ingresar una edad mayor que 0","Error",JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+            else if(edad < 18)
+            {
+                JOptionPane.showMessageDialog(this, "Debe ser mayor de edad para trabajar","Error",JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        return true;
+    }
+    
+    public boolean EsEntero(String valor)
+    {
+        try
+        {            
+            var numero = Integer.parseInt(valor);            
+        }        
+        catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(this, "Debe ingresar una edad mayor que 0","Error",JOptionPane.ERROR_MESSAGE);                
+            return false;
         }
         return true;
     }
+   
     /**
      * Validamos que el GuiaTuristico no sea nulo
      * @param GuiaTuristico: un objeto de la clase GuiaTuristico

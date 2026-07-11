@@ -1,11 +1,12 @@
 package Model;
+
 import Util.UtilDireccion;
-import Exception.DireccionException;
+
 /**
  * Clase para modelar una dirección
  * 
  */
-public class Direccion {
+public class Direccion implements Registrable{
 private String calle;
 private int numero;
 private String comuna;
@@ -19,19 +20,28 @@ private String ciudad;
  * @param comuna: Comuna a la que pertenece la casa
  * @param ciudad : Ciudad a la que pertenece la casa
  */
-    public Direccion(String calle, int numero, String comuna, String ciudad) throws DireccionException 
+    public Direccion(String calle, String numero, String comuna, String ciudad)  
     {
         UtilDireccion util = new UtilDireccion();
-        if(util.ValidarCalle(calle))
-            this.calle = calle;
+        if(!util.EsEntero(numero) || !util.ValidarNumeracion(numero)){
+            return;
+        }                
+        int numeracion = Integer.parseInt(numero);
+        this.numero = numeracion;
         
-        if(util.ValidarNumeracion(numero))    
-            this.numero = numero;
+        if(!util.ValidarCalle(calle)){
+            return;
+        }
+            this.calle = calle;          
                         
-        if(util.ValidarComuna(comuna))
+        if(!util.ValidarComuna(comuna)){
+            return;
+        }
             this.comuna = comuna;
 
-        if(util.ValidarCiudad(ciudad))
+        if(!util.ValidarCiudad(ciudad)){
+            return;
+        }
             this.ciudad = ciudad;
     }    
     
@@ -46,11 +56,12 @@ private String ciudad;
  * Setter de calle
  * se verifican que los datos sean correctos
  * @param calle nombre de la calle
- * @throws DireccionException si no es válida
  */
-    public void setCalle(String calle) throws DireccionException{
+    public void setCalle(String calle){
         UtilDireccion util = new UtilDireccion();
-        if(util.ValidarCalle(calle))
+        if(!util.ValidarCalle(calle)){
+            return;
+        }
         this.calle = calle;
     }
 
@@ -65,12 +76,14 @@ private String ciudad;
  * Setter de numero
  * se verifican que los datos sean correctos
  * @param numero: numeración de la dirección
- * @throws DireccionException si no es válida
  */
-    public void setNumero(int numero) throws DireccionException{
+    public void setNumero(String numero) {
         UtilDireccion util = new UtilDireccion();
-        if(util.ValidarNumeracion(numero))
-        this.numero = numero;
+        if(!util.EsEntero(numero) || !util.ValidarNumeracion(numero)){
+            return;
+        }                
+        int numeracion = Integer.parseInt(numero);
+        this.numero = numeracion;
     }
 
 /**
@@ -84,12 +97,13 @@ private String ciudad;
  * Setter de comuna
  * se verifican que los datos sean correctos
  * @param comuna: nombre de la comuna
- * @throws DireccionException si no es válida
  */
-    public void setComuna(String comuna) throws DireccionException{
+    public void setComuna(String comuna) {
         UtilDireccion util = new UtilDireccion();
-        if(util.ValidarComuna(comuna))
-            this.comuna = comuna;        
+        if(!util.ValidarComuna(comuna)){
+            return;
+        }
+        this.comuna = comuna;        
     }
 
 /**
@@ -103,13 +117,15 @@ private String ciudad;
  * Setter de ciudad
  * se verifican que los datos sean correctos
  * @param ciudad: nombre de la ciudad
- * @throws DireccionException si no es válida
  */
-    public void setCiudad(String ciudad) throws DireccionException{ 
+    public void setCiudad(String ciudad) { 
         UtilDireccion util = new UtilDireccion();
-        if(util.ValidarCiudad(ciudad))
+        if(!util.ValidarCiudad(ciudad)){
+            return;
+        }
             this.ciudad = ciudad;        
     }
+
     
     /**
      * sobreescribe el método toString con formato personalizado
@@ -119,6 +135,11 @@ private String ciudad;
     public String toString()
     {
             return "Dirección: " + this.calle + " " + this.numero +", " + this.comuna + ", " + this.ciudad;
+    }
+
+    @Override
+    public String mostrarResumen() {
+        return this.toString();
     }
 }
 

@@ -6,7 +6,7 @@ package Model;
  * @nombre: Nombre del servicio turístico a prestar.
  * @duracionHoras: Duración en horas del servicio.
  */
-public class ServicioTuristico {
+public class ServicioTuristico implements Registrable{
     private String nombre;
     private double duracionHoras;
 
@@ -36,9 +36,14 @@ public class ServicioTuristico {
      */
    
     public String mostrarInformacion() {
-        return "Servicio Turístico: " + nombre + 
-               " tiene una duración de: " + duracionHoras + 
+        return "Servicio Turístico: " + nombre + "\n" +
+               " tiene una duración de: " + duracionHoras + "\n" +
                "hrs.";
+    }
+
+    @Override
+    public String mostrarResumen() {
+        return this.mostrarInformacion();
     }
     
     

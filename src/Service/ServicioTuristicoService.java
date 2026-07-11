@@ -25,15 +25,15 @@ public class ServicioTuristicoService {
 
             if(servicio instanceof PaseoLacustre) 
             {
-                System.out.println(((PaseoLacustre) servicio).mostrarInformacion());
+                System.out.println(((PaseoLacustre) servicio).mostrarResumen());
             } 
             else if(servicio instanceof RutaGastronomica) 
             {
-                System.out.println(((RutaGastronomica) servicio).mostrarInformacion());
+                System.out.println(((RutaGastronomica) servicio).mostrarResumen());
             } 
             else if(servicio instanceof ExcursionCultural) 
             {
-                System.out.println(((ExcursionCultural) servicio).mostrarInformacion());
+                System.out.println(((ExcursionCultural) servicio).mostrarResumen());
             }
         }
     }
