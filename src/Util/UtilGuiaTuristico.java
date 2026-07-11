@@ -67,7 +67,7 @@ public class UtilGuiaTuristico extends JFrame{
             }
             else if(edad < 18)
             {
-                JOptionPane.showMessageDialog(this, "Debe ser mayor de edad para trabajar","Error",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Debe ser mayor de edad para trabajar \n +18","Error",JOptionPane.ERROR_MESSAGE);
                 return false;
             }
         return true;

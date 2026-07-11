@@ -115,7 +115,7 @@ public class UtilDireccion extends JFrame{
             var numero = Integer.parseInt(valor);            
         }        
         catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(this, "Debe ingresar una numeración mayor que o igual 0","Error",JOptionPane.ERROR_MESSAGE);                
+            JOptionPane.showMessageDialog(this, "Debe ingresar una numeración mayor o igual que 0","Error",JOptionPane.ERROR_MESSAGE);                
             return false;
         }
         return true;
