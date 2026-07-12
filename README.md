@@ -83,7 +83,7 @@ básica para el ingreso y visualización de registros.
   **métodos renombrados a camelCase** en todo el proyecto, siguiendo la convención estándar de
   Java.
 
-**Cómo probarlo:** ejecuta `Main`, ingresa un guía y un servicio desde los botones "Ingresar
+**Cómo probarlo:** ejecuta `Main`, ingresa un guía y un servicio desde los botones en la sección "Ingresar
 nuevo", y luego usa los botones "Mostrar" para ver el listado polimórfico resultante.
 
 ---
