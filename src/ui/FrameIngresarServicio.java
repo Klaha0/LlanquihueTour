@@ -1,20 +1,25 @@
-package UI;
+package ui;
 
-import Data.GestorEntidades;
-import Model.ExcursionCultural;
-import Model.PaseoLacustre;
-import Model.RutaGastronomica;
-import Util.UtilServicioTuristico;
+import data.GestorEntidades;
+import model.ExcursionCultural;
+import model.PaseoLacustre;
+import model.RutaGastronomica;
+import util.UtilServicioTuristico;
 import javax.swing.JOptionPane;
 
 
-public class FrameIngresarServicio extends javax.swing.JFrame {
-    
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrameIngresarServicio.class.getName());
+/**
+ * Ventana que permite ingresar un nuevo servicio turístico (Ruta Gastronómica,
+Paseo Lacustre o Excursión Cultural) y agregarlo al GestorEntidades recibido
+desde la ventana principal.
+ */
+public class FrameIngresarServicio extends javax.swing.JFrame {    
     private final GestorEntidades gestor;
     UtilServicioTuristico utilServicio = new UtilServicioTuristico();
+    
     /**
-     * Creates new form FrameIngresarServicio
+     * Crea la ventana de ingreso de servicio turístico.
+     * @param gestorEntidades: gestor donde se agregará el servicio creado.
      */
     public FrameIngresarServicio(GestorEntidades gestorEntidades){
         this.gestor = gestorEntidades;
@@ -32,12 +37,12 @@ public class FrameIngresarServicio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        labelTitulo = new javax.swing.JLabel();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         labelSeleccionarServicio = new javax.swing.JLabel();
         labelNombreServicio = new javax.swing.JLabel();
         labelDuracionServicio = new javax.swing.JLabel();
-        labelCambiar = new javax.swing.JLabel();
+        labelVariable = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel8 = new javax.swing.JLabel();
         txtNombreServicio = new javax.swing.JTextField();
@@ -50,8 +55,8 @@ public class FrameIngresarServicio extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Crear nuevo servicio");
 
-        jLabel1.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        jLabel1.setText("Nuevo Servicio");
+        labelTitulo.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        labelTitulo.setText("Nuevo Servicio");
 
         jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tipo Servicio", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 2, 12))); // NOI18N
 
@@ -61,7 +66,7 @@ public class FrameIngresarServicio extends javax.swing.JFrame {
 
         labelDuracionServicio.setText("Duración hrs");
 
-        labelCambiar.setText("Nro Paradas");
+        labelVariable.setText("Nro Paradas");
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         jLabel8.setText("Datos Servicio");
@@ -78,7 +83,7 @@ public class FrameIngresarServicio extends javax.swing.JFrame {
         jLayeredPane1.setLayer(labelSeleccionarServicio, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(labelNombreServicio, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(labelDuracionServicio, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(labelCambiar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(labelVariable, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jSeparator1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel8, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(txtNombreServicio, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -99,7 +104,7 @@ public class FrameIngresarServicio extends javax.swing.JFrame {
                         .addComponent(txtDuracionServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelCambiar)
+                            .addComponent(labelVariable)
                             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                                 .addGap(14, 14, 14)
                                 .addComponent(labelNombreServicio)))
@@ -140,7 +145,7 @@ public class FrameIngresarServicio extends javax.swing.JFrame {
                     .addComponent(txtDuracionServicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelCambiar)
+                    .addComponent(labelVariable)
                     .addComponent(txtVariableServicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
@@ -157,7 +162,7 @@ public class FrameIngresarServicio extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(98, 98, 98)
-                .addComponent(jLabel1)
+                .addComponent(labelTitulo)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -174,7 +179,7 @@ public class FrameIngresarServicio extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(labelTitulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, Short.MAX_VALUE)
@@ -210,40 +215,40 @@ public class FrameIngresarServicio extends javax.swing.JFrame {
                 nombreServicio = txtNombreServicio.getText();
                 int paradas;
 
-                if(!utilServicio.EsDouble(txtDuracionServicio.getText()))
+                if(!utilServicio.esDouble(txtDuracionServicio.getText()))
                 {
                     return;
                 }
-                else if(!utilServicio.EsEntero(txtVariableServicio.getText()))
+                else if(!utilServicio.esEntero(txtVariableServicio.getText()))
                 {
                     return;
                 }
                 duracionServicio = Double.parseDouble(txtDuracionServicio.getText());                    
                 paradas = Integer.parseInt(txtVariableServicio.getText());
                 var rutaGastronomica = new RutaGastronomica(nombreServicio, duracionServicio, paradas);
-                if(!utilServicio.ValidarServicio(rutaGastronomica)){
+                if(!utilServicio.validarServicio(rutaGastronomica)){
                     return;
                 }
                 gestor.agregar(rutaGastronomica);
-                Limpiar();
+                limpiar();
                 JOptionPane.showMessageDialog(this, "Ruta Gastronómica creada con éxito","Correcto",JOptionPane.INFORMATION_MESSAGE);                
                 break;
 
             case "Paseo Lacustre":
                 nombreServicio = txtNombreServicio.getText();
                 var tipoEmbarcacion = txtVariableServicio.getText();
-                if(!utilServicio.EsDouble(txtDuracionServicio.getText()))
+                if(!utilServicio.esDouble(txtDuracionServicio.getText()))
                 {
                     return;
                 }               
                 duracionServicio = Double.parseDouble(txtDuracionServicio.getText());                                    
                 var paseoLacustre = new PaseoLacustre(nombreServicio, duracionServicio, tipoEmbarcacion);
-                if(!utilServicio.ValidarServicio(paseoLacustre))
+                if(!utilServicio.validarServicio(paseoLacustre))
                 {
                    return; 
                 }
                 gestor.agregar(paseoLacustre);
-                Limpiar();
+                limpiar();
                 JOptionPane.showMessageDialog(this, "Paseo Lacustre creado con éxito","Correcto",JOptionPane.INFORMATION_MESSAGE);                
                 break;
                     
@@ -251,18 +256,18 @@ public class FrameIngresarServicio extends javax.swing.JFrame {
             case "Excursión Cultural":
                 nombreServicio = txtNombreServicio.getText();
                 var lugarHistorico = txtVariableServicio.getText();
-                if(!utilServicio.EsDouble(txtDuracionServicio.getText()))
+                if(!utilServicio.esDouble(txtDuracionServicio.getText()))
                 {
                     return;
                 }               
                 duracionServicio = Double.parseDouble(txtDuracionServicio.getText());                                    
                 var excursionCultural = new ExcursionCultural(nombreServicio, duracionServicio, lugarHistorico);
-                if(!utilServicio.ValidarServicio(excursionCultural))
+                if(!utilServicio.validarServicio(excursionCultural))
                 {
                    return; 
                 }
-                gestor.agregar(excursionCultural);    
-                Limpiar();
+                gestor.agregar(excursionCultural);
+                limpiar();
                 JOptionPane.showMessageDialog(this, "Excursión cultural creada con éxito","Correcto",JOptionPane.INFORMATION_MESSAGE);                
                 break;
         }
@@ -279,20 +284,23 @@ public class FrameIngresarServicio extends javax.swing.JFrame {
         switch(opcion)
         {
             case "Ruta Gastronómica":
-                labelCambiar.setText("Nro. Paradas");                                
+                labelVariable.setText("Nro. Paradas");                                
                 break;
 
             case "Paseo Lacustre":
-                labelCambiar.setText("Tipo Embarcación");
+                labelVariable.setText("Tipo Embarcación");
                 break;
 
             case "Excursión Cultural":
-                labelCambiar.setText("Lugar Histórico");
+                labelVariable.setText("Lugar Histórico");
                 break;
         }
     }//GEN-LAST:event_comboBoxActionPerformed
 
-    private void Limpiar(){
+    /**
+     * Limpia todos los campos del formulario de ingreso de servicio.
+     */
+    private void limpiar(){
     txtDuracionServicio.setText("");
     txtNombreServicio.setText("");
     txtVariableServicio.setText("");    
@@ -302,14 +310,14 @@ public class FrameIngresarServicio extends javax.swing.JFrame {
     private javax.swing.JButton btnAgregarServicio;
     private javax.swing.JButton btnCerrarServicio;
     private javax.swing.JComboBox<String> comboBox;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel labelCambiar;
     private javax.swing.JLabel labelDuracionServicio;
     private javax.swing.JLabel labelNombreServicio;
     private javax.swing.JLabel labelSeleccionarServicio;
+    private javax.swing.JLabel labelTitulo;
+    private javax.swing.JLabel labelVariable;
     private javax.swing.JTextField txtDuracionServicio;
     private javax.swing.JTextField txtNombreServicio;
     private javax.swing.JTextField txtVariableServicio;

@@ -1,15 +1,18 @@
-package Model;
+package model;
 
-/**@ServicioTuristico
- * Super Clase que servirá para crear distintos 
- * servicios turísticos.
- * @nombre: Nombre del servicio turístico a prestar.
- * @duracionHoras: Duración en horas del servicio.
+/**
+ * Superclase que representa un servicio turístico genérico ofrecido por la agencia.
+ * Sirve de base para las distintas variantes de servicio (rutas, paseos, excursiones).
  */
 public class ServicioTuristico implements Registrable{
     private String nombre;
     private double duracionHoras;
 
+    /**
+     * Crea un servicio turístico con su nombre y duración.
+     * @param nombre: nombre del servicio turístico a prestar.
+     * @param duracionHoras: duración en horas del servicio.
+     */
     public ServicioTuristico(String nombre, double duracionHoras) {
         this.nombre = nombre;
         this.duracionHoras = duracionHoras;
@@ -30,21 +33,13 @@ public class ServicioTuristico implements Registrable{
     public void setDuracionHoras(double duracionHoras) {
         this.duracionHoras = duracionHoras;
     }
-    /**Método mostrarInformacion
+    /**
      * Muestra la información del servicio turístico.
-     * @return String de servicio formateado
+     * @return el String con el detalle del servicio formateado.
      */
-   
-    public String mostrarInformacion() {
-        return "Servicio Turístico: " + nombre + "\n" +
-               " tiene una duración de: " + duracionHoras + "\n" +
-               "hrs.";
+    public String mostrarResumen() {
+        return nombre + "\n" +
+               " tiene una duración de: " + String.format("%.2f", this.getDuracionHoras()) + " hrs." + "\n";
     }
 
-    @Override
-    public String mostrarResumen() {
-        return this.mostrarInformacion();
-    }
-    
-    
 }

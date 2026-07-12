@@ -1,19 +1,17 @@
-package Model;
+package model;
 
-import Util.UtilDireccion;
-import Util.UtilGuiaTuristico;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
+import util.UtilDireccion;
+import util.UtilGuiaTuristico;
 
 /**
  * Clase que representa un guía turístico con sus datos personales y dirección.
  * Cada guía tiene un nombre, una edad y una dirección asociada.
  */
-public class GuiaTuristico extends JFrame implements Registrable{
+public class GuiaTuristico implements Registrable{
     private UtilGuiaTuristico util = new UtilGuiaTuristico();
     private UtilDireccion utilDireccion = new UtilDireccion();
     private String nombre;
-    private int Edad;
+    private int edad;
     private Direccion direccion;
 
     /**
@@ -24,13 +22,13 @@ public class GuiaTuristico extends JFrame implements Registrable{
      */
     public GuiaTuristico(String nombre, String edadString, Direccion direccion)
     {
-        if(!util.EsEntero(edadString) || !util.ValidarEdad(edadString)){
+        if(!util.esEntero(edadString) || !util.validarEdad(edadString)){
             return;
         }        
-        int edad = Integer.parseInt(edadString);
-        this.Edad = edad;
+        int edadInt = Integer.parseInt(edadString);
+        this.edad = edadInt;
         
-        if(!util.ValidarNombre(nombre)){
+        if(!util.validarNombre(nombre)){
             return;        
         }
         this.nombre = nombre;
@@ -80,34 +78,31 @@ public class GuiaTuristico extends JFrame implements Registrable{
      * @return la edad del guía turístico.
      */
     public int getEdad() {
-        return Edad;
+        return edad;
     }
 
     /**
      * Setter de la edad del guía turístico.
-     * @param Edad: edad del guía turístico.
+     * @param edadString: edad del guía turístico.
      */
     public void setEdad(String edadString) {
-        if(!util.EsEntero(edadString) || !util.ValidarEdad(edadString)){
+        if(!util.esEntero(edadString) || !util.validarEdad(edadString)){
             return;
         }
-        int edad = Integer.parseInt(edadString);
-        this.Edad = Edad;
+        int edadInt = Integer.parseInt(edadString);
+        this.edad = edadInt;
     }
 
     /**
-     * sobreescribe el método toString con formato personalizado
+     * sobreescribe el método mostrarResumen con formato personalizado
      * @return el texto descriptivo del guía turístico.
      */
     @Override
-    public String toString() {
-        return //"\t***Datos Guía Turístico***\n"+  DEBERIA ELIMINAR ESTO
-               "Nombre: " + nombre + " Edad: " + Edad + "\n"+ 
+    public String mostrarResumen() {
+        return 
+               "Nombre    : " + nombre + "\n"+
+               "Edad        : " + this.edad + "\n"+ 
                 direccion.mostrarResumen();
     }
-    
-    @Override
-    public String mostrarResumen() {
-        return this.toString();
-    }
+
 }

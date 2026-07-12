@@ -1,18 +1,26 @@
-package UI;
+package ui;
 
-import Data.GestorEntidades;
+import data.GestorEntidades;
 
+/**
+ * Ventana principal del sistema Llanquihue Tour.
+ * Permite ingresar guías turísticos y servicios, y visualizar los registros
+ * cargados en el GestorEntidades.
+ */
 public class Main extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Main.class.getName());
-    GestorEntidades gestor = new GestorEntidades();
+    GestorEntidades gestorEntidades = new GestorEntidades();
     /**
-     * Creates new form UI
+     * Crea la ventana principal, inicializa sus componentes y carga las
+     * entidades de ejemplo (guías y servicios) en el gestor.
      */
     public Main() {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
+        gestorEntidades.agregarServicios();
+        gestorEntidades.agregarGuias();
     }
 
     /**
@@ -28,16 +36,16 @@ public class Main extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        labelTitulo = new javax.swing.JLabel();
         jLayeredPane1 = new javax.swing.JLayeredPane();
-        jLabel2 = new javax.swing.JLabel();
+        labelIngresar = new javax.swing.JLabel();
         btnIngresarGuia = new javax.swing.JButton();
         btnIngresarServicio = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
+        labelMostrar = new javax.swing.JLabel();
         btnMostrarGuias = new javax.swing.JButton();
         btnMostrarServicios = new javax.swing.JButton();
         btnMostrarTodo = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
+        labelSistema = new javax.swing.JLabel();
         btnLimpiar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
@@ -45,7 +53,7 @@ public class Main extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jLayeredPane2 = new javax.swing.JLayeredPane();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtArea = new javax.swing.JTextArea();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -94,16 +102,16 @@ public class Main extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("framePrincipal"); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        jLabel1.setText("SISTEMA LLANQUIHUE TOUR");
+        labelTitulo.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        labelTitulo.setText("SISTEMA LLANQUIHUE TOUR");
 
         jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "¿Qué desea hacer?", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 2, 12))); // NOI18N
         jLayeredPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLayeredPane1.setFocusable(false);
 
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel2.setText("Ingresar nuevo");
-        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        labelIngresar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        labelIngresar.setText("Ingresar nuevo");
+        labelIngresar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         btnIngresarGuia.setText("Guía");
         btnIngresarGuia.addActionListener(this::btnIngresarGuiaActionPerformed);
@@ -111,9 +119,9 @@ public class Main extends javax.swing.JFrame {
         btnIngresarServicio.setText("Servicio");
         btnIngresarServicio.addActionListener(this::btnIngresarServicioActionPerformed);
 
-        jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel3.setText("Mostrar");
-        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        labelMostrar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        labelMostrar.setText("Mostrar");
+        labelMostrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         btnMostrarGuias.setText("Guías");
         btnMostrarGuias.addActionListener(this::btnMostrarGuiasActionPerformed);
@@ -124,9 +132,9 @@ public class Main extends javax.swing.JFrame {
         btnMostrarTodo.setText("Todo");
         btnMostrarTodo.addActionListener(this::btnMostrarTodoActionPerformed);
 
-        jLabel5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel5.setText("Sistema");
-        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        labelSistema.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        labelSistema.setText("Sistema");
+        labelSistema.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(this::btnLimpiarActionPerformed);
@@ -138,14 +146,14 @@ public class Main extends javax.swing.JFrame {
 
         jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jLayeredPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(labelIngresar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(btnIngresarGuia, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(btnIngresarServicio, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(labelMostrar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(btnMostrarGuias, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(btnMostrarServicios, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(btnMostrarTodo, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(labelSistema, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(btnLimpiar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(btnSalir, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jSeparator2, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -158,14 +166,14 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel2)
+                    .addComponent(labelIngresar)
                     .addComponent(btnIngresarGuia)
                     .addComponent(btnIngresarServicio))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(55, 55, 55)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel3)
+                    .addComponent(labelMostrar)
                     .addComponent(btnMostrarGuias)
                     .addComponent(btnMostrarServicios)
                     .addComponent(btnMostrarTodo))
@@ -175,7 +183,7 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(btnLimpiar)
                     .addComponent(btnSalir)
-                    .addComponent(jLabel5))
+                    .addComponent(labelSistema))
                 .addGap(44, 44, 44))
         );
         jLayeredPane1Layout.setVerticalGroup(
@@ -189,8 +197,8 @@ public class Main extends javax.swing.JFrame {
                         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(labelIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(labelMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                                         .addGap(4, 4, 4)
@@ -206,7 +214,7 @@ public class Main extends javax.swing.JFrame {
                                         .addComponent(btnIngresarServicio))))
                             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
-                                .addComponent(jLabel5)
+                                .addComponent(labelSistema)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnLimpiar)
                                 .addGap(18, 18, 18)
@@ -218,13 +226,12 @@ public class Main extends javax.swing.JFrame {
         jLayeredPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Información", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 2, 12))); // NOI18N
         jLayeredPane2.setFocusable(false);
 
-        jTextArea1.setEditable(false);
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Arial", 3, 12)); // NOI18N
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
-        jTextArea1.setFocusable(false);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtArea.setEditable(false);
+        txtArea.setColumns(20);
+        txtArea.setLineWrap(true);
+        txtArea.setRows(5);
+        txtArea.setFocusable(false);
+        jScrollPane1.setViewportView(txtArea);
 
         jLayeredPane2.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -250,7 +257,7 @@ public class Main extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(114, 114, 114)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(labelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(127, 127, 127))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -269,7 +276,7 @@ public class Main extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(labelTitulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -283,33 +290,33 @@ public class Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIngresarGuiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarGuiaActionPerformed
-        var ventanaGuia = new FrameIngresarGuia(gestor);
+        var ventanaGuia = new FrameIngresarGuia(gestorEntidades);
         ventanaGuia.setVisible(true);
     }//GEN-LAST:event_btnIngresarGuiaActionPerformed
 
     private void btnMostrarServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarServiciosActionPerformed
-        // TODO add your handling code here:
+        txtArea.setText(gestorEntidades.mostrarServicios());
     }//GEN-LAST:event_btnMostrarServiciosActionPerformed
 
     private void btnIngresarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarServicioActionPerformed
-        var ventanaServicio = new FrameIngresarServicio(gestor);
+        var ventanaServicio = new FrameIngresarServicio(gestorEntidades);
         ventanaServicio.setVisible(true);
     }//GEN-LAST:event_btnIngresarServicioActionPerformed
 
     private void btnMostrarGuiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarGuiasActionPerformed
-        // TODO add your handling code here:
+        txtArea.setText(gestorEntidades.mostrarGuias());
     }//GEN-LAST:event_btnMostrarGuiasActionPerformed
 
     private void btnMostrarTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarTodoActionPerformed
-        // TODO add your handling code here:
+        txtArea.setText(gestorEntidades.mostrarTodo());
     }//GEN-LAST:event_btnMostrarTodoActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        // TODO add your handling code here:
+        txtArea.setText("");
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
     public static void main(String args[]) {
@@ -329,7 +336,7 @@ public class Main extends javax.swing.JFrame {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new Main().setVisible(true));
     }
@@ -342,10 +349,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton btnMostrarServicios;
     private javax.swing.JButton btnMostrarTodo;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JPanel jPanel1;
@@ -356,6 +359,10 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel labelIngresar;
+    private javax.swing.JLabel labelMostrar;
+    private javax.swing.JLabel labelSistema;
+    private javax.swing.JLabel labelTitulo;
+    private javax.swing.JTextArea txtArea;
     // End of variables declaration//GEN-END:variables
 }

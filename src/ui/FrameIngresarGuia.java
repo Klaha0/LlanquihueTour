@@ -1,20 +1,25 @@
-package UI;
+package ui;
 
-import Data.GestorEntidades;
-import Model.Direccion;
-import Model.GuiaTuristico;
-import Util.UtilDireccion;
-import Util.UtilGuiaTuristico;
+import data.GestorEntidades;
+import model.Direccion;
+import model.GuiaTuristico;
+import util.UtilDireccion;
+import util.UtilGuiaTuristico;
 import javax.swing.JOptionPane;
 
+/**
+ * Ventana que permite ingresar un nuevo guía turístico (nombre, edad y dirección)
+y agregarlo al GestorEntidades recibido desde la ventana principal.
+ */
 public class FrameIngresarGuia extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrameIngresarGuia.class.getName());
     private final GestorEntidades gestor;
     UtilDireccion utilDireccion  = new UtilDireccion();
     UtilGuiaTuristico utilGuia  = new UtilGuiaTuristico();
     /**
-     * Creates new form frameIngresarGuia
+     * Crea la ventana de ingreso de guía turístico.
+     * @param gestorEntidades: gestor donde se agregará el guía creado.
      */
     public FrameIngresarGuia(GestorEntidades gestorEntidades) {
         initComponents();
@@ -33,7 +38,7 @@ public class FrameIngresarGuia extends javax.swing.JFrame {
     private void initComponents() {
 
         JPane1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        labelTitulo = new javax.swing.JLabel();
         btnAgregarGuia = new javax.swing.JButton();
         btnCerrarGuia = new javax.swing.JButton();
         jLayeredPane1 = new javax.swing.JLayeredPane();
@@ -54,8 +59,8 @@ public class FrameIngresarGuia extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        jLabel1.setText("Nuevo Guía");
+        labelTitulo.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        labelTitulo.setText("Nuevo Guía");
 
         btnAgregarGuia.setText("Agregar");
         btnAgregarGuia.addActionListener(this::btnAgregarGuiaActionPerformed);
@@ -186,7 +191,7 @@ public class FrameIngresarGuia extends javax.swing.JFrame {
             JPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JPane1Layout.createSequentialGroup()
                 .addGap(98, 98, 98)
-                .addComponent(jLabel1)
+                .addComponent(labelTitulo)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(JPane1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -203,7 +208,7 @@ public class FrameIngresarGuia extends javax.swing.JFrame {
             JPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JPane1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(labelTitulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -235,28 +240,28 @@ public class FrameIngresarGuia extends javax.swing.JFrame {
             String numero = txtNumeracionGuia.getText();  
             String nombre = txtNombreGuia.getText();
             String edad = txtEdadGuia.getText();
-            if(!utilGuia.ValidarNombre(nombre)){
+            if(!utilGuia.validarNombre(nombre)){
                 return;
             }
-            if(!utilGuia.EsEntero(edad) || !utilGuia.ValidarEdad(edad)){
+            if(!utilGuia.esEntero(edad) || !utilGuia.validarEdad(edad)){
                 return;
             }                
-            if(!utilDireccion.ValidarCalle(calle)){
+            if(!utilDireccion.validarCalle(calle)){
                 return;
             }
-            if(!utilDireccion.EsEntero(numero) || !utilDireccion.ValidarNumeracion(numero)){
+            if(!utilDireccion.esEntero(numero) || !utilDireccion.validarNumeracion(numero)){
                 return;
             }            
-            if(!utilDireccion.ValidarComuna(comuna)){
+            if(!utilDireccion.validarComuna(comuna)){
                 return;
             }           
-            if(!utilDireccion.ValidarCiudad(ciudad)){
+            if(!utilDireccion.validarCiudad(ciudad)){
                 return;
             }
             var direccion = new Direccion(calle, numero, comuna, ciudad);
             var guia = new GuiaTuristico(nombre, edad, direccion);            
-            gestor.agregar(guia);            
-            Limpiar();
+            gestor.agregar(guia);
+            limpiar();
             JOptionPane.showMessageDialog(this, "Guía Turístico creado con éxito","Correcto",JOptionPane.INFORMATION_MESSAGE);                
     }//GEN-LAST:event_btnAgregarGuiaActionPerformed
 
@@ -288,7 +293,10 @@ public class FrameIngresarGuia extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreGuiaActionPerformed
 
-    private void Limpiar(){
+    /**
+     * Limpia todos los campos del formulario de ingreso de guía.
+     */
+    private void limpiar(){
         txtCalleGuia.setText("");
         txtComunaGuia.setText("");
         txtCiudadGuia.setText("");
@@ -301,7 +309,6 @@ public class FrameIngresarGuia extends javax.swing.JFrame {
     private javax.swing.JPanel JPane1;
     private javax.swing.JButton btnAgregarGuia;
     private javax.swing.JButton btnCerrarGuia;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JSeparator jSeparator1;
@@ -311,6 +318,7 @@ public class FrameIngresarGuia extends javax.swing.JFrame {
     private javax.swing.JLabel labelEdadGuia;
     private javax.swing.JLabel labelNombreGuia;
     private javax.swing.JLabel labelNumeracionGuia;
+    private javax.swing.JLabel labelTitulo;
     private javax.swing.JTextField txtCalleGuia;
     private javax.swing.JTextField txtCiudadGuia;
     private javax.swing.JTextField txtComunaGuia;

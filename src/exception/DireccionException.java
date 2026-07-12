@@ -1,4 +1,4 @@
-package Exception;
+package exception;
 
 /**
  * Excepción personalizada para errores relacionados con la creación y validación de direcciones.

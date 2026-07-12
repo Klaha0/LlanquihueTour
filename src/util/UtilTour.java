@@ -1,9 +1,9 @@
-package Util;
+package util;
 
-import Exception.GuiaTuristicoException;
-import Exception.TourException;
-import Model.GuiaTuristico;
-import Model.Tour;
+import exception.GuiaTuristicoException;
+import exception.TourException;
+import model.GuiaTuristico;
+import model.Tour;
 import java.util.ArrayList;
 import static java.util.Objects.isNull;
 
@@ -21,7 +21,7 @@ public class UtilTour {
      * @param existentes: lista de tours ya cargados.
      * @return true si el tour ya existe en la lista.
      */
-    public boolean ExisteTour(Tour nuevo, ArrayList<Tour> existentes){
+    public boolean existeTour(Tour nuevo, ArrayList<Tour> existentes){
         for(Tour tour : existentes){
             if(tour.getTipoTour().equals(nuevo.getTipoTour())
                && tour.getLugarTour().equals(nuevo.getLugarTour())
@@ -39,7 +39,7 @@ public class UtilTour {
      * @return true si el tipo de tour es válido.
      * @throws TourException si el tipo de tour es nulo o vacío.
      */
-    public boolean ValidarTipoTour(String tipoTour) throws TourException{
+    public boolean validarTipoTour(String tipoTour) throws TourException{
         if(isNull(tipoTour) || tipoTour.trim().isEmpty())
         {
             throw new TourException("Debe proporcionar un tipo de Tour válido");
@@ -54,7 +54,7 @@ public class UtilTour {
      * @return true si el lugar del tour es válido.
      * @throws TourException si el lugar del tour es nulo o vacío.
      */
-    public boolean ValidarLugarTour(String lugarTour) throws TourException{
+    public boolean validarLugarTour(String lugarTour) throws TourException{
         if(isNull(lugarTour) || lugarTour.trim().isEmpty())
         {
             throw new TourException("Debe proporcionar un lugar de Tour válido");
@@ -68,7 +68,7 @@ public class UtilTour {
      * @return true si la capacidad es válida.
      * @throws TourException si la capacidad es menor o igual a cero.
      */
-    public boolean ValidarCapacidad(int capacidadTour) throws TourException{
+    public boolean validarCapacidad(int capacidadTour) throws TourException{
         if(capacidadTour <= 0)
         {
             throw new TourException("La capacidad del tour debe ser mayor que 0");
@@ -82,7 +82,7 @@ public class UtilTour {
      * @return true si la distancia es válida.
      * @throws TourException si la distancia es menor o igual a cero.
      */
-    public boolean ValidarDistancia(double distanciaEnKm) throws TourException{
+    public boolean validarDistancia(double distanciaEnKm) throws TourException{
         if(distanciaEnKm <= 0)
         {
             throw new TourException("La distancia del tour debe ser mayor que 0");

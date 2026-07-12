@@ -1,7 +1,7 @@
-package Model;
-import Exception.TourException;
-import Util.UtilGuiaTuristico;
-import Util.UtilTour;
+package model;
+import exception.TourException;
+import util.UtilGuiaTuristico;
+import util.UtilTour;
 import java.util.ArrayList;
 
 /**
@@ -34,23 +34,23 @@ public class Tour {
         UtilTour util = new UtilTour();
         UtilGuiaTuristico utilGuiaTuristico = new UtilGuiaTuristico();
 
-        if(util.ValidarTipoTour(tipoTour)){
+        if(util.validarTipoTour(tipoTour)){
             this.tipoTour = tipoTour;
         }
-        if(util.ValidarLugarTour(lugarTour)){
+        if(util.validarLugarTour(lugarTour)){
             this.lugarTour = lugarTour;
         }
-        if(util.ValidarCapacidad(capacidadDePersonas)){
+        if(util.validarCapacidad(capacidadDePersonas)){
             this.capacidadDePersonas = capacidadDePersonas;
         }
-        if(util.ValidarDistancia(distanciaEnKm)){
+        if(util.validarDistancia(distanciaEnKm)){
             this.distanciaEnKm = distanciaEnKm;
         }
         if(utilGuiaTuristico.esValidoGuiaTuristico(guia)){
             this.guiaTuristico = guia;
         }
         //Validamos contra la lista ya cargada: si el tour ya existe, no lo creamos.        
-        if(util.ExisteTour(this, existentes)){
+        if(util.existeTour(this, existentes)){
             throw new TourException("El tour ya existe en los registros");
         }        
         
@@ -85,7 +85,7 @@ public class Tour {
      */
     public void setTipoTour(String tipoTour) throws TourException{
         UtilTour util = new UtilTour();
-        if(util.ValidarTipoTour(tipoTour)){
+        if(util.validarTipoTour(tipoTour)){
             this.tipoTour = tipoTour;
         }
     }
@@ -105,7 +105,7 @@ public class Tour {
      */
     public void setLugarTour(String lugarTour) throws TourException{
         UtilTour util = new UtilTour();
-        if(util.ValidarLugarTour(lugarTour)){
+        if(util.validarLugarTour(lugarTour)){
             this.lugarTour = lugarTour;
         }
     }
@@ -125,7 +125,7 @@ public class Tour {
      */
     public void setCapacidadDePersonas(int capacidadDePersonas) throws TourException{
         UtilTour util = new UtilTour();
-        if(util.ValidarCapacidad(capacidadDePersonas)){
+        if(util.validarCapacidad(capacidadDePersonas)){
             this.capacidadDePersonas = capacidadDePersonas;
         }
     }
@@ -145,7 +145,7 @@ public class Tour {
      */
     public void setDistanciaEnKm(double distanciaEnKm) throws TourException{
         UtilTour util = new UtilTour();
-        if(util.ValidarDistancia(distanciaEnKm)){
+        if(util.validarDistancia(distanciaEnKm)){
             this.distanciaEnKm = distanciaEnKm;
         }
     }

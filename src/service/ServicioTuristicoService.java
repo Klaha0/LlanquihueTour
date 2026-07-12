@@ -1,22 +1,22 @@
-package Service;
+package service;
 
-import Model.ExcursionCultural;
-import Model.PaseoLacustre;
-import Model.RutaGastronomica;
-import Model.ServicioTuristico;
+import model.ExcursionCultural;
+import model.PaseoLacustre;
+import model.RutaGastronomica;
+import model.ServicioTuristico;
 import java.util.ArrayList;
 
-/**@ServicioTuristicoService (Semana 7)
+/**
  * Clase de servicio encargada de recorrer y mostrar por consola una
  * colección de servicios turísticos.
  */
 public class ServicioTuristicoService {
 
-    /**Método mostrarServicioTuristico
+    /**
      * Recorre la colección con un bucle for-each y muestra por consola
      * la información de cada servicio turístico invocando su método
-     * sobrescrito mostrarInformacion().
-     * @param servicios ArrayList de servicios turísticos a mostrar.
+     * sobrescrito mostrarResumen().
+     * @param servicios: ArrayList de servicios turísticos a mostrar.
      */
     public void mostrarServicioTuristico(ArrayList<ServicioTuristico> servicios) {
         

@@ -1,6 +1,6 @@
-package Model;
+package model;
 
-import Util.UtilDireccion;
+import util.UtilDireccion;
 
 /**
  * Clase para modelar una dirección
@@ -23,23 +23,23 @@ private String ciudad;
     public Direccion(String calle, String numero, String comuna, String ciudad)  
     {
         UtilDireccion util = new UtilDireccion();
-        if(!util.EsEntero(numero) || !util.ValidarNumeracion(numero)){
+        if(!util.esEntero(numero) || !util.validarNumeracion(numero)){
             return;
         }                
         int numeracion = Integer.parseInt(numero);
         this.numero = numeracion;
         
-        if(!util.ValidarCalle(calle)){
+        if(!util.validarCalle(calle)){
             return;
         }
             this.calle = calle;          
                         
-        if(!util.ValidarComuna(comuna)){
+        if(!util.validarComuna(comuna)){
             return;
         }
             this.comuna = comuna;
 
-        if(!util.ValidarCiudad(ciudad)){
+        if(!util.validarCiudad(ciudad)){
             return;
         }
             this.ciudad = ciudad;
@@ -59,7 +59,7 @@ private String ciudad;
  */
     public void setCalle(String calle){
         UtilDireccion util = new UtilDireccion();
-        if(!util.ValidarCalle(calle)){
+        if(!util.validarCalle(calle)){
             return;
         }
         this.calle = calle;
@@ -79,7 +79,7 @@ private String ciudad;
  */
     public void setNumero(String numero) {
         UtilDireccion util = new UtilDireccion();
-        if(!util.EsEntero(numero) || !util.ValidarNumeracion(numero)){
+        if(!util.esEntero(numero) || !util.validarNumeracion(numero)){
             return;
         }                
         int numeracion = Integer.parseInt(numero);
@@ -100,7 +100,7 @@ private String ciudad;
  */
     public void setComuna(String comuna) {
         UtilDireccion util = new UtilDireccion();
-        if(!util.ValidarComuna(comuna)){
+        if(!util.validarComuna(comuna)){
             return;
         }
         this.comuna = comuna;        
@@ -120,7 +120,7 @@ private String ciudad;
  */
     public void setCiudad(String ciudad) { 
         UtilDireccion util = new UtilDireccion();
-        if(!util.ValidarCiudad(ciudad)){
+        if(!util.validarCiudad(ciudad)){
             return;
         }
             this.ciudad = ciudad;        
@@ -128,18 +128,14 @@ private String ciudad;
 
     
     /**
-     * sobreescribe el método toString con formato personalizado
+     * sobreescribe el método mostrarResumen con formato personalizado
      * @return el texto descriptivo de la dirección formateada.
      */
     @Override
-    public String toString()
+    public String mostrarResumen()
     {
-            return "Dirección: " + this.calle + " " + this.numero +", " + this.comuna + ", " + this.ciudad;
+            return "Dirección : " + this.calle + " " + this.numero +", " + this.comuna + ", " + this.ciudad + "\n";
     }
 
-    @Override
-    public String mostrarResumen() {
-        return this.toString();
-    }
 }
 
