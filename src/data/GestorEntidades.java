@@ -82,9 +82,9 @@ tipos de servicio turístico (PaseoLacustre, ExcursionCultural, RutaGastronomica
      */
     public String mostrarTodo(){
         var resumen = new StringBuilder();
-        resumen.append("\t     ┌────────────────────────────────┐\n");
+        resumen.append("\t     ┌────────────────────────────────────┐\n");
         resumen.append("\t     │ == Bienvenido a Llanquihue Tours ==  │\n");
-        resumen.append("\t     └────────────────────────────────┘\n\n");
+        resumen.append("\t     └────────────────────────────────────┘\n\n");
         resumen.append(mostrarGuias());
         resumen.append(mostrarServicios());
         return resumen.toString();

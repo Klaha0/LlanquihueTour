@@ -21,10 +21,6 @@ public class GestorServicios {
        return new PaseoLacustre("Conoce el lago calafquén", 2.5, "lancha");
     }
 
-    /**
-     * Crea un paseo lacustre de ejemplo.
-     * @return el PaseoLacustre creado.
-     */
     public ServicioTuristico crearPaseoLacustre2(){
         return new PaseoLacustre("Crucero romántico al atardecer", 3.0, "Yate de lujo");
     }
@@ -37,10 +33,6 @@ public class GestorServicios {
         return new RutaGastronomica("Ruta del curánto", 4.0, 4);
     }
 
-    /**
-     * Crea una ruta gastronómica de ejemplo.
-     * @return la RutaGastronomica creada.
-     */
     public ServicioTuristico crearRutaGastronomica2(){
         return new RutaGastronomica("Ruta de Vinos", 3.5, 3);
     }
@@ -53,10 +45,6 @@ public class GestorServicios {
         return new ExcursionCultural("Tour histórico ciudad nocturna", 2.5, "Centro de Valdivia");
     }
 
-    /**
-     * Crea una excursión cultural de ejemplo.
-     * @return la ExcursionCultural creada.
-     */
     public ServicioTuristico crearExcursionCultural2(){
         return new ExcursionCultural("El arte desde otra perspectiva", 2.0, "Museo Nacional de bellas artes");
     }
