@@ -1,22 +1,21 @@
 package ui;
 
 import data.GestorEntidades;
+import javax.swing.JOptionPane;
 import model.Direccion;
 import model.GuiaTuristico;
 import util.UtilDireccion;
 import util.UtilGuiaTuristico;
-import javax.swing.JOptionPane;
 
 /**
  * Ventana que permite ingresar un nuevo guía turístico (nombre, edad y dirección)
 y agregarlo al GestorEntidades recibido desde la ventana principal.
  */
-public class FrameIngresarGuia extends javax.swing.JFrame {
-
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrameIngresarGuia.class.getName());
+public class FrameIngresarGuia extends javax.swing.JFrame {    
     private final GestorEntidades gestor;
     UtilDireccion utilDireccion  = new UtilDireccion();
     UtilGuiaTuristico utilGuia  = new UtilGuiaTuristico();
+    
     /**
      * Crea la ventana de ingreso de guía turístico.
      * @param gestorEntidades: gestor donde se agregará el guía creado.
@@ -57,7 +56,7 @@ public class FrameIngresarGuia extends javax.swing.JFrame {
         txtEdadGuia = new javax.swing.JTextField();
         txtComunaGuia = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         labelTitulo.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         labelTitulo.setText("Nuevo Guía");
@@ -84,18 +83,6 @@ public class FrameIngresarGuia extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         jLabel8.setText("Dirección");
-
-        txtCalleGuia.addActionListener(this::txtCalleGuiaActionPerformed);
-
-        txtNombreGuia.addActionListener(this::txtNombreGuiaActionPerformed);
-
-        txtNumeracionGuia.addActionListener(this::txtNumeracionGuiaActionPerformed);
-
-        txtCiudadGuia.addActionListener(this::txtCiudadGuiaActionPerformed);
-
-        txtEdadGuia.addActionListener(this::txtEdadGuiaActionPerformed);
-
-        txtComunaGuia.addActionListener(this::txtComunaGuiaActionPerformed);
 
         jLayeredPane1.setLayer(labelNombreGuia, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(labelEdadGuia, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -267,31 +254,7 @@ public class FrameIngresarGuia extends javax.swing.JFrame {
 
     private void btnCerrarGuiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarGuiaActionPerformed
         this.dispose();
-    }//GEN-LAST:event_btnCerrarGuiaActionPerformed
-
-    private void txtCalleGuiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCalleGuiaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCalleGuiaActionPerformed
-
-    private void txtNumeracionGuiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeracionGuiaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNumeracionGuiaActionPerformed
-
-    private void txtCiudadGuiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCiudadGuiaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCiudadGuiaActionPerformed
-
-    private void txtEdadGuiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEdadGuiaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEdadGuiaActionPerformed
-
-    private void txtComunaGuiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtComunaGuiaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtComunaGuiaActionPerformed
-
-    private void txtNombreGuiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreGuiaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreGuiaActionPerformed
+    }//GEN-LAST:event_btnCerrarGuiaActionPerformed    
 
     /**
      * Limpia todos los campos del formulario de ingreso de guía.

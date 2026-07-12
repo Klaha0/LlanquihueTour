@@ -39,11 +39,11 @@ de forma flexible, sin necesidad de conocer de antemano el tipo concreto de cada
 📁 src/
 ├── ui/          # Interfaz gráfica: Main, FrameIngresarGuia, FrameIngresarServicio.
 ├── model/       # Entidades y jerarquías: Registrable, ServicioTuristico y subclases,
-│                #   GuiaTuristico, Direccion, Tour.
+│                # GuiaTuristico, Direccion, ExcursionCultural, PaseoLacustre, RutaGastronomica, Tour.
 ├── data/        # Gestores: GestorEntidades, GestorServicios, GestorGuias.
 ├── service/     # ServicioTuristicoService.
 ├── exception/   # Excepciones personalizadas.
-└── util/        # Clases de validación.
+└── util/        # UtilDireccion, UtilGuiaturistico, UtilServicioTuristico, UtilTour
 ```
 
 ## ⚙️ Instrucciones para clonar y ejecutar el proyecto
@@ -60,20 +60,6 @@ git clone https://github.com/Klaha0/LlanquihueTour.git
    * Ingresar un nuevo **Guía** o **Servicio** (Ruta Gastronómica, Paseo Lacustre o Excursión
      Cultural).
    * Mostrar los **Guías**, los **Servicios** o **Todo** el listado registrado.
-
-### 💻 Compilación y ejecución por consola (alternativa)
-
-Desde la raíz del proyecto:
-
-```bash
-# Compilar todo el código fuente del proyecto en la carpeta build/classes
-javac -encoding UTF-8 -d build/classes \
-  src/model/*.java src/data/*.java src/service/*.java \
-  src/exception/*.java src/util/*.java src/ui/*.java
-
-# Ejecutar la clase principal
-java -cp build/classes ui.Main
-```
 
 ---
 
@@ -102,18 +88,6 @@ nuevo", y luego usa los botones "Mostrar" para ver el listado polimórfico resul
 
 ---
 
-## 📚 Historial breve de semanas anteriores
-
-* **Semana 4-5:** gestión de tours con encapsulamiento, composición (`Tour` → `GuiaTuristico` →
-  `Direccion`), excepciones personalizadas y persistencia en archivo (`GestorDatos`).
-* **Semana 6:** jerarquía de servicios turísticos (`ServicioTuristico` y subclases) con herencia
-  simple y `super(...)`.
-* **Semana 7:** polimorfismo y colecciones genéricas: `ArrayList<ServicioTuristico>`, método
-  sobrescrito `mostrarInformacion()`, recorrido `for-each` y paquete `service` con
-  `ServicioTuristicoService`.
-* **Semana 8:** ver sección propia más arriba.
-
----
 
 **Repositorio GitHub:** https://github.com/Klaha0/LlanquihueTour
 

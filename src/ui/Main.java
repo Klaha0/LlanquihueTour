@@ -13,7 +13,7 @@ public class Main extends javax.swing.JFrame {
     GestorEntidades gestorEntidades = new GestorEntidades();
     /**
      * Crea la ventana principal, inicializa sus componentes y carga las
-     * entidades de ejemplo (guías y servicios) en el gestor.
+     * entidades de ejemplo (guías y servicios) en el gestor para facilitar las pruebas del sistema.
      */
     public Main() {
         initComponents();

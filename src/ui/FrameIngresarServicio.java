@@ -52,7 +52,7 @@ public class FrameIngresarServicio extends javax.swing.JFrame {
         btnAgregarServicio = new javax.swing.JButton();
         btnCerrarServicio = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Crear nuevo servicio");
 
         labelTitulo.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
@@ -70,12 +70,6 @@ public class FrameIngresarServicio extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         jLabel8.setText("Datos Servicio");
-
-        txtNombreServicio.addActionListener(this::txtNombreServicioActionPerformed);
-
-        txtDuracionServicio.addActionListener(this::txtDuracionServicioActionPerformed);
-
-        txtVariableServicio.addActionListener(this::txtVariableServicioActionPerformed);
 
         comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ruta Gastronómica", "Paseo Lacustre", "Excursión Cultural" }));
         comboBox.addActionListener(this::comboBoxActionPerformed);
@@ -191,18 +185,6 @@ public class FrameIngresarServicio extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtNombreServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreServicioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreServicioActionPerformed
-
-    private void txtDuracionServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDuracionServicioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDuracionServicioActionPerformed
-
-    private void txtVariableServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtVariableServicioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtVariableServicioActionPerformed
 
     private void btnAgregarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarServicioActionPerformed
         String opcion = comboBox.getSelectedItem().toString();
