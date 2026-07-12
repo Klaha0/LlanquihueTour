@@ -93,4 +93,4 @@ nuevo", y luego usa los botones "Mostrar" para ver el listado polimórfico resul
 
 ---
 
-© Duoc UC | Escuela de Informática y Telecomunicaciones | Actividad formativa individual
+© Duoc UC | Escuela de Informática y Telecomunicaciones | Actividad sumativa individual
