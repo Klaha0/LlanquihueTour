@@ -89,6 +89,32 @@ git clone https://github.com/Klaha0/LlanquihueTour.git
 
 ---
 
+## 🆕 Semana 8 — Interfaces, polimorfismo y GUI (actual)
+
+**Objetivo:** ampliar el sistema con un contrato de comportamiento común (`Registrable`),
+diferenciación de tipos en tiempo de ejecución mediante `instanceof` y una interfaz gráfica
+básica para el ingreso y visualización de registros.
+
+**Qué se agregó sobre el proyecto de semanas anteriores:**
+
+* **Interfaz `Registrable`** (paquete `model`), con el método `mostrarResumen()`. La implementan
+  `ServicioTuristico` (y sus subclases, por herencia), `GuiaTuristico` y `Direccion`.
+* **`GestorEntidades`** (paquete `data`): mantiene una única colección `ArrayList<Registrable>`
+  con guías y servicios, y usa `instanceof` para separarlos al mostrarlos (`mostrarGuias()`,
+  `mostrarServicios()`, `mostrarTodo()`).
+* **Interfaz gráfica Swing** (paquete `ui`): `Main` es la ventana principal; `FrameIngresarGuia`
+  y `FrameIngresarServicio` permiten ingresar cada tipo de entidad mediante formularios con
+  validación y confirmación por `JOptionPane`.
+* **Paquetes renombrados a minúsculas** (`model`, `data`, `ui`, `util`, `exception`, `service`) y
+  **métodos renombrados a camelCase** en todo el proyecto, siguiendo la convención estándar de
+  Java.
+
+**Cómo probarlo:** ejecuta `Main`, ingresa un guía y un servicio desde los botones en la sección "Ingresar
+nuevo", y luego usa los botones "Mostrar" para ver el listado polimórfico resultante.
+
+---
+
+
 **Repositorio GitHub:** https://github.com/Klaha0/LlanquihueTour
 
 ---
