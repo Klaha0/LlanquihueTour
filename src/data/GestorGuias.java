@@ -32,8 +32,8 @@ public class GestorGuias {
      * @return el GuiaTuristico creado.
      */
     public GuiaTuristico crearGuiaTuristico2(){
-        String nombre = "Daniela Guzmán";
-        String edad = "25";
+        String nombre = "Daniela Guzmán López";
+        String edad = "35";
         String calle = "Las palmas";
         String numero = "9178";
         String comuna = "Ensenada";
@@ -49,7 +49,7 @@ public class GestorGuias {
      */
     public GuiaTuristico crearGuiaTuristico3(){
         String nombre = "Carlos Palma Garrido";
-        String edad = "25";
+        String edad = "41";
         String calle = "Los robles";
         String numero = "8248";
         String comuna = "El Carmen";

@@ -1,13 +1,39 @@
 # 🧭 LlanquihueTourApp
 
 Sistema de gestión para la agencia de turismo **Llanquihue Tour**, desarrollado como proyecto
-progresivo de la asignatura **Desarrollo Orientado a Objetos I** (Duoc UC).
+progresivo de la asignatura **Desarrollo Orientado a Objetos I** (Duoc UC), esta es la semana 8 
+y la actividad se llama **Integrando interfaces, polimorfismo y estructuras dinámicas**.
 
 ## 👤 Autor del proyecto
 
 * **Nombre completo:** Carlos Palma Garrido.
 * **Carrera:** Programación de aplicaciones.
 * **Sede:** Online
+
+---
+
+## 🆕 Semana 8 — Interfaces, polimorfismo y GUI (actual)
+
+**Objetivo:** ampliar el sistema con un contrato de comportamiento común, interfaz (`Registrable`),
+diferenciación de tipos en tiempo de ejecución mediante `instanceof` y una interfaz gráfica
+para el ingreso y visualización de registros.
+
+**Qué se agregó sobre el proyecto de semanas anteriores:**
+
+* **Interfaz `Registrable`** (paquete `model`), con el método `mostrarResumen()`. La implementan
+  `ServicioTuristico` (y sus subclases, por herencia), `GuiaTuristico` y `Direccion`.
+* **`GestorEntidades`** (paquete `data`): mantiene una única colección `ArrayList<Registrable>`
+  con guías y servicios, y usa `instanceof` para separarlos al mostrarlos (`mostrarGuias()`,
+  `mostrarServicios()`, `mostrarTodo()`).
+* **Interfaz gráfica Swing** (paquete `ui`): `Main` es la ventana principal; `FrameIngresarGuia`
+  y `FrameIngresarServicio` permiten ingresar cada tipo de entidad mediante formularios con
+  validación y confirmación por `JOptionPane`.
+* **Paquetes renombrados a minúsculas** (`model`, `data`, `ui`, `util`, `exception`, `service`) y
+  **métodos renombrados a camelCase** en todo el proyecto, siguiendo la convención estándar de
+  Java.
+
+**Cómo probarlo:** ejecuta `Main`, ingresa un guía y un servicio desde los botones "Ingresar
+nuevo", y luego usa los botones "Mostrar" para ver el listado polimórfico resultante.
 
 ---
 
@@ -57,7 +83,7 @@ git clone https://github.com/Klaha0/LlanquihueTour.git
 2. Abre el proyecto en tu IDE (NetBeans o IntelliJ IDEA).
 3. Ejecuta la clase principal **`Main.java`**, ubicada en el paquete `ui`.
 4. Desde la ventana principal puedes:
-   * Ingresar un nuevo **Guía** o **Servicio** (Ruta Gastronómica, Paseo Lacustre o Excursión
+   * Abrir una ventana para ingresar un nuevo **Guía** o **Servicio** (Ruta Gastronómica, Paseo Lacustre o Excursión
      Cultural).
    * Mostrar los **Guías**, los **Servicios** o **Todo** el listado registrado.
 
