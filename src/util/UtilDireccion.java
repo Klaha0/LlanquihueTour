@@ -1,8 +1,9 @@
 package util;
 
-import model.Direccion;
+import exception.DireccionException;
 import static java.util.Objects.isNull;
 import javax.swing.JOptionPane;
+import model.Direccion;
 
 /**
  * Clase para validar campos de Direccion.
@@ -18,16 +19,22 @@ public class UtilDireccion {
      */
     public boolean validarCalle(String calle)
     {
-        if(isNull(calle))
+        try
         {
-            JOptionPane.showMessageDialog(null, "Debe ingresar una calle válida","Error",JOptionPane.ERROR_MESSAGE);
-            return false;
+            if(isNull(calle))
+            {
+                throw new DireccionException("Debe ingresar una calle válida");
+            }
+            if(calle.trim().isBlank())
+            {
+                throw new DireccionException("El campo calle no puede estar en blanco");
+            }
         }
-        if(calle.trim().isBlank())
+        catch(DireccionException e)
         {
-            JOptionPane.showMessageDialog(null, "El campo calle no puede estar en blanco","Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return false;
-        }
+        }        
         return true;
     }
 
@@ -38,18 +45,24 @@ public class UtilDireccion {
      */
     public boolean validarComuna(String comuna)
     {
-        if(isNull(comuna))
+        try
         {
-            JOptionPane.showMessageDialog(null, "Debe ingresar una comuna válida","Error",JOptionPane.ERROR_MESSAGE);
-            return false;
+            if(isNull(comuna))
+            {
+                throw new DireccionException("Debe ingresar una comuna válida");
+            }
+            if(comuna.trim().isBlank())
+            {
+                throw new DireccionException("El campo comuna no puede estar en blanco");
+            }
         }
-        if(comuna.trim().isBlank())
+        catch(DireccionException e)
         {
-            JOptionPane.showMessageDialog(null, "El campo comuna no puede estar en blanco","Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return false;
         }
         return true;
-    }
+    }            
 
     /**
      * Valida que la ciudad no sea nula ni esté en blanco.
@@ -58,16 +71,22 @@ public class UtilDireccion {
      */
     public boolean validarCiudad(String ciudad)
     {
-        if(isNull(ciudad))
+        try
         {
-            JOptionPane.showMessageDialog(null, "Debe ingresar una ciudad válida","Error",JOptionPane.ERROR_MESSAGE);
-            return false;
+            if(isNull(ciudad))
+            {
+                throw new DireccionException("Debe ingresar una ciudad válida");
+            }
+            if(ciudad.trim().isBlank())
+            {
+                throw new DireccionException("El campo ciudad no puede estar en blanco");
+            }
         }
-        if(ciudad.trim().isBlank())
+        catch(DireccionException e)
         {
-            JOptionPane.showMessageDialog(null, "El campo ciudad no puede estar en blanco","Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return false;
-        }
+        }         
         return true;
     }
 
@@ -78,10 +97,18 @@ public class UtilDireccion {
      */
     public boolean validarNumeracion(String numero)
     {
-        var numeracion = parseNumeracionDireccion(numero);
-        if (numeracion < 0)
+        try
         {
-            JOptionPane.showMessageDialog(null, "La numeración debe ser mayor o igual que 0","Error",JOptionPane.ERROR_MESSAGE);
+            var numeracion = parseNumeracionDireccion(numero);
+            if (numeracion < 0)
+            {
+                JOptionPane.showMessageDialog(null, "La numeración debe ser mayor o igual que 0","Error",JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        }
+        catch(NumberFormatException e)
+        {
+            JOptionPane.showMessageDialog(null, "Debe ingresar una numeración válida","Error",JOptionPane.ERROR_MESSAGE);
             return false;
         }
         return true;

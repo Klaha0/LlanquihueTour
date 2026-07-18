@@ -1,0 +1,6 @@
+RutaGastronomica;Ruta las delicias;6.5;3
+RutaGastronomica;Chefs Orientales;3.5;5
+GuiaTuristico;Carlos Palma Garrido;41;Anibal Huneeus;737;La Pintana;Santiago;15941450--7;Trekking
+Cliente;Javier Silva Peña;25;Los Fresnos;7584;Macul;Santiago;22487789--7;dyUO4v6I
+Cliente;Gonzalo Pascal Chavez;48;Arrecife;3794;Lo Prado;Santiago;14258789--0;f9yDlIKd
+Cliente;Francisco Arriagada Sanchez;35;Humboldt;4955;Lirquén;Magallanes;17198774--1;caTk9PZA

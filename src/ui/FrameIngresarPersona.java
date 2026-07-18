@@ -1,30 +1,44 @@
 package ui;
 
 import data.GestorEntidades;
+import static java.util.Objects.isNull;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import model.Cliente;
 import model.Direccion;
 import model.GuiaTuristico;
+import model.Rut;
+import service.GeneradorCodigos;
+import util.UtilCliente;
 import util.UtilDireccion;
 import util.UtilGuiaTuristico;
+import util.UtilPersona;
+import util.UtilRut;
 
 /**
  * Ventana que permite ingresar un nuevo guía turístico (nombre, edad y dirección)
 y agregarlo al GestorEntidades recibido desde la ventana principal.
  */
-public class FrameIngresarGuia extends javax.swing.JFrame {    
+public class FrameIngresarPersona extends javax.swing.JFrame {    
     private final GestorEntidades gestor;
     UtilDireccion utilDireccion  = new UtilDireccion();
-    UtilGuiaTuristico utilGuia  = new UtilGuiaTuristico();
+    UtilPersona utilPersona  = new UtilPersona();
+    UtilRut utilRut  = new UtilRut();
+    UtilCliente utilcliente  = new UtilCliente();
+    UtilGuiaTuristico utilGuia = new UtilGuiaTuristico();
+    GeneradorCodigos generador = new GeneradorCodigos();
     
     /**
      * Crea la ventana de ingreso de guía turístico.
      * @param gestorEntidades: gestor donde se agregará el guía creado.
      */
-    public FrameIngresarGuia(GestorEntidades gestorEntidades) {
+    public FrameIngresarPersona(GestorEntidades gestorEntidades) {
         initComponents();
         this.gestor = gestorEntidades;
         setLocationRelativeTo(null);
         setResizable(false);
+        if(isNull(txtRutPersona) || txtRutPersona.getText().isBlank())
+            txtRutPersona.setText("Ejemplo: 12345678-9");
     }
 
     /**
@@ -38,170 +52,274 @@ public class FrameIngresarGuia extends javax.swing.JFrame {
 
         JPane1 = new javax.swing.JPanel();
         labelTitulo = new javax.swing.JLabel();
-        btnAgregarGuia = new javax.swing.JButton();
-        btnCerrarGuia = new javax.swing.JButton();
-        jLayeredPane1 = new javax.swing.JLayeredPane();
-        labelNombreGuia = new javax.swing.JLabel();
-        labelEdadGuia = new javax.swing.JLabel();
+        btnAgregarPersona = new javax.swing.JButton();
+        btnCerrarPersona = new javax.swing.JButton();
+        labelDatosPersonales = new javax.swing.JLayeredPane();
+        labelNombrePersona = new javax.swing.JLabel();
+        labelEdadPersona = new javax.swing.JLabel();
         labelCalleGuia = new javax.swing.JLabel();
-        labelNumeracionGuia = new javax.swing.JLabel();
-        labelComunaGuia = new javax.swing.JLabel();
-        labelCiudadGuia = new javax.swing.JLabel();
+        labelNumeracionPersona = new javax.swing.JLabel();
+        labelComunaPersona = new javax.swing.JLabel();
+        labelCiudadPersona = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel8 = new javax.swing.JLabel();
-        txtCalleGuia = new javax.swing.JTextField();
-        txtNombreGuia = new javax.swing.JTextField();
-        txtNumeracionGuia = new javax.swing.JTextField();
-        txtCiudadGuia = new javax.swing.JTextField();
-        txtEdadGuia = new javax.swing.JTextField();
-        txtComunaGuia = new javax.swing.JTextField();
+        txtCallePersona = new javax.swing.JTextField();
+        txtNombrePersona = new javax.swing.JTextField();
+        txtNumeracionPersona = new javax.swing.JTextField();
+        txtCiudadPersona = new javax.swing.JTextField();
+        txtEdadPersona = new javax.swing.JTextField();
+        txtComunaPersona = new javax.swing.JTextField();
+        jSeparator2 = new javax.swing.JSeparator();
+        labelVariablePersona = new javax.swing.JLabel();
+        txtVariablePersona = new javax.swing.JTextField();
+        labelRut = new javax.swing.JLabel();
+        txtRutPersona = new javax.swing.JTextField();
+        comboBoxPersona = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JSeparator();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        JPane1.setMaximumSize(new java.awt.Dimension(352, 517));
+        JPane1.setMinimumSize(new java.awt.Dimension(352, 517));
 
         labelTitulo.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        labelTitulo.setText("Nuevo Guía");
+        labelTitulo.setText("Crear Persona");
 
-        btnAgregarGuia.setText("Agregar");
-        btnAgregarGuia.addActionListener(this::btnAgregarGuiaActionPerformed);
+        btnAgregarPersona.setText("Agregar");
+        btnAgregarPersona.addActionListener(this::btnAgregarPersonaActionPerformed);
 
-        btnCerrarGuia.setText("Cerrar");
-        btnCerrarGuia.addActionListener(this::btnCerrarGuiaActionPerformed);
+        btnCerrarPersona.setText("Cerrar");
+        btnCerrarPersona.addActionListener(this::btnCerrarPersonaActionPerformed);
 
-        jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Guía", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 2, 12))); // NOI18N
+        labelDatosPersonales.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Personales", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 2, 12))); // NOI18N
 
-        labelNombreGuia.setText("Nombre");
+        labelNombrePersona.setText("Nombre");
 
-        labelEdadGuia.setText("Edad");
+        labelEdadPersona.setText("Edad");
 
         labelCalleGuia.setText("Calle");
 
-        labelNumeracionGuia.setText("Número");
+        labelNumeracionPersona.setText("Número");
 
-        labelComunaGuia.setText("Comuna");
+        labelComunaPersona.setText("Comuna");
 
-        labelCiudadGuia.setText("Ciudad");
+        labelCiudadPersona.setText("Ciudad");
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         jLabel8.setText("Dirección");
 
-        jLayeredPane1.setLayer(labelNombreGuia, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(labelEdadGuia, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(labelCalleGuia, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(labelNumeracionGuia, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(labelComunaGuia, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(labelCiudadGuia, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jSeparator1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jLabel8, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(txtCalleGuia, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(txtNombreGuia, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(txtNumeracionGuia, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(txtCiudadGuia, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(txtEdadGuia, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(txtComunaGuia, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        txtCallePersona.addActionListener(this::txtCallePersonaActionPerformed);
 
-        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
-        jLayeredPane1.setLayout(jLayeredPane1Layout);
-        jLayeredPane1Layout.setHorizontalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+        txtNombrePersona.addActionListener(this::txtNombrePersonaActionPerformed);
+
+        txtNumeracionPersona.addActionListener(this::txtNumeracionPersonaActionPerformed);
+
+        txtCiudadPersona.setMaximumSize(new java.awt.Dimension(64, 22));
+        txtCiudadPersona.addActionListener(this::txtCiudadPersonaActionPerformed);
+
+        txtEdadPersona.addActionListener(this::txtEdadPersonaActionPerformed);
+
+        txtComunaPersona.addActionListener(this::txtComunaPersonaActionPerformed);
+
+        labelVariablePersona.setText("Especialidad");
+
+        txtVariablePersona.setMaximumSize(new java.awt.Dimension(64, 22));
+        txtVariablePersona.addActionListener(this::txtVariablePersonaActionPerformed);
+
+        labelRut.setText("Rut");
+
+        txtRutPersona.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtRutPersonaFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtRutPersonaFocusLost(evt);
+            }
+        });
+        txtRutPersona.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtRutPersonaMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txtRutPersonaMouseExited(evt);
+            }
+        });
+        txtRutPersona.addActionListener(this::txtRutPersonaActionPerformed);
+
+        labelDatosPersonales.setLayer(labelNombrePersona, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        labelDatosPersonales.setLayer(labelEdadPersona, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        labelDatosPersonales.setLayer(labelCalleGuia, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        labelDatosPersonales.setLayer(labelNumeracionPersona, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        labelDatosPersonales.setLayer(labelComunaPersona, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        labelDatosPersonales.setLayer(labelCiudadPersona, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        labelDatosPersonales.setLayer(jSeparator1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        labelDatosPersonales.setLayer(jLabel8, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        labelDatosPersonales.setLayer(txtCallePersona, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        labelDatosPersonales.setLayer(txtNombrePersona, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        labelDatosPersonales.setLayer(txtNumeracionPersona, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        labelDatosPersonales.setLayer(txtCiudadPersona, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        labelDatosPersonales.setLayer(txtEdadPersona, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        labelDatosPersonales.setLayer(txtComunaPersona, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        labelDatosPersonales.setLayer(jSeparator2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        labelDatosPersonales.setLayer(labelVariablePersona, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        labelDatosPersonales.setLayer(txtVariablePersona, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        labelDatosPersonales.setLayer(labelRut, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        labelDatosPersonales.setLayer(txtRutPersona, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout labelDatosPersonalesLayout = new javax.swing.GroupLayout(labelDatosPersonales);
+        labelDatosPersonales.setLayout(labelDatosPersonalesLayout);
+        labelDatosPersonalesLayout.setHorizontalGroup(
+            labelDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(labelDatosPersonalesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(labelComunaGuia)
-                                .addComponent(labelNombreGuia)
-                                .addComponent(labelEdadGuia, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                    .addGap(17, 17, 17)
-                                    .addComponent(labelCalleGuia))
-                                .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                    .addGap(6, 6, 6)
-                                    .addComponent(labelCiudadGuia)))
-                            .addComponent(jLabel8))
+                .addGroup(labelDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(labelDatosPersonalesLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(labelVariablePersona)
+                        .addGap(57, 57, 57)
+                        .addComponent(txtVariablePersona, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(labelDatosPersonalesLayout.createSequentialGroup()
+                        .addGroup(labelDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(labelDatosPersonalesLayout.createSequentialGroup()
+                                .addGap(128, 128, 128)
+                                .addComponent(txtNumeracionPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(labelDatosPersonalesLayout.createSequentialGroup()
+                        .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 5, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtNombreGuia, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtCalleGuia, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtCiudadGuia, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                                    .addComponent(txtEdadGuia, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                                    .addComponent(txtComunaGuia, javax.swing.GroupLayout.Alignment.TRAILING)))))
-                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addComponent(labelNumeracionGuia)
+                        .addGroup(labelDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(labelDatosPersonalesLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(labelCalleGuia)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jSeparator1)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, labelDatosPersonalesLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(labelDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, labelDatosPersonalesLayout.createSequentialGroup()
+                                .addComponent(labelNumeracionPersona)
+                                .addGap(232, 232, 232))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, labelDatosPersonalesLayout.createSequentialGroup()
+                                .addGroup(labelDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(labelCiudadPersona)
+                                    .addComponent(labelComunaPersona))
+                                .addGap(42, 42, 42)
+                                .addGroup(labelDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtCallePersona, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtCiudadPersona, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                                    .addComponent(txtComunaPersona, javax.swing.GroupLayout.Alignment.TRAILING)))))
+                    .addGroup(labelDatosPersonalesLayout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addGroup(labelDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(labelEdadPersona)
+                            .addComponent(labelNombrePersona)
+                            .addComponent(labelRut))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtNumeracionGuia, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(labelDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtNombrePersona, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtEdadPersona, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtRutPersona, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))))
                 .addContainerGap())
         );
-        jLayeredPane1Layout.setVerticalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNombreGuia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelNombreGuia))
-                .addGap(12, 12, 12)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtEdadGuia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelEdadGuia))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        labelDatosPersonalesLayout.setVerticalGroup(
+            labelDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(labelDatosPersonalesLayout.createSequentialGroup()
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addGroup(labelDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNombrePersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelNombrePersona))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(labelDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtEdadPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelEdadPersona))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(labelDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtRutPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelRut))
+                .addGap(18, 18, 18)
+                .addGroup(labelDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(9, 9, 9)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(labelDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelCalleGuia)
-                    .addComponent(txtCalleGuia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCallePersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelNumeracionGuia)
-                    .addComponent(txtNumeracionGuia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(labelDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelNumeracionPersona)
+                    .addComponent(txtNumeracionPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelComunaGuia)
-                    .addComponent(txtComunaGuia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(labelDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelComunaPersona)
+                    .addComponent(txtComunaPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelCiudadGuia)
-                    .addComponent(txtCiudadGuia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addGroup(labelDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelCiudadPersona)
+                    .addComponent(txtCiudadPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addGroup(labelDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelVariablePersona)
+                    .addComponent(txtVariablePersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17))
         );
+
+        comboBoxPersona.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Guía", "Cliente" }));
+        comboBoxPersona.addActionListener(this::comboBoxPersonaActionPerformed);
+
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel1.setText("Crear Nuevo");
 
         javax.swing.GroupLayout JPane1Layout = new javax.swing.GroupLayout(JPane1);
         JPane1.setLayout(JPane1Layout);
         JPane1Layout.setHorizontalGroup(
             JPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JPane1Layout.createSequentialGroup()
-                .addGap(98, 98, 98)
-                .addComponent(labelTitulo)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(JPane1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(JPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLayeredPane1)
+                    .addGroup(JPane1Layout.createSequentialGroup()
+                        .addGroup(JPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(JPane1Layout.createSequentialGroup()
+                                .addGap(98, 98, 98)
+                                .addComponent(labelTitulo)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(labelDatosPersonales, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPane1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnAgregarGuia)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnCerrarGuia)))
-                .addContainerGap())
+                        .addGroup(JPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPane1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(66, 66, 66)
+                                .addComponent(comboBoxPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(80, 80, 80))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPane1Layout.createSequentialGroup()
+                                .addComponent(btnAgregarPersona)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnCerrarPersona)
+                                .addGap(6, 6, 6))))))
         );
         JPane1Layout.setVerticalGroup(
             JPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JPane1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(8, 8, 8)
                 .addComponent(labelTitulo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(JPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(comboBoxPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelDatosPersonales)
+                .addGap(18, 18, 18)
                 .addGroup(JPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCerrarGuia)
-                    .addComponent(btnAgregarGuia))
+                    .addComponent(btnCerrarPersona)
+                    .addComponent(btnAgregarPersona))
                 .addGap(12, 12, 12))
         );
 
@@ -209,28 +327,41 @@ public class FrameIngresarGuia extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(JPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(JPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(JPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(JPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
+
+        JPane1.getAccessibleContext().setAccessibleDescription("");
+        JPane1.getAccessibleContext().setAccessibleParent(null);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnAgregarGuiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarGuiaActionPerformed
+    
+    private void txtCallePersonaActionPerformed(java.awt.event.ActionEvent evt){}
+    private void txtNombrePersonaActionPerformed(java.awt.event.ActionEvent evt){}
+    private void txtNumeracionPersonaActionPerformed(java.awt.event.ActionEvent evt){}
+    private void txtCiudadPersonaActionPerformed(java.awt.event.ActionEvent evt){}
+    private void txtEdadPersonaActionPerformed(java.awt.event.ActionEvent evt){}
+    private void txtComunaPersonaActionPerformed(java.awt.event.ActionEvent evt){}
+    
+    private void btnAgregarPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPersonaActionPerformed
+            String opcion = comboBoxPersona.getSelectedItem().toString();
         
-            String calle = txtCalleGuia.getText();
-            String comuna = txtComunaGuia.getText();
-            String ciudad = txtCiudadGuia.getText();
-            String numero = txtNumeracionGuia.getText();  
-            String nombre = txtNombreGuia.getText();
-            String edad = txtEdadGuia.getText();
-            if(!utilGuia.validarNombre(nombre)){
+            String calle = txtCallePersona.getText();
+            String comuna = txtComunaPersona.getText();
+            String ciudad = txtCiudadPersona.getText();
+            String numero = txtNumeracionPersona.getText();  
+            String nombre = txtNombrePersona.getText();
+            String edad = txtEdadPersona.getText();
+            String rut = txtRutPersona.getText();
+
+            if(!utilPersona.validarNombre(nombre)){
                 return;
             }
-            if(!utilGuia.esEntero(edad) || !utilGuia.validarEdad(edad)){
+            if(!utilPersona.esEntero(edad) || !utilPersona.validarEdad(edad)){
                 return;
             }                
             if(!utilDireccion.validarCalle(calle)){
@@ -245,48 +376,134 @@ public class FrameIngresarGuia extends javax.swing.JFrame {
             if(!utilDireccion.validarCiudad(ciudad)){
                 return;
             }
+            if(!utilRut.validarRut(rut)){
+                return;
+            }
             var direccion = new Direccion(calle, numero, comuna, ciudad);
-            var guia = new GuiaTuristico(nombre, edad, direccion);            
-            gestor.agregar(guia);
+            var rutObjeto = new Rut(rut);
+            if(opcion == "Guía")
+            {
+                var especialidad = txtVariablePersona.getText();
+                if(utilGuia.validarEspecialidad(especialidad)){
+                    var guia = new GuiaTuristico(nombre, edad, direccion, rutObjeto, especialidad);
+                    gestor.agregar(guia);
+                    JOptionPane.showMessageDialog(null, "Guía ingresado con éxito", "Correcto", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+            if(opcion == "Cliente")
+            {   
+                String codigo = "";
+                if(isNull(txtVariablePersona.getText()) || txtVariablePersona.getText().length() != 8)
+                    codigo = generador.generarCodigo();
+                
+                while(codigo.length() != 8 || !utilcliente.validarCodigo(codigo))
+                {
+                    codigo = generador.generarCodigo();
+                }
+                txtVariablePersona.setText(codigo);
+                var cliente = new Cliente(nombre, edad, direccion, rutObjeto, codigo);
+                gestor.agregar(cliente);  
+                JOptionPane.showMessageDialog(null, "Cliente ingresado con éxito", "Correcto", JOptionPane.INFORMATION_MESSAGE);
+            }                                         
             limpiar();
-            JOptionPane.showMessageDialog(this, "Guía Turístico creado con éxito","Correcto",JOptionPane.INFORMATION_MESSAGE);                
-    }//GEN-LAST:event_btnAgregarGuiaActionPerformed
+            
+    }//GEN-LAST:event_btnAgregarPersonaActionPerformed
 
-    private void btnCerrarGuiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarGuiaActionPerformed
+    private void txtVariablePersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtVariablePersonaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtVariablePersonaActionPerformed
+
+    private void comboBoxPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxPersonaActionPerformed
+        String opcion = comboBoxPersona.getSelectedItem().toString();
+        
+        switch(opcion)
+        {
+            case "Guía":
+            {
+                labelVariablePersona.setText("Especialidad");
+                txtVariablePersona.setEditable(true);   
+                txtVariablePersona.setText("");
+            }
+            break;
+            case "Cliente":
+            {
+                var codigo = generador.generarCodigo();
+                labelVariablePersona.setText("Cod. Reserva");
+                txtVariablePersona.setEditable(false);
+                txtVariablePersona.setText(codigo);
+            }    
+                break;            
+        }
+    }//GEN-LAST:event_comboBoxPersonaActionPerformed
+
+    private void txtRutPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRutPersonaActionPerformed
+        //txtRutPersona.setText("");
+    }//GEN-LAST:event_txtRutPersonaActionPerformed
+
+    private void txtRutPersonaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtRutPersonaMouseClicked
+        if(txtRutPersona.getText().contains("Ejemplo: 12345678-9"))
+            txtRutPersona.setText("");
+    }//GEN-LAST:event_txtRutPersonaMouseClicked
+
+    private void txtRutPersonaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtRutPersonaMouseExited
+        //txtRutPersona.setText("Ejemplo: 12345678-9");
+    }//GEN-LAST:event_txtRutPersonaMouseExited
+
+    private void txtRutPersonaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtRutPersonaFocusLost
+        if(isNull(txtRutPersona.getText()) || txtRutPersona.getText().isBlank() || txtRutPersona.getText().contains("Ejemplo : 12345678-9"))
+            txtRutPersona.setText("Ejemplo: 12345678-9");
+    }//GEN-LAST:event_txtRutPersonaFocusLost
+
+    private void txtRutPersonaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtRutPersonaFocusGained
+        if(txtRutPersona.getText().contains("Ejemplo: 12345678-9"))
+            txtRutPersona.setText("");
+    }//GEN-LAST:event_txtRutPersonaFocusGained
+
+    private void btnCerrarPersonaActionPerformed(java.awt.event.ActionEvent evt) {                                              
         this.dispose();
-    }//GEN-LAST:event_btnCerrarGuiaActionPerformed    
+    }                                                 
 
     /**
      * Limpia todos los campos del formulario de ingreso de guía.
      */
     private void limpiar(){
-        txtCalleGuia.setText("");
-        txtComunaGuia.setText("");
-        txtCiudadGuia.setText("");
-        txtNumeracionGuia.setText("");
-        txtNombreGuia.setText("");
-        txtEdadGuia.setText("");
+        txtCallePersona.setText("");
+        txtComunaPersona.setText("");
+        txtCiudadPersona.setText("");
+        txtNumeracionPersona.setText("");
+        txtNombrePersona.setText("");
+        txtEdadPersona.setText("");
+        txtRutPersona.setText("Ejemplo: 12345678-9");
+        txtVariablePersona.setText("");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JPane1;
-    private javax.swing.JButton btnAgregarGuia;
-    private javax.swing.JButton btnCerrarGuia;
+    private javax.swing.JButton btnAgregarPersona;
+    private javax.swing.JButton btnCerrarPersona;
+    private javax.swing.JComboBox<String> comboBoxPersona;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JLabel labelCalleGuia;
-    private javax.swing.JLabel labelCiudadGuia;
-    private javax.swing.JLabel labelComunaGuia;
-    private javax.swing.JLabel labelEdadGuia;
-    private javax.swing.JLabel labelNombreGuia;
-    private javax.swing.JLabel labelNumeracionGuia;
+    private javax.swing.JLabel labelCiudadPersona;
+    private javax.swing.JLabel labelComunaPersona;
+    private javax.swing.JLayeredPane labelDatosPersonales;
+    private javax.swing.JLabel labelEdadPersona;
+    private javax.swing.JLabel labelNombrePersona;
+    private javax.swing.JLabel labelNumeracionPersona;
+    private javax.swing.JLabel labelRut;
     private javax.swing.JLabel labelTitulo;
-    private javax.swing.JTextField txtCalleGuia;
-    private javax.swing.JTextField txtCiudadGuia;
-    private javax.swing.JTextField txtComunaGuia;
-    private javax.swing.JTextField txtEdadGuia;
-    private javax.swing.JTextField txtNombreGuia;
-    private javax.swing.JTextField txtNumeracionGuia;
+    private javax.swing.JLabel labelVariablePersona;
+    private javax.swing.JTextField txtCallePersona;
+    private javax.swing.JTextField txtCiudadPersona;
+    private javax.swing.JTextField txtComunaPersona;
+    private javax.swing.JTextField txtEdadPersona;
+    private javax.swing.JTextField txtNombrePersona;
+    private javax.swing.JTextField txtNumeracionPersona;
+    private javax.swing.JTextField txtRutPersona;
+    private javax.swing.JTextField txtVariablePersona;
     // End of variables declaration//GEN-END:variables
 }

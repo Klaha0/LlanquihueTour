@@ -20,7 +20,7 @@ para el ingreso y visualización de registros.
 
 **Qué se agregó sobre el proyecto de semanas anteriores:**
 
-* **Interfaz `Registrable`** (paquete `model`), con el método `mostrarResumen()`. La implementan
+* **Interfaz `Registrable`** (paquete `model`), con el método `toString()`. La implementan
   `ServicioTuristico` (y sus subclases, por herencia), `GuiaTuristico` y `Direccion`.
 * **`GestorEntidades`** (paquete `data`): mantiene una única colección `ArrayList<Registrable>`
   con guías y servicios, y usa `instanceof` para separarlos al mostrarlos (`mostrarGuias()`,
@@ -48,7 +48,7 @@ de forma flexible, sin necesidad de conocer de antemano el tipo concreto de cada
 
 | Paquete | Elemento | Rol |
 |---------|----------|-----|
-| `model` | `Registrable` | Interfaz común (`mostrarResumen()`) implementada por toda entidad gestionable. |
+| `model` | `Registrable` | Interfaz común (`toString()`) implementada por toda entidad gestionable. |
 | `model` | `ServicioTuristico` | Superclase de los servicios turísticos. |
 | `model` | `RutaGastronomica`, `PaseoLacustre`, `ExcursionCultural` | Subclases de `ServicioTuristico`. |
 | `model` | `GuiaTuristico`, `Direccion`, `Tour` | Entidades de dominio de semanas anteriores. |

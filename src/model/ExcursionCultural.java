@@ -1,19 +1,21 @@
 package model;
 
+import data.GestorDatos;
+
 /**
  * Subclase de ServicioTuristico que representa una excursión cultural.
  * Agrega el lugar histórico visitado durante la excursión.
  */
 public class ExcursionCultural extends ServicioTuristico{
+    private GestorDatos gestor = new GestorDatos();
     private String lugarHistorico;
-
     /**
      * Crea una excursión cultural.
      * @param nombre: nombre de la excursión cultural.
      * @param duracionHoras: duración en horas del servicio.
      * @param lugarHistorico: lugar histórico visitado durante la excursión.
      */
-    public ExcursionCultural(String nombre, double duracionHoras, String lugarHistorico) {
+    public ExcursionCultural(String nombre, String duracionHoras, String lugarHistorico) {
         super(nombre, duracionHoras);
         this.lugarHistorico = lugarHistorico;
     }
@@ -31,10 +33,20 @@ public class ExcursionCultural extends ServicioTuristico{
      * @return el String con el detalle de la excursión cultural formateado.
      */
     @Override
-    public String mostrarResumen() {
-        return "Excursion Cultural     : " + this.getNombre() + "\n"+
-               "Duración                    : " + String.format("%.2f Hrs.",this.getDuracionHoras()) +  "\n"+
-               "Lugar Histórico          : " + this.lugarHistorico + "\n";
+    public String toString() {
+        return "Excursion Cultural\t: " + this.getNombre() + "\n"+
+               "Duración\t\t: " + String.format("%.2f Hrs.",this.getDuracionHoras()) +  "\n"+
+               "Lugar Histórico\t: " + this.lugarHistorico + "\n";
+    }
+    
+    @Override
+    public void persistir() {
+        String persistirExcursionCultural = 
+                "ExcursionCultural;" +
+                this.getNombre() + ";" + 
+                this.getDuracionHoras() + ";"+
+                this.lugarHistorico;
+        gestor.persistirEntidad(persistirExcursionCultural);
     }
     
 }

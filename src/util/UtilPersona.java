@@ -1,15 +1,16 @@
 package util;
 
-import model.GuiaTuristico;
+import exception.PersonaException;
 import static java.util.Objects.isNull;
 import javax.swing.JOptionPane;
+import model.Persona;
 
 /**
  * Clase para validar campos de GuiaTuristico.
  * Todas las validaciones retornan boolean y muestran un mensaje de error al usuario
  * mediante JOptionPane cuando el dato ingresado no es válido.
  */
-public class UtilGuiaTuristico {
+public class UtilPersona {
 
     /**
      * Valida que el nombre no sea nulo ni esté en blanco.
@@ -18,14 +19,19 @@ public class UtilGuiaTuristico {
      */
     public boolean validarNombre(String nombre)
     {
-        if(isNull(nombre))
-        {
-            JOptionPane.showMessageDialog(null, "Debe ingresar un nombre válido","Error",JOptionPane.ERROR_MESSAGE);
-            return false;
+        try{
+            if(isNull(nombre))
+            {
+                throw new PersonaException( "Debe ingresar un nombre válido");
+            }
+            if(nombre.trim().isBlank())
+            {
+                throw new PersonaException("El campo nombre no puede estar en blanco");
+            }
         }
-        if(nombre.trim().isBlank())
+        catch(PersonaException e)
         {
-            JOptionPane.showMessageDialog(null, "El campo nombre no puede estar en blanco","Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return false;
         }
         return true;
@@ -58,7 +64,7 @@ public class UtilGuiaTuristico {
      */
     public boolean validarEdad(String edadString)
     {
-        var edad =parseEdad(edadString);
+        var edad = parseEdad(edadString);
         if(edad < 0)
             {
                 JOptionPane.showMessageDialog(null, "Debe ingresar una edad mayor que 0","Error",JOptionPane.ERROR_MESSAGE);
@@ -92,10 +98,10 @@ public class UtilGuiaTuristico {
 
     /**
      * Validamos que el guía turístico no sea nulo.
-     * @param guia: un objeto de la clase GuiaTuristico.
+     * @param persona: un objeto de la clase Persona.
      * @return false si es nulo el guía turístico.
      */
-    public boolean esValidoGuiaTuristico(GuiaTuristico guia){
-            return !isNull(guia);
+    public boolean esValidaPersona(Persona persona){
+            return !isNull(persona);
     }
 }

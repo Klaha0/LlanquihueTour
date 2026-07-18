@@ -1,108 +1,50 @@
 package model;
 
-import util.UtilDireccion;
+import data.GestorDatos;
+import exception.PersonaException;
 import util.UtilGuiaTuristico;
 
-/**
- * Clase que representa un guía turístico con sus datos personales y dirección.
- * Cada guía tiene un nombre, una edad y una dirección asociada.
- */
-public class GuiaTuristico implements Registrable{
+public class GuiaTuristico extends Persona{
     private UtilGuiaTuristico util = new UtilGuiaTuristico();
-    private UtilDireccion utilDireccion = new UtilDireccion();
-    private String nombre;
-    private int edad;
-    private Direccion direccion;
+    private GestorDatos gestor = new GestorDatos();
+    private String especialidad;
 
-    /**
-     * Crea un guía turístico validando sus datos antes de asignarlos.
-     * @param nombre: nombre del guía turístico.
-     * @param edadString: edad del guía turístico.
-     * @param direccion: dirección del guía turístico.
-     */
-    public GuiaTuristico(String nombre, String edadString, Direccion direccion)
-    {
-        if(!util.esEntero(edadString) || !util.validarEdad(edadString)){
-            return;
-        }        
-        int edadInt = Integer.parseInt(edadString);
-        this.edad = edadInt;
-        
-        if(!util.validarNombre(nombre)){
-            return;        
-        }
-        this.nombre = nombre;
-                      
-        if(!utilDireccion.esValidaDireccion(direccion) || !util.esValidoGuiaTuristico(this))
-        {
-            return;
-        }        
-        this.direccion = direccion;        
+    public GuiaTuristico(String nombre, String edadString, Direccion direccion, Rut rut, String especialidad) {
+        super(nombre, edadString, direccion, rut);
+
+        if(!util.validarEspecialidad(especialidad))
+            throw new PersonaException("La especialidad ingresada no es válida");
+        this.especialidad = especialidad;
     }
 
-    /**
-     * Getter del nombre del guía turístico.
-     * @return el nombre del guía turístico.
-     */
-    public String getNombre() {
-
-        return nombre;
+    public String getEspecialidad() {
+        return especialidad;
     }
 
-    /**
-     * Setter del nombre del guía turístico.
-     * @param nombre: nombre del guía turístico.
-     */
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setEspecialidad(String especialidad) {
+        if(util.validarEspecialidad(especialidad))
+            this.especialidad = especialidad;
     }
-
-    /**
-     * Getter de la dirección del guía turístico.
-     * @return la dirección del guía turístico.
-     */
-    public Direccion getDireccion() {
-        return direccion;
-    }
-
-    /**
-     * Setter de la dirección del guía turístico.
-     * @param direccion: dirección del guía turístico.
-     */
-    public void setDireccion(Direccion direccion) {
-        this.direccion = direccion;
-    }
-
-    /**
-     * Getter de la edad del guía turístico.
-     * @return la edad del guía turístico.
-     */
-    public int getEdad() {
-        return edad;
-    }
-
-    /**
-     * Setter de la edad del guía turístico.
-     * @param edadString: edad del guía turístico.
-     */
-    public void setEdad(String edadString) {
-        if(!util.esEntero(edadString) || !util.validarEdad(edadString)){
-            return;
-        }
-        int edadInt = Integer.parseInt(edadString);
-        this.edad = edadInt;
-    }
-
-    /**
-     * sobreescribe el método mostrarResumen con formato personalizado
-     * @return el texto descriptivo del guía turístico.
-     */
+    
     @Override
-    public String mostrarResumen() {
-        return 
-               "Nombre    : " + nombre + "\n"+
-               "Edad        : " + this.edad + "\n"+ 
-                direccion.mostrarResumen();
+    public String toString(){
+        String guia = "Nombre\t: " + this.getNombre() + "\n" +
+                      "Edad\t: " + this.getEdad() + "\n" +
+                      "Rut\t: " + this.getRut().toString() + "\n" +
+                      this.getDireccion().toString() + "\n" +
+                      "Especialidad\t: " + this.especialidad + "\n";
+        return guia;
     }
-
+    
+    @Override
+    public void persistir(){
+        String persistirGuiaTuristico = 
+                "GuiaTuristico;" + 
+                this.getNombre() + ";" + 
+                this.getEdad() + ";"+
+                this.getDireccion().persistir()+";" + 
+                this.getRut().toString()+ ";" +
+                this.especialidad;
+        gestor.persistirEntidad(persistirGuiaTuristico);
+    }
 }

@@ -1,12 +1,13 @@
 package model;
 
+import exception.DireccionException;
 import util.UtilDireccion;
 
 /**
  * Clase para modelar una dirección
  * 
  */
-public class Direccion implements Registrable{
+public class Direccion{
 private String calle;
 private int numero;
 private String comuna;
@@ -20,30 +21,30 @@ private String ciudad;
  * @param comuna: Comuna a la que pertenece la casa
  * @param ciudad : Ciudad a la que pertenece la casa
  */
-    public Direccion(String calle, String numero, String comuna, String ciudad)  
+    public Direccion(String calle, String numero, String comuna, String ciudad)
     {
         UtilDireccion util = new UtilDireccion();
         if(!util.esEntero(numero) || !util.validarNumeracion(numero)){
-            return;
-        }                
+            throw new DireccionException("La numeración ingresada no es válida");
+        }
         int numeracion = Integer.parseInt(numero);
         this.numero = numeracion;
-        
+
         if(!util.validarCalle(calle)){
-            return;
+            throw new DireccionException("La calle ingresada no es válida");
         }
-            this.calle = calle;          
-                        
+            this.calle = calle;
+
         if(!util.validarComuna(comuna)){
-            return;
+            throw new DireccionException("La comuna ingresada no es válida");
         }
             this.comuna = comuna;
 
         if(!util.validarCiudad(ciudad)){
-            return;
+            throw new DireccionException("La ciudad ingresada no es válida");
         }
             this.ciudad = ciudad;
-    }    
+    }
     
 /**
  * Getter de calle
@@ -128,13 +129,18 @@ private String ciudad;
 
     
     /**
-     * sobreescribe el método mostrarResumen con formato personalizado
+     * sobreescribe el método toString con formato personalizado
      * @return el texto descriptivo de la dirección formateada.
      */
     @Override
-    public String mostrarResumen()
+    public String toString()
     {
-            return "Dirección : " + this.calle + " " + this.numero +", " + this.comuna + ", " + this.ciudad + "\n";
+            return "Dirección\t: " + this.calle + " " + this.numero + ", " + this.comuna + ", " + this.ciudad;
+    }
+    
+    public String persistir(){
+        String persistirDireccion = this.calle + ";" + this.numero + ";"+ this.comuna + ";" + this.ciudad;
+        return persistirDireccion;
     }
 
 }

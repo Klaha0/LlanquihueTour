@@ -1,5 +1,6 @@
 package ui;
 
+import data.GestorDatos;
 import data.GestorEntidades;
 
 /**
@@ -8,19 +9,19 @@ import data.GestorEntidades;
  * cargados en el GestorEntidades.
  */
 public class Main extends javax.swing.JFrame {
-
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Main.class.getName());
-    GestorEntidades gestorEntidades = new GestorEntidades();
+ 
+    private GestorEntidades gestorEntidades = new GestorEntidades();
+    private GestorDatos gestorDatos = new GestorDatos();
     /**
      * Crea la ventana principal, inicializa sus componentes y carga las
      * entidades de ejemplo (guías y servicios) en el gestor para facilitar las pruebas del sistema.
      */
-    public Main() {
+    public Main() {        
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
-        gestorEntidades.agregarServicios();
-        gestorEntidades.agregarGuias();
+        
+        
     }
 
     /**
@@ -50,6 +51,7 @@ public class Main extends javax.swing.JFrame {
         btnSalir = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
+        btnMostrarClientes = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jLayeredPane2 = new javax.swing.JLayeredPane();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -110,13 +112,19 @@ public class Main extends javax.swing.JFrame {
         jLayeredPane1.setFocusable(false);
 
         labelIngresar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        labelIngresar.setText("Ingresar nuevo");
+        labelIngresar.setText("Crear nuevo");
         labelIngresar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        btnIngresarGuia.setText("Guía");
+        btnIngresarGuia.setText("Persona");
+        btnIngresarGuia.setMaximumSize(new java.awt.Dimension(76, 23));
+        btnIngresarGuia.setMinimumSize(new java.awt.Dimension(76, 23));
+        btnIngresarGuia.setPreferredSize(new java.awt.Dimension(76, 23));
         btnIngresarGuia.addActionListener(this::btnIngresarGuiaActionPerformed);
 
         btnIngresarServicio.setText("Servicio");
+        btnIngresarServicio.setMaximumSize(new java.awt.Dimension(76, 23));
+        btnIngresarServicio.setMinimumSize(new java.awt.Dimension(76, 23));
+        btnIngresarServicio.setPreferredSize(new java.awt.Dimension(76, 23));
         btnIngresarServicio.addActionListener(this::btnIngresarServicioActionPerformed);
 
         labelMostrar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -124,12 +132,18 @@ public class Main extends javax.swing.JFrame {
         labelMostrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         btnMostrarGuias.setText("Guías");
+        btnMostrarGuias.setMaximumSize(new java.awt.Dimension(76, 23));
+        btnMostrarGuias.setMinimumSize(new java.awt.Dimension(76, 23));
+        btnMostrarGuias.setPreferredSize(new java.awt.Dimension(76, 23));
         btnMostrarGuias.addActionListener(this::btnMostrarGuiasActionPerformed);
 
         btnMostrarServicios.setText("Servicios");
         btnMostrarServicios.addActionListener(this::btnMostrarServiciosActionPerformed);
 
         btnMostrarTodo.setText("Todo");
+        btnMostrarTodo.setMaximumSize(new java.awt.Dimension(76, 23));
+        btnMostrarTodo.setMinimumSize(new java.awt.Dimension(76, 23));
+        btnMostrarTodo.setPreferredSize(new java.awt.Dimension(76, 23));
         btnMostrarTodo.addActionListener(this::btnMostrarTodoActionPerformed);
 
         labelSistema.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -137,6 +151,9 @@ public class Main extends javax.swing.JFrame {
         labelSistema.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         btnLimpiar.setText("Limpiar");
+        btnLimpiar.setMaximumSize(new java.awt.Dimension(76, 23));
+        btnLimpiar.setMinimumSize(new java.awt.Dimension(76, 23));
+        btnLimpiar.setPreferredSize(new java.awt.Dimension(76, 23));
         btnLimpiar.addActionListener(this::btnLimpiarActionPerformed);
 
         btnSalir.setText("Salir");
@@ -145,6 +162,12 @@ public class Main extends javax.swing.JFrame {
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        btnMostrarClientes.setText("Clientes");
+        btnMostrarClientes.setMaximumSize(new java.awt.Dimension(76, 23));
+        btnMostrarClientes.setMinimumSize(new java.awt.Dimension(76, 23));
+        btnMostrarClientes.setPreferredSize(new java.awt.Dimension(76, 23));
+        btnMostrarClientes.addActionListener(this::btnMostrarClientesActionPerformed);
 
         jLayeredPane1.setLayer(labelIngresar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(btnIngresarGuia, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -158,6 +181,7 @@ public class Main extends javax.swing.JFrame {
         jLayeredPane1.setLayer(btnSalir, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jSeparator2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jSeparator3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(btnMostrarClientes, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
@@ -167,59 +191,72 @@ public class Main extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(labelIngresar)
-                    .addComponent(btnIngresarGuia)
-                    .addComponent(btnIngresarServicio))
+                    .addComponent(btnIngresarGuia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnIngresarServicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55)
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnMostrarServicios)
+                            .addComponent(btnMostrarGuias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnMostrarTodo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnMostrarClientes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(28, 28, 28))
+                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                        .addGap(85, 85, 85)
+                        .addComponent(labelMostrar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(labelMostrar)
-                    .addComponent(btnMostrarGuias)
-                    .addComponent(btnMostrarServicios)
-                    .addComponent(btnMostrarTodo))
-                .addGap(71, 71, 71)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(btnLimpiar)
+                    .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSalir)
-                    .addComponent(labelSistema))
-                .addGap(44, 44, 44))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jLayeredPane1Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(labelSistema)))
+                .addGap(27, 27, 27))
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(labelIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(labelMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                        .addGap(4, 4, 4)
-                                        .addComponent(btnMostrarGuias)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(btnMostrarServicios)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(btnMostrarTodo))
-                                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(btnIngresarGuia, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(labelIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(labelMostrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(18, 18, 18)
-                                        .addComponent(btnIngresarServicio))))
-                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(labelSistema)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnLimpiar)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnSalir)))
-                        .addGap(0, 12, Short.MAX_VALUE)))
+                                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                                                .addComponent(btnIngresarGuia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(28, 28, 28)
+                                                .addComponent(btnIngresarServicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                                                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                    .addComponent(btnMostrarGuias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(btnMostrarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(29, 29, 29)
+                                                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                    .addComponent(btnMostrarServicios)
+                                                    .addComponent(btnMostrarTodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                                        .addGap(12, 12, 12)
+                                        .addComponent(labelSistema)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnSalir)))
+                                .addGap(0, 29, Short.MAX_VALUE))
+                            .addComponent(jSeparator3))))
                 .addContainerGap())
         );
 
@@ -289,35 +326,39 @@ public class Main extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnIngresarGuiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarGuiaActionPerformed
-        var ventanaGuia = new FrameIngresarGuia(gestorEntidades);
-        ventanaGuia.setVisible(true);
-    }//GEN-LAST:event_btnIngresarGuiaActionPerformed
+    private void btnMostrarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarClientesActionPerformed
+        txtArea.setText(gestorEntidades.mostrarClientes());
+    }//GEN-LAST:event_btnMostrarClientesActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        txtArea.setText("");
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void btnMostrarTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarTodoActionPerformed
+        txtArea.setText(gestorEntidades.mostrarTodo());
+    }//GEN-LAST:event_btnMostrarTodoActionPerformed
 
     private void btnMostrarServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarServiciosActionPerformed
         txtArea.setText(gestorEntidades.mostrarServicios());
     }//GEN-LAST:event_btnMostrarServiciosActionPerformed
+
+    private void btnMostrarGuiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarGuiasActionPerformed
+        txtArea.setText(gestorEntidades.mostrarGuias());
+    }//GEN-LAST:event_btnMostrarGuiasActionPerformed
 
     private void btnIngresarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarServicioActionPerformed
         var ventanaServicio = new FrameIngresarServicio(gestorEntidades);
         ventanaServicio.setVisible(true);
     }//GEN-LAST:event_btnIngresarServicioActionPerformed
 
-    private void btnMostrarGuiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarGuiasActionPerformed
-        txtArea.setText(gestorEntidades.mostrarGuias());
-    }//GEN-LAST:event_btnMostrarGuiasActionPerformed
-
-    private void btnMostrarTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarTodoActionPerformed
-        txtArea.setText(gestorEntidades.mostrarTodo());
-    }//GEN-LAST:event_btnMostrarTodoActionPerformed
-
-    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        txtArea.setText("");
-    }//GEN-LAST:event_btnLimpiarActionPerformed
-
-    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_btnSalirActionPerformed
+    private void btnIngresarGuiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarGuiaActionPerformed
+        var ventanaGuia = new FrameIngresarPersona(gestorEntidades);
+        ventanaGuia.setVisible(true);
+    }//GEN-LAST:event_btnIngresarGuiaActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -333,18 +374,20 @@ public class Main extends javax.swing.JFrame {
                 }
             }
         } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
+            
         }
         //</editor-fold>
         
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new Main().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new Main().setVisible(true));        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIngresarGuia;
     private javax.swing.JButton btnIngresarServicio;
     private javax.swing.JButton btnLimpiar;
+    private javax.swing.JButton btnMostrarClientes;
     private javax.swing.JButton btnMostrarGuias;
     private javax.swing.JButton btnMostrarServicios;
     private javax.swing.JButton btnMostrarTodo;

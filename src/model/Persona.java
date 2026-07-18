@@ -1,43 +1,54 @@
 package model;
 
+import exception.DireccionException;
+import exception.PersonaException;
+import exception.RutInvalidoException;
 import util.UtilDireccion;
-import util.UtilGuiaTuristico;
+import util.UtilPersona;
+import util.UtilRut;
 
 /**
  * Clase que representa un guía turístico con sus datos personales y dirección.
  * Cada guía tiene un nombre, una edad y una dirección asociada.
  */
-public class GuiaTuristico implements Registrable{
-    private UtilGuiaTuristico util = new UtilGuiaTuristico();
+public class Persona implements Persistible{
+    private UtilPersona util = new UtilPersona();
     private UtilDireccion utilDireccion = new UtilDireccion();
+    private UtilRut utilRut = new UtilRut();
     private String nombre;
     private int edad;
     private Direccion direccion;
+    private Rut rut;
 
     /**
      * Crea un guía turístico validando sus datos antes de asignarlos.
      * @param nombre: nombre del guía turístico.
      * @param edadString: edad del guía turístico.
      * @param direccion: dirección del guía turístico.
+     * @param rut: rut de la persona
      */
-    public GuiaTuristico(String nombre, String edadString, Direccion direccion)
+    public Persona(String nombre, String edadString, Direccion direccion, Rut rut)
     {
         if(!util.esEntero(edadString) || !util.validarEdad(edadString)){
-            return;
-        }        
+            throw new PersonaException("La edad ingresada no es válida");
+        }
         int edadInt = Integer.parseInt(edadString);
         this.edad = edadInt;
-        
+
         if(!util.validarNombre(nombre)){
-            return;        
+            throw new PersonaException("El nombre ingresado no es válido");
         }
         this.nombre = nombre;
-                      
-        if(!utilDireccion.esValidaDireccion(direccion) || !util.esValidoGuiaTuristico(this))
+
+        if(!utilDireccion.esValidaDireccion(direccion)){
+            throw new DireccionException("Debe ingresar una dirección válida");
+        }
+        if(!util.esValidaPersona(this) || !utilRut.validarRut(rut))
         {
-            return;
-        }        
-        this.direccion = direccion;        
+            throw new RutInvalidoException("El Rut ingresado no es válido");
+        }
+        this.rut = rut;
+        this.direccion = direccion;
     }
 
     /**
@@ -93,16 +104,31 @@ public class GuiaTuristico implements Registrable{
         this.edad = edadInt;
     }
 
+    public Rut getRut() {
+        return rut;
+    }
+
+    public void setRut(Rut rut) {
+        if(utilRut.validarRut(rut))
+            this.rut = rut;
+    }
+
     /**
-     * sobreescribe el método mostrarResumen con formato personalizado
+     * sobreescribe el método toString con formato personalizado
      * @return el texto descriptivo del guía turístico.
      */
     @Override
-    public String mostrarResumen() {
+    public String toString() {
         return 
                "Nombre    : " + nombre + "\n"+
                "Edad        : " + this.edad + "\n"+ 
-                direccion.mostrarResumen();
+                direccion.toString();
+    }
+
+    @Override
+    public void persistir() {
+        //Método que deberán implementar las sub-clases para guardar 
+        //en archivo
     }
 
 }

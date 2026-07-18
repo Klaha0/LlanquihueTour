@@ -1,11 +1,12 @@
 package data;
 
+import java.util.ArrayList;
+import model.Cliente;
 import model.ExcursionCultural;
 import model.GuiaTuristico;
 import model.PaseoLacustre;
-import model.Registrable;
+import model.Persistible;
 import model.RutaGastronomica;
-import java.util.ArrayList;
 
 /**
  * Clase encargada de administrar la colección polimórfica de entidades del sistema
@@ -13,20 +14,20 @@ import java.util.ArrayList;
  * diferenciando su tipo real mediante instanceof.
  */
 public class GestorEntidades {
-    private final ArrayList<Registrable> entidades;
-    GestorServicios gestorServicios = new GestorServicios();
-    GestorGuias gestorGuias = new GestorGuias();
+    private GestorDatos gestorDatos = new GestorDatos();
+    private final ArrayList<Persistible> entidades = gestorDatos.LeerArchivo();
 
-    public GestorEntidades() {
-        this.entidades = new ArrayList<>();
+
+    public ArrayList<Persistible> CargarEntidades(){
+        return entidades;
     }
-
     /**
      * Agrega una entidad a la colección.
      * @param entidad: entidad que implementa Registrable a agregar.
      */
-    public void agregar(Registrable entidad) {
+    public void agregar(Persistible entidad) {
         this.entidades.add(entidad);
+        entidad.persistir();
     }
 
     /**
@@ -42,7 +43,7 @@ public class GestorEntidades {
         {
             if(entidad instanceof GuiaTuristico)
             {
-                resumen.append(entidad.mostrarResumen());
+                resumen.append(entidad.toString());
                 resumen.append("────────────────────────────────────────\n");
             }
         }
@@ -50,6 +51,22 @@ public class GestorEntidades {
         return resumen.toString();
     }
 
+    
+    public String mostrarClientes()
+    {
+        var resumen = new StringBuilder();
+        resumen.append("\t     --== Listado de Clientes ==--\n\n");
+        for(var entidad : entidades)
+        {
+            if(entidad instanceof Cliente)
+            {
+                resumen.append(entidad.toString());
+                resumen.append("────────────────────────────────────────\n");
+            }
+        }
+        resumen.append("\n");
+        return resumen.toString();
+    }
     /**
      * Recorre la colección e identifica, mediante instanceof, los distintos
 tipos de servicio turístico (PaseoLacustre, ExcursionCultural, RutaGastronomica).
@@ -61,18 +78,19 @@ tipos de servicio turístico (PaseoLacustre, ExcursionCultural, RutaGastronomica
         for(var entidad : entidades)
         {
             if(entidad instanceof PaseoLacustre){
-                resumen.append(entidad.mostrarResumen());
+                resumen.append(entidad.toString());
                 resumen.append("────────────────────────────────────────\n");
             }
             else if(entidad instanceof ExcursionCultural){
-                resumen.append(entidad.mostrarResumen());
+                resumen.append(entidad.toString());
                 resumen.append("────────────────────────────────────────\n");
             }
             else if(entidad instanceof RutaGastronomica){
-                resumen.append(entidad.mostrarResumen());
+                resumen.append(entidad.toString());
                 resumen.append("────────────────────────────────────────\n");
             }
         }
+        resumen.append("\n");
         return resumen.toString();
     }
 
@@ -87,21 +105,36 @@ tipos de servicio turístico (PaseoLacustre, ExcursionCultural, RutaGastronomica
         resumen.append("\t     └────────────────────────────────────┘\n\n");
         resumen.append(mostrarGuias());
         resumen.append(mostrarServicios());
+        resumen.append(mostrarClientes());
         return resumen.toString();
+    }    
+
+    public String buscarXCodigoReserva(String codigoReserva) {
+        for (var entidad : entidades) {
+            if (entidad instanceof Cliente) {
+                Cliente cliente = (Cliente) entidad;
+                if (cliente.getCodigoReserva().equals(codigoReserva)) {
+                    return cliente.toString();
+                }
+            }
+        }
+        return "No se encontró ningún cliente con el código de reserva proporcionado.";
     }
 
-    /**
-     * Carga en la colección los servicios turísticos de ejemplo.
-     */
-    public void agregarServicios(){
-        gestorServicios.cargarServiciosTuristicos(this.entidades);
+    public String buscarXNombre(String nombre) {
+        for (var entidad : entidades) {
+            if (entidad instanceof Cliente) {
+                Cliente cliente = (Cliente) entidad;
+                if (cliente.getNombre().equalsIgnoreCase(nombre)) {
+                    return "Cliente encontrado\n: " + cliente.toString();
+                }
+            }
+        }
+        return "No se encontró ningún cliente con el nombre proporcionado.";
     }
 
-    /**
-     * Carga en la colección los guías turísticos de ejemplo.
-     */
-    public void agregarGuias(){
-        gestorGuias.cargarGuiasTuristicos(this.entidades);
+    public void actualizar(Persistible entidad, int indice) {
+        entidades.set(indice, entidad);
+        entidad.persistir();
     }
-
 }
