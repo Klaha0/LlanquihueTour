@@ -1,17 +1,17 @@
 package ui;
 
 import data.GestorEntidades;
+import javax.swing.JOptionPane;
 import model.ExcursionCultural;
 import model.PaseoLacustre;
 import model.RutaGastronomica;
 import util.UtilServicioTuristico;
-import javax.swing.JOptionPane;
 
 
 /**
  * Ventana que permite ingresar un nuevo servicio turístico (Ruta Gastronómica,
-Paseo Lacustre o Excursión Cultural) y agregarlo al GestorEntidades recibido
-desde la ventana principal.
+ * Paseo Lacustre o Excursión Cultural) y agregarlo al GestorEntidades recibido
+ * desde la ventana principal.
  */
 public class FrameIngresarServicio extends javax.swing.JFrame {    
     private final GestorEntidades gestor;
@@ -22,7 +22,7 @@ public class FrameIngresarServicio extends javax.swing.JFrame {
      * @param gestorEntidades: gestor donde se agregará el servicio creado.
      */
     public FrameIngresarServicio(GestorEntidades gestorEntidades){
-        this.gestor = gestorEntidades;
+        this.gestor = gestorEntidades;        
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
@@ -42,12 +42,14 @@ public class FrameIngresarServicio extends javax.swing.JFrame {
         labelSeleccionarServicio = new javax.swing.JLabel();
         labelNombreServicio = new javax.swing.JLabel();
         labelDuracionServicio = new javax.swing.JLabel();
+        labelCapacidadServicio = new javax.swing.JLabel();
         labelVariable = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel8 = new javax.swing.JLabel();
         txtNombreServicio = new javax.swing.JTextField();
         txtDuracionServicio = new javax.swing.JTextField();
         txtVariableServicio = new javax.swing.JTextField();
+        txtCapacidadServicio = new javax.swing.JTextField();
         comboBox = new javax.swing.JComboBox<>();
         btnAgregarServicio = new javax.swing.JButton();
         btnCerrarServicio = new javax.swing.JButton();
@@ -56,7 +58,7 @@ public class FrameIngresarServicio extends javax.swing.JFrame {
         setTitle("Crear nuevo servicio");
 
         labelTitulo.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        labelTitulo.setText("Nuevo Servicio");
+        labelTitulo.setText("Crear Servicio");
 
         jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tipo Servicio", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 2, 12))); // NOI18N
 
@@ -66,10 +68,22 @@ public class FrameIngresarServicio extends javax.swing.JFrame {
 
         labelDuracionServicio.setText("Duración hrs");
 
+        labelCapacidadServicio.setText("Capacidad");
+
+        labelVariable.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelVariable.setText("Nro Paradas");
+        labelVariable.setMaximumSize(new java.awt.Dimension(102, 16));
+        labelVariable.setMinimumSize(new java.awt.Dimension(102, 16));
+        labelVariable.setPreferredSize(new java.awt.Dimension(102, 16));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         jLabel8.setText("Datos Servicio");
+
+        txtNombreServicio.addActionListener(this::txtNombreServicioActionPerformed);
+
+        txtDuracionServicio.addActionListener(this::txtDuracionServicioActionPerformed);
+
+        txtVariableServicio.addActionListener(this::txtVariableServicioActionPerformed);
 
         comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ruta Gastronómica", "Paseo Lacustre", "Excursión Cultural" }));
         comboBox.addActionListener(this::comboBoxActionPerformed);
@@ -77,12 +91,14 @@ public class FrameIngresarServicio extends javax.swing.JFrame {
         jLayeredPane1.setLayer(labelSeleccionarServicio, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(labelNombreServicio, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(labelDuracionServicio, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(labelCapacidadServicio, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(labelVariable, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jSeparator1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel8, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(txtNombreServicio, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(txtDuracionServicio, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(txtVariableServicio, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(txtCapacidadServicio, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(comboBox, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
@@ -93,30 +109,33 @@ public class FrameIngresarServicio extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addComponent(labelDuracionServicio)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtDuracionServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(31, 31, 31)
+                        .addComponent(labelSeleccionarServicio)
+                        .addGap(56, 56, 56)
+                        .addComponent(comboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelVariable)
                             .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addComponent(labelNombreServicio)))
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(labelDuracionServicio))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(labelCapacidadServicio, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(labelVariable, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(labelNombreServicio, javax.swing.GroupLayout.Alignment.TRAILING))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNombreServicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                            .addComponent(txtVariableServicio, javax.swing.GroupLayout.Alignment.TRAILING)))
-                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtNombreServicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                                .addComponent(txtVariableServicio, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(txtCapacidadServicio, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(txtDuracionServicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel8)
                         .addGap(8, 8, 8)
-                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                .addComponent(labelSeleccionarServicio)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(23, 23, 23))
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap())
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,23 +144,27 @@ public class FrameIngresarServicio extends javax.swing.JFrame {
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelSeleccionarServicio))
-                .addGap(18, 18, 18)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(9, 9, 9)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelNombreServicio)
-                    .addComponent(txtNombreServicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNombreServicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelNombreServicio))
+                .addGap(15, 15, 15)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelDuracionServicio)
                     .addComponent(txtDuracionServicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelCapacidadServicio)
+                    .addComponent(txtCapacidadServicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelVariable)
+                    .addComponent(labelVariable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtVariableServicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         btnAgregarServicio.setText("Agregar");
@@ -155,28 +178,26 @@ public class FrameIngresarServicio extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(98, 98, 98)
-                .addComponent(labelTitulo)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(labelTitulo)
+                    .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLayeredPane1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnAgregarServicio)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnCerrarServicio)))
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAgregarServicio)
+                .addGap(18, 18, 18)
+                .addComponent(btnCerrarServicio)
+                .addGap(6, 6, 6))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(labelTitulo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnCerrarServicio)
                     .addComponent(btnAgregarServicio))
@@ -186,71 +207,84 @@ public class FrameIngresarServicio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtNombreServicioActionPerformed(java.awt.event.ActionEvent evt){}
+    private void txtDuracionServicioActionPerformed(java.awt.event.ActionEvent evt){}
+    private void txtVariableServicioActionPerformed(java.awt.event.ActionEvent evt){}
+    
     private void btnAgregarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarServicioActionPerformed
         String opcion = comboBox.getSelectedItem().toString();
         String nombreServicio;
         double duracionServicio;
 
+        String capacidad = txtCapacidadServicio.getText().strip();
+
         switch(opcion)
         {
             case "Ruta Gastronómica":
-                nombreServicio = txtNombreServicio.getText();
-                int paradas;
+                nombreServicio = txtNombreServicio.getText().strip();
 
-                if(!utilServicio.esDouble(txtDuracionServicio.getText()))
+                if(!utilServicio.esDouble(txtDuracionServicio.getText().strip()))
                 {
                     return;
                 }
-                else if(!utilServicio.esEntero(txtVariableServicio.getText()))
+                else if(!utilServicio.esEntero(capacidad) || !utilServicio.validarCapacidad(capacidad))
                 {
                     return;
                 }
-                duracionServicio = Double.parseDouble(txtDuracionServicio.getText());                    
-                paradas = Integer.parseInt(txtVariableServicio.getText());
-                var rutaGastronomica = new RutaGastronomica(nombreServicio, duracionServicio, paradas);
+                else if(!utilServicio.esEntero(txtVariableServicio.getText().strip()))
+                {
+                    return;
+                }
+                var rutaGastronomica = new RutaGastronomica(nombreServicio, txtDuracionServicio.getText().strip(), capacidad, txtVariableServicio.getText().strip());
                 if(!utilServicio.validarServicio(rutaGastronomica)){
                     return;
                 }
                 gestor.agregar(rutaGastronomica);
                 limpiar();
-                JOptionPane.showMessageDialog(this, "Ruta Gastronómica creada con éxito","Correcto",JOptionPane.INFORMATION_MESSAGE);                
+                JOptionPane.showMessageDialog(null, "Ruta Gastronómica ingresada con éxito", "Correcto", JOptionPane.INFORMATION_MESSAGE);
                 break;
 
             case "Paseo Lacustre":
-                nombreServicio = txtNombreServicio.getText();
-                var tipoEmbarcacion = txtVariableServicio.getText();
-                if(!utilServicio.esDouble(txtDuracionServicio.getText()))
+                nombreServicio = txtNombreServicio.getText().strip();
+                var tipoEmbarcacion = txtVariableServicio.getText().strip();
+                if(!utilServicio.esDouble(txtDuracionServicio.getText().strip()))
                 {
                     return;
-                }               
-                duracionServicio = Double.parseDouble(txtDuracionServicio.getText());                                    
-                var paseoLacustre = new PaseoLacustre(nombreServicio, duracionServicio, tipoEmbarcacion);
+                }
+                else if(!utilServicio.esEntero(capacidad) || !utilServicio.validarCapacidad(capacidad))
+                {
+                    return;
+                }
+                var paseoLacustre = new PaseoLacustre(nombreServicio, txtDuracionServicio.getText().strip(), capacidad, tipoEmbarcacion);
                 if(!utilServicio.validarServicio(paseoLacustre))
                 {
-                   return; 
+                   return;
                 }
                 gestor.agregar(paseoLacustre);
                 limpiar();
-                JOptionPane.showMessageDialog(this, "Paseo Lacustre creado con éxito","Correcto",JOptionPane.INFORMATION_MESSAGE);                
+                JOptionPane.showMessageDialog(null, "Paseo Lacustre ingresado con éxito", "Correcto", JOptionPane.INFORMATION_MESSAGE);
                 break;
-                    
+
 
             case "Excursión Cultural":
-                nombreServicio = txtNombreServicio.getText();
-                var lugarHistorico = txtVariableServicio.getText();
-                if(!utilServicio.esDouble(txtDuracionServicio.getText()))
+                nombreServicio = txtNombreServicio.getText().strip();
+                var lugarHistorico = txtVariableServicio.getText().strip();
+                if(!utilServicio.esDouble(txtDuracionServicio.getText().strip()))
                 {
                     return;
-                }               
-                duracionServicio = Double.parseDouble(txtDuracionServicio.getText());                                    
-                var excursionCultural = new ExcursionCultural(nombreServicio, duracionServicio, lugarHistorico);
+                }
+                else if(!utilServicio.esEntero(capacidad) || !utilServicio.validarCapacidad(capacidad))
+                {
+                    return;
+                }
+                var excursionCultural = new ExcursionCultural(nombreServicio, txtDuracionServicio.getText().strip(), capacidad, lugarHistorico);
                 if(!utilServicio.validarServicio(excursionCultural))
                 {
-                   return; 
+                   return;
                 }
                 gestor.agregar(excursionCultural);
                 limpiar();
-                JOptionPane.showMessageDialog(this, "Excursión cultural creada con éxito","Correcto",JOptionPane.INFORMATION_MESSAGE);                
+                JOptionPane.showMessageDialog(null, "Excursión Cultural ingresada con éxito", "Correcto", JOptionPane.INFORMATION_MESSAGE);
                 break;
         }
         
@@ -285,6 +319,7 @@ public class FrameIngresarServicio extends javax.swing.JFrame {
     private void limpiar(){
     txtDuracionServicio.setText("");
     txtNombreServicio.setText("");
+    txtCapacidadServicio.setText("");
     txtVariableServicio.setText("");    
     }
 
@@ -295,11 +330,13 @@ public class FrameIngresarServicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel labelCapacidadServicio;
     private javax.swing.JLabel labelDuracionServicio;
     private javax.swing.JLabel labelNombreServicio;
     private javax.swing.JLabel labelSeleccionarServicio;
     private javax.swing.JLabel labelTitulo;
     private javax.swing.JLabel labelVariable;
+    private javax.swing.JTextField txtCapacidadServicio;
     private javax.swing.JTextField txtDuracionServicio;
     private javax.swing.JTextField txtNombreServicio;
     private javax.swing.JTextField txtVariableServicio;

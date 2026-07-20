@@ -1,5 +1,0 @@
-0;Trekking;Panguipulli;12;60.5;Daniel Opazo;32;Las golondrinas;10589;Coñaripe;Villarrica;
-1;Gastronómico;Puerto Varas;8;45.2;Daniel Opazo;32;Las golondrinas;10589;Coñaripe;Villarrica;
-2;Gastronómico;Frutillar;15;25.1;Jaime Falpe;28;Caupolicán;1145;Pucón;Villarrica;
-3;Escalada;Osorno;10;50.9;Ariel Quinteros;28;Los Tulipanes;7847;Lican ray;Villarrica;
-4;Trekking;Llanquihue;20;10.9;Ariel Quinteros;28;Los Tulipanes;7847;Lican ray;Villarrica;
