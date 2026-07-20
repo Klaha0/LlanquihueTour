@@ -2,7 +2,6 @@ package ui;
 
 import data.GestorEntidades;
 import static java.util.Objects.isNull;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import model.Cliente;
 import model.Direccion;
@@ -78,7 +77,7 @@ public class FrameIngresarPersona extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         JPane1.setMaximumSize(new java.awt.Dimension(352, 517));
         JPane1.setMinimumSize(new java.awt.Dimension(352, 517));

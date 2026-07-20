@@ -1,6 +1,6 @@
 # 🧭 LlanquihueTourApp
 
-Aplicación de escritorio para la gestión de la agencia de turismo **Llanquihue Tour**. El
+Prototipo de la Aplicación de escritorio para la gestión de la agencia de turismo **Llanquihue Tour**. El
 sistema modela y administra las entidades clave del negocio —clientes, guías turísticos y
 servicios turísticos— a través de una interfaz gráfica Swing, aplicando los principios
 fundamentales de la Programación Orientada a Objetos.
@@ -19,8 +19,8 @@ Proyecto desarrollado para la asignatura **Desarrollo Orientado a Objetos I** (D
 
 LlanquihueTourApp permite **registrar, consultar, buscar, actualizar y eliminar** las entidades
 de la agencia desde una interfaz gráfica. Todas las entidades se almacenan de forma polimórfica
-en una única colección y se persisten en un archivo de texto (`DatosLlanquihueTours.txt`), que se
-carga automáticamente al iniciar el programa y se mantiene sincronizado con cada operación.
+en una única colección y se persisten en un archivo de texto (`resources/DatosLlanquihueTours.txt`),
+que se carga automáticamente al iniciar el programa y se mantiene sincronizado con cada operación.
 
 Características principales:
 
@@ -41,6 +41,12 @@ Características principales:
   archivo y se reconstruyen en una segunda pasada de lectura (resolviendo cliente y servicio).
 * **Gestión completa (CRUD):** cualquier registro puede buscarse por nombre (coincidencia
   parcial), RUT o código de reserva, y luego actualizarse o eliminarse.
+* **Navegación de resultados y confirmaciones:** si una búsqueda por nombre encuentra más de
+  una coincidencia, se pueden recorrer con las flechas **Anterior/Siguiente**, mostrando la
+  posición actual sobre el total; toda eliminación (de una entidad o de una reserva) pide
+  confirmación explícita antes de aplicarse.
+* **Límite de reservas:** el sistema no permite crear una nueva reserva una vez alcanzado el
+  máximo de 40 reservas registradas.
 
 ## 🧠 Principios de POO aplicados
 
@@ -66,7 +72,7 @@ Características principales:
 | `model` | `Reserva` | Entidad que asocia un `Cliente` y un `ServicioTuristico` con un código de reserva y una cantidad de integrantes. |
 | `model` | `Direccion`, `Rut` | Objetos de valor compuestos dentro de `Persona`. |
 | `data` | `GestorEntidades` | Mantiene la colección `ArrayList<Persistible>` y el `ArrayList<Reserva>`; agrega, muestra, busca, actualiza y elimina, y calcula cupos disponibles. |
-| `data` | `GestorDatos` | Lee y escribe las entidades y reservas en `DatosLlanquihueTours.txt` (carga en dos pasadas, agrega y reescribe el archivo). |
+| `data` | `GestorDatos` | Lee y escribe las entidades y reservas en `resources/DatosLlanquihueTours.txt` (carga en dos pasadas, agrega y reescribe el archivo). |
 | `service` | `GeneradorCodigos` | Genera códigos de reserva aleatorios de 8 caracteres. |
 | `util` | `UtilPersona`, `UtilCliente`, `UtilGuiaTuristico`, `UtilServicioTuristico`, `UtilDireccion`, `UtilRut`, `UtilReserva` | Validaciones de los campos de cada entidad. |
 | `exception` | `PersonaException`, `RutInvalidoException`, `DireccionException`, `ServicioTuristicoException`, `ReservaException` | Excepciones personalizadas de validación. |
@@ -88,6 +94,9 @@ Características principales:
 ├── util/        # Validadores: UtilPersona, UtilCliente, UtilGuiaTuristico,
 │                # UtilServicioTuristico, UtilDireccion, UtilRut, UtilReserva.
 └── exception/   # Excepciones personalizadas.
+
+📁 resources/
+└── DatosLlanquihueTours.txt   # Archivo de persistencia leído y escrito por GestorDatos.
 ```
 
 ## ⚙️ Instrucciones para clonar y ejecutar el proyecto
@@ -105,15 +114,17 @@ git clone https://github.com/Klaha0/LlanquihueTour.git
      Gastronómica, Paseo Lacustre o Excursión Cultural, indicando su **capacidad**).
    * **Mostrar:** listar los **Guías**, **Clientes**, **Servicios** o **Todo** el registro.
    * **Gestionar:** buscar una entidad por nombre (coincidencia parcial), RUT o código de
-     reserva, **actualizar** sus datos o **eliminarla** del sistema.
+     reserva —si hay más de una coincidencia, se navega con las flechas **Anterior/Siguiente**—,
+     **actualizar** sus datos o **eliminarla** del sistema (previa confirmación).
    * **Reservas:** crear una reserva asociando un cliente con un servicio (mostrando los cupos
-     disponibles), y buscar, actualizar o eliminar reservas existentes.
+     disponibles y respetando el máximo de 40 reservas), y buscar, actualizar o eliminar
+     reservas existentes (también con navegación entre resultados y confirmación al eliminar).
    * **Sistema:** limpiar el área de información.
 
 ## 💾 Formato del archivo de datos
 
-Cada línea de `DatosLlanquihueTours.txt` representa una entidad, con sus campos separados por `;`
-y precedidos por el tipo. Ejemplos:
+Cada línea de `resources/DatosLlanquihueTours.txt` representa una entidad, con sus campos
+separados por `;` y precedidos por el tipo. Ejemplos:
 
 ```text
 GuiaTuristico;Ana Torres Rivas;38;Los Aromos;120;Puerto Varas;Los Lagos;12345678-5;Trekking
@@ -134,25 +145,6 @@ eliminar una entidad o reserva para mantener la integridad de los datos.
 
 ---
 
-## 🆕 Semana 8 — Interfaces, polimorfismo y GUI (actual)
-
-**Objetivo:** ampliar el sistema con un contrato de comportamiento común (`Registrable`),
-diferenciación de tipos en tiempo de ejecución mediante `instanceof` y una interfaz gráfica
-básica para el ingreso y visualización de registros.
-
-**Qué se agregó sobre el proyecto de semanas anteriores:**
-
-* **Interfaz `Registrable`** (paquete `model`), con el método `mostrarResumen()`. La implementan
-  `ServicioTuristico` (y sus subclases, por herencia), `GuiaTuristico` y `Direccion`.
-* **`GestorEntidades`** (paquete `data`): mantiene una única colección `ArrayList<Registrable>`
-  con guías y servicios, y usa `instanceof` para separarlos al mostrarlos (`mostrarGuias()`,
-  `mostrarServicios()`, `mostrarTodo()`).
-* **Interfaz gráfica Swing** (paquete `ui`): `Main` es la ventana principal; `FrameIngresarGuia`
-  y `FrameIngresarServicio` permiten ingresar cada tipo de entidad mediante formularios con
-  validación y confirmación por `JOptionPane`.
-* **Paquetes renombrados a minúsculas** (`model`, `data`, `ui`, `util`, `exception`, `service`) y
-  **métodos renombrados a camelCase** en todo el proyecto, siguiendo la convención estándar de
-  Java.
 
 **Cómo probarlo:** ejecuta `Main`, ingresa un guía y un servicio desde los botones en la sección "Ingresar
 nuevo", y luego usa los botones "Mostrar" para ver el listado polimórfico resultante.
