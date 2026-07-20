@@ -13,10 +13,11 @@ public class ExcursionCultural extends ServicioTuristico{
      * Crea una excursión cultural.
      * @param nombre: nombre de la excursión cultural.
      * @param duracionHoras: duración en horas del servicio.
+     * @param capacidad: cantidad de personas que pueden inscribirse (1 a 40).
      * @param lugarHistorico: lugar histórico visitado durante la excursión.
      */
-    public ExcursionCultural(String nombre, String duracionHoras, String lugarHistorico) {
-        super(nombre, duracionHoras);
+    public ExcursionCultural(String nombre, String duracionHoras, String capacidad, String lugarHistorico) {
+        super(nombre, duracionHoras, capacidad);
         this.lugarHistorico = lugarHistorico;
     }
 
@@ -36,15 +37,17 @@ public class ExcursionCultural extends ServicioTuristico{
     public String toString() {
         return "Excursion Cultural\t: " + this.getNombre() + "\n"+
                "Duración\t\t: " + String.format("%.2f Hrs.",this.getDuracionHoras()) +  "\n"+
-               "Lugar Histórico\t: " + this.lugarHistorico + "\n";
+               "Capacidad\t\t: " + this.getCapacidad() + " personas\n"+
+               "Lugar Histórico\t\t: " + this.lugarHistorico + "\n";
     }
-    
+
     @Override
     public void persistir() {
-        String persistirExcursionCultural = 
+        String persistirExcursionCultural =
                 "ExcursionCultural;" +
-                this.getNombre() + ";" + 
+                this.getNombre() + ";" +
                 this.getDuracionHoras() + ";"+
+                this.getCapacidad() + ";"+
                 this.lugarHistorico;
         gestor.persistirEntidad(persistirExcursionCultural);
     }

@@ -1,0 +1,74 @@
+Cliente;Javier Silva Castillo;45;Los Romeros;15058;Quilicura;Santiago;12034567-2;R9FKyOpU
+Cliente;Camila Rojas Muñoz;29;Los Alerces;245;Puerto Varas;Puerto Montt;13124568-8;A7mP2qLs
+Cliente;Felipe González Soto;38;Vicente Pérez Rosales;918;Puerto Montt;Puerto Montt;14235679-1;B8nR4tWx
+Cliente;Valentina Sepúlveda Díaz;33;San Martín;1120;Frutillar;Puerto Montt;15346780-3;C3vK6yZa
+Cliente;Matías Contreras Vera;27;Los Colonos;456;Llanquihue;Puerto Montt;16457891-7;D5pL9sQe
+Cliente;Daniela Morales Paredes;41;Imperial;789;Osorno;Osorno;17568902-8;E2xM7uNb
+Cliente;Sebastián Torres Fuentes;36;Antonio Varas;332;Puerto Varas;Puerto Montt;18679013-8;F6qT1wRc
+Cliente;Francisca Araya López;31;Los Notros;87;Frutillar;Puerto Montt;19780124-7;G4zP8aHd
+Cliente;Nicolás Herrera Castro;44;Baquedano;1540;Puerto Montt;Puerto Montt;20891235-6;H9kV3mYs
+Cliente;Constanza Navarro Reyes;26;Los Arrayanes;610;Puerto Varas;Puerto Montt;21902346-4;J2rN5xUf
+Cliente;Benjamín Soto Ramírez;39;Manuel Rodríguez;224;Llanquihue;Puerto Montt;23013457-K;K7tB4qWp
+Cliente;Antonia Valdés Molina;34;Pedro Montt;990;Osorno;Osorno;24124568-3;L3yC8vRm
+Cliente;Diego Fuentes Carrasco;48;Los Pellines;301;Puerto Octay;Osorno;25235679-7;M6uD1zNs
+Cliente;Isidora Pino Salazar;28;Bernardo O'Higgins;712;Frutillar;Puerto Montt;26346780-9;N4wF9pTa
+Cliente;Tomás Vega Sandoval;37;Nueva Braunau;145;Puerto Varas;Puerto Montt;27457891-2;P8aG2rVx
+Cliente;Josefa Leiva Campos;42;Regimiento;811;Puerto Montt;Puerto Montt;28568902-3;Q5sH7kYb
+Cliente;Martín Bustos Alarcón;30;Los Coihues;506;Llanquihue;Puerto Montt;29679013-3;S1dJ6mZe
+Cliente;Catalina Garrido Peña;35;Colón;1288;Osorno;Osorno;30780124-8;T9fK3nUc
+Cliente;Vicente Tapia Escobar;46;Los Tilos;76;Frutillar;Puerto Montt;31891235-1;U2gL8pWd
+Cliente;Amanda Cárdenas Silva;32;Eleuterio Ramírez;455;Puerto Varas;Puerto Montt;32902346-K;V7hM4qXr
+Cliente;Joaquín Núñez Bravo;40;Bellavista;640;Puerto Montt;Puerto Montt;34013457-5;W3jN9sYa
+Cliente;Trinidad Figueroa Ortiz;25;Los Mañíos;132;Llanquihue;Puerto Montt;35124568-9;X6kP1tZb
+Cliente;Agustín Lagos Méndez;51;San Pedro;903;Osorno;Osorno;36235679-2;Y4mQ7uAc
+Cliente;Florencia Vidal Riquelme;29;Los Castaños;218;Puerto Octay;Osorno;37346780-4;Z8nR2vBd
+Cliente;Lucas Espinoza Jara;43;Benavente;740;Puerto Montt;Puerto Montt;38457891-8;a5pS9wCe
+Cliente;Martina Cabrera Godoy;36;Los Volcanes;355;Puerto Varas;Puerto Montt;39568902-9;b1qT6xDf
+Cliente;Simón Salinas Moya;47;Cristino Winkler;110;Frutillar;Puerto Montt;40679013-4;c7rV3yEg
+Cliente;Emilia Barría Soto;33;Salvador Allende;528;Llanquihue;Puerto Montt;41780124-3;d2sW8zFh
+Cliente;Maximiliano Sanhueza León;38;República;965;Osorno;Osorno;42891235-7;e9tX4aGj
+Cliente;Renata Cáceres Pinto;27;Los Ulmos;284;Puerto Montt;Puerto Montt;43902346-5;f3uY7bHk
+GuiaTuristico;Carlos Palma Garrido;41;Anibal Huneeus;737;La Pintana;Santiago;11022334-K;Trekking
+GuiaTuristico;Daniela Romero Acuña;35;Lluta;6458;San Javier;Concepción;12133445-3;Montañismo
+GuiaTuristico;Paula Mancilla Ruiz;32;Los Robles;412;Puerto Varas;Puerto Montt;13244556-7;Historia local
+GuiaTuristico;Rodrigo Almonacid Pérez;46;Los Laureles;985;Frutillar;Puerto Montt;14355667-0;Navegación
+GuiaTuristico;Carolina Ojeda Soto;39;Egaña;267;Puerto Montt;Puerto Montt;15466778-4;Gastronomía
+GuiaTuristico;Mauricio Villarroel Díaz;44;Freire;1033;Osorno;Osorno;16577889-8;Senderismo
+GuiaTuristico;Andrea Barrientos Vera;31;Los Avellanos;154;Llanquihue;Puerto Montt;17688990-K;Patrimonio cultural
+GuiaTuristico;Cristóbal Cárcamo Jara;37;San Francisco;690;Puerto Octay;Osorno;18799001-7;Ecoturismo
+GuiaTuristico;Verónica Gallardo Muñoz;42;Rengifo;821;Puerto Montt;Puerto Montt;19900112-4;Avistamiento de aves
+GuiaTuristico;Esteban Ulloa Paredes;34;Los Copihues;309;Puerto Varas;Puerto Montt;21011223-5;Kayak
+RutaGastronomica;Sabores de Frutillar;4.0;25;4
+RutaGastronomica;Cocina Tradicional de Puerto Varas;5.0;30;5
+PaseoLacustre;Navegación por el Lago Llanquihue;5.5;40;Catamarán
+PaseoLacustre;Atardecer en la Bahía de Frutillar;3.0;24;Lancha turística
+ExcursionCultural;Historia y Patrimonio de Llanquihue;2.5;40;Museo del lago Llanquihue
+ExcursionCultural;Colonización Alemana en Frutillar;3.5;30;Teatro del Lago y casco histórico
+Cliente;Javier Vera Rojas;35;Jardín del edén;4582;El Carmen;Chillán;15641450-6;mSSNDAgt
+Cliente;Andrés Cabedo Silva;40;Los olivos;10879;Talca;Talca;16411456-2;GKQlxhfv
+Reserva;rA1bC2dE;12034567-2;Navegación por el Lago Llanquihue;6
+Reserva;rF3gH4jK;13124568-8;Sabores de Frutillar;4
+Reserva;rL5mN6pQ;14235679-1;Historia y Patrimonio de Llanquihue;5
+Reserva;rR7sT8vW;15346780-3;Cocina Tradicional de Puerto Varas;8
+Reserva;rX9yZ1aB;16457891-7;Atardecer en la Bahía de Frutillar;3
+Reserva;rC2dE3fG;17568902-8;Colonización Alemana en Frutillar;6
+Reserva;rH4jK5mN;18679013-8;Navegación por el Lago Llanquihue;7
+Reserva;rP6qR7sT;19780124-7;Sabores de Frutillar;5
+Reserva;rU8vW9xY;20891235-6;Historia y Patrimonio de Llanquihue;4
+Reserva;rZ1aB2cD;21902346-4;Cocina Tradicional de Puerto Varas;6
+Reserva;sE3fG4hJ;23013457-K;Atardecer en la Bahía de Frutillar;4
+Reserva;sK5mN6pQ;24124568-3;Colonización Alemana en Frutillar;5
+Reserva;sR7tU8vW;25235679-7;Navegación por el Lago Llanquihue;8
+Reserva;sX9yZ1bC;26346780-9;Sabores de Frutillar;3
+Reserva;sD2eF3gH;27457891-2;Historia y Patrimonio de Llanquihue;6
+Reserva;sJ4kL5mN;28568902-3;Cocina Tradicional de Puerto Varas;4
+Reserva;sP6qR7tU;29679013-3;Atardecer en la Bahía de Frutillar;5
+Reserva;sV8wX9yZ;30780124-8;Colonización Alemana en Frutillar;7
+Reserva;tA1bC2dE;31891235-1;Navegación por el Lago Llanquihue;6
+Reserva;tF3gH4jK;32902346-K;Historia y Patrimonio de Llanquihue;5
+Reserva;o76azM7N;40679013-4;Sabores de Frutillar;8
+Reserva;wdNDvb85;43902346-5;Cocina Tradicional de Puerto Varas;7
+Reserva;mSSNDAgt;15641450-6;Navegación por el Lago Llanquihue;6
+Reserva;C3vK6yZa;15346780-3;Navegación por el Lago Llanquihue;5
+Reserva;C3vK6yZa;15346780-3;Navegación por el Lago Llanquihue;2
+Reserva;C3vK6yZa;15346780-3;Cocina Tradicional de Puerto Varas;5

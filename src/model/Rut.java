@@ -35,10 +35,17 @@ public class Rut {
     }    
     
     @Override
-    public String toString(){
-        var rutString = this.rut.replace(".", "").replace("-", "");
-        rutString = this.rut.substring(0,(rutString.length())-1) + "-" + this.rut.substring((rutString.length())-1);
-        return rutString;
-    }               
+public String toString() {
+    String rutString = this.rut
+            .replace(".", "")
+            .replace("-", "")
+            .toUpperCase();
+
+    rutString = rutString.substring(0, rutString.length() - 1)
+            + "-"
+            + rutString.substring(rutString.length() - 1);
+
+    return rutString;
+}              
     
 }

@@ -16,12 +16,13 @@ public class RutaGastronomica extends ServicioTuristico{
      * Crea una ruta gastronómica.
      * @param nombre: nombre del tour.
      * @param duracionHoras: duración en horas del servicio.
+     * @param capacidad: cantidad de personas que pueden inscribirse (1 a 40).
      * @param numeroDeParadas: cantidad de paradas de la ruta.
      */
-    public RutaGastronomica(String nombre, String duracionHoras, String numeroDeParadas) {
-        super(nombre, duracionHoras);
+    public RutaGastronomica(String nombre, String duracionHoras, String capacidad, String numeroDeParadas) {
+        super(nombre, duracionHoras, capacidad);
         if(util.esEntero(numeroDeParadas)){
-            this.numeroDeParadas = Integer.parseInt(numeroDeParadas);            
+            this.numeroDeParadas = Integer.parseInt(numeroDeParadas);
         }
     }
 
@@ -42,15 +43,17 @@ public class RutaGastronomica extends ServicioTuristico{
     public String toString() {
         return "Ruta Gastronómica\t: " + this.getNombre() + "\n"+
                "Duración\t\t: " + String.format("%.2f Hrs.",this.getDuracionHoras()) +  "\n"+
+               "Capacidad\t\t: " + this.getCapacidad() + " personas\n"+
                "Número de Paradas\t: " + this.numeroDeParadas+ "\n";
     }
 
     @Override
     public void persistir() {
-        String persistirRutaGastronomica = 
+        String persistirRutaGastronomica =
                 "RutaGastronomica;" +
-                this.getNombre() + ";" + 
+                this.getNombre() + ";" +
                 this.getDuracionHoras() + ";"+
+                this.getCapacidad() + ";"+
                 this.numeroDeParadas;
         gestor.persistirEntidad(persistirRutaGastronomica);
     }

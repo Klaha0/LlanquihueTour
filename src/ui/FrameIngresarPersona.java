@@ -37,7 +37,7 @@ public class FrameIngresarPersona extends javax.swing.JFrame {
         this.gestor = gestorEntidades;
         setLocationRelativeTo(null);
         setResizable(false);
-        if(isNull(txtRutPersona) || txtRutPersona.getText().isBlank())
+        if(isNull(txtRutPersona) || txtRutPersona.getText().strip().isBlank())
             txtRutPersona.setText("Ejemplo: 12345678-9");
     }
 
@@ -78,7 +78,7 @@ public class FrameIngresarPersona extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
 
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         JPane1.setMaximumSize(new java.awt.Dimension(352, 517));
         JPane1.setMinimumSize(new java.awt.Dimension(352, 517));
@@ -175,9 +175,9 @@ public class FrameIngresarPersona extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(labelDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(labelDatosPersonalesLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
+                        .addGap(18, 18, 18)
                         .addComponent(labelVariablePersona)
-                        .addGap(57, 57, 57)
+                        .addGap(45, 45, 45)
                         .addComponent(txtVariablePersona, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(labelDatosPersonalesLayout.createSequentialGroup()
                         .addGroup(labelDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -267,6 +267,8 @@ public class FrameIngresarPersona extends javax.swing.JFrame {
                 .addGap(17, 17, 17))
         );
 
+        txtNombrePersona.getAccessibleContext().setAccessibleParent(null);
+
         comboBoxPersona.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Guía", "Cliente" }));
         comboBoxPersona.addActionListener(this::comboBoxPersonaActionPerformed);
 
@@ -335,7 +337,6 @@ public class FrameIngresarPersona extends javax.swing.JFrame {
         );
 
         JPane1.getAccessibleContext().setAccessibleDescription("");
-        JPane1.getAccessibleContext().setAccessibleParent(null);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -350,13 +351,13 @@ public class FrameIngresarPersona extends javax.swing.JFrame {
     private void btnAgregarPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPersonaActionPerformed
             String opcion = comboBoxPersona.getSelectedItem().toString();
         
-            String calle = txtCallePersona.getText();
-            String comuna = txtComunaPersona.getText();
-            String ciudad = txtCiudadPersona.getText();
-            String numero = txtNumeracionPersona.getText();  
-            String nombre = txtNombrePersona.getText();
-            String edad = txtEdadPersona.getText();
-            String rut = txtRutPersona.getText();
+            String calle = txtCallePersona.getText().strip();
+            String comuna = txtComunaPersona.getText().strip();
+            String ciudad = txtCiudadPersona.getText().strip();
+            String numero = txtNumeracionPersona.getText().strip();  
+            String nombre = txtNombrePersona.getText().strip();
+            String edad = txtEdadPersona.getText().strip();
+            String rut = txtRutPersona.getText().strip();
 
             if(!utilPersona.validarNombre(nombre)){
                 return;
@@ -383,7 +384,7 @@ public class FrameIngresarPersona extends javax.swing.JFrame {
             var rutObjeto = new Rut(rut);
             if(opcion == "Guía")
             {
-                var especialidad = txtVariablePersona.getText();
+                var especialidad = txtVariablePersona.getText().strip();
                 if(utilGuia.validarEspecialidad(especialidad)){
                     var guia = new GuiaTuristico(nombre, edad, direccion, rutObjeto, especialidad);
                     gestor.agregar(guia);
@@ -393,7 +394,7 @@ public class FrameIngresarPersona extends javax.swing.JFrame {
             if(opcion == "Cliente")
             {   
                 String codigo = "";
-                if(isNull(txtVariablePersona.getText()) || txtVariablePersona.getText().length() != 8)
+                if(isNull(txtVariablePersona.getText().strip()) || txtVariablePersona.getText().strip().length() != 8)
                     codigo = generador.generarCodigo();
                 
                 while(codigo.length() != 8 || !utilcliente.validarCodigo(codigo))
@@ -441,7 +442,7 @@ public class FrameIngresarPersona extends javax.swing.JFrame {
     }//GEN-LAST:event_txtRutPersonaActionPerformed
 
     private void txtRutPersonaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtRutPersonaMouseClicked
-        if(txtRutPersona.getText().contains("Ejemplo: 12345678-9"))
+        if(txtRutPersona.getText().strip().contains("Ejemplo: 12345678-9"))
             txtRutPersona.setText("");
     }//GEN-LAST:event_txtRutPersonaMouseClicked
 
@@ -450,12 +451,12 @@ public class FrameIngresarPersona extends javax.swing.JFrame {
     }//GEN-LAST:event_txtRutPersonaMouseExited
 
     private void txtRutPersonaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtRutPersonaFocusLost
-        if(isNull(txtRutPersona.getText()) || txtRutPersona.getText().isBlank() || txtRutPersona.getText().contains("Ejemplo : 12345678-9"))
+        if(isNull(txtRutPersona.getText().strip()) || txtRutPersona.getText().strip().isBlank() || txtRutPersona.getText().strip().contains("Ejemplo : 12345678-9"))
             txtRutPersona.setText("Ejemplo: 12345678-9");
     }//GEN-LAST:event_txtRutPersonaFocusLost
 
     private void txtRutPersonaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtRutPersonaFocusGained
-        if(txtRutPersona.getText().contains("Ejemplo: 12345678-9"))
+        if(txtRutPersona.getText().strip().contains("Ejemplo: 12345678-9"))
             txtRutPersona.setText("");
     }//GEN-LAST:event_txtRutPersonaFocusGained
 

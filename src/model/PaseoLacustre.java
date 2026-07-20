@@ -15,11 +15,12 @@ public class PaseoLacustre extends ServicioTuristico{
      * Crea un paseo lacustre.
      * @param nombre: nombre del servicio turístico a prestar.
      * @param duracionHoras: duración en horas del servicio.
+     * @param capacidad: cantidad de personas que pueden inscribirse (1 a 40).
      * @param tipoEmbarcacion: tipo de embarcación utilizada en el paseo.
      */
-    public PaseoLacustre(String nombre, String duracionHoras, String tipoEmbarcacion) {
-        super(nombre, duracionHoras);
-        this.tipoEmbarcacion = tipoEmbarcacion;        
+    public PaseoLacustre(String nombre, String duracionHoras, String capacidad, String tipoEmbarcacion) {
+        super(nombre, duracionHoras, capacidad);
+        this.tipoEmbarcacion = tipoEmbarcacion;
     }
 
     public String getTipoEmbarcacion() {
@@ -36,17 +37,19 @@ public class PaseoLacustre extends ServicioTuristico{
      */
     @Override
     public String toString() {
-        return "Paseo Lacustre\t: " + this.getNombre() + "\n"+
-               "Duración\t\t: " + String.format("%.2f Hrs.",this.getDuracionHoras()) + "\n"+
+        return "Paseo Lacustre\t\t: " + this.getNombre() + "\n"+
+               "Duración\t\t: " + String.format("%.1f Hrs.",this.getDuracionHoras()) + "\n"+
+               "Capacidad\t\t: " + this.getCapacidad() + " personas\n"+
                "Tipo de Embarcación\t: " + this.tipoEmbarcacion + "\n";
     }
     @Override
-        public void persistir() {
-            String persistirPaseoLacustre = 
-                    "PaseoLacustre;" +
-                    this.getNombre() + ";" + 
-                    this.getDuracionHoras() + ";"+
-                    this.tipoEmbarcacion;
-            gestor.persistirEntidad(persistirPaseoLacustre);
-        }
+    public void persistir() {
+        String persistirPaseoLacustre =
+                "PaseoLacustre;" +
+                this.getNombre() + ";" +
+                this.getDuracionHoras() + ";"+
+                this.getCapacidad() + ";"+
+                this.tipoEmbarcacion;
+        gestor.persistirEntidad(persistirPaseoLacustre);
+    }
 }

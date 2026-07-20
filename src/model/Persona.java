@@ -8,8 +8,9 @@ import util.UtilPersona;
 import util.UtilRut;
 
 /**
- * Clase que representa un guía turístico con sus datos personales y dirección.
- * Cada guía tiene un nombre, una edad y una dirección asociada.
+ * Clase base que representa una persona del sistema con sus datos personales.
+ * Cada persona tiene un nombre, una edad, un RUT y una dirección asociada, y
+ * sirve de superclase para Cliente y GuiaTuristico.
  */
 public class Persona implements Persistible{
     private UtilPersona util = new UtilPersona();
@@ -21,10 +22,10 @@ public class Persona implements Persistible{
     private Rut rut;
 
     /**
-     * Crea un guía turístico validando sus datos antes de asignarlos.
-     * @param nombre: nombre del guía turístico.
-     * @param edadString: edad del guía turístico.
-     * @param direccion: dirección del guía turístico.
+     * Crea una persona validando sus datos antes de asignarlos.
+     * @param nombre: nombre de la persona.
+     * @param edadString: edad de la persona.
+     * @param direccion: dirección de la persona.
      * @param rut: rut de la persona
      */
     public Persona(String nombre, String edadString, Direccion direccion, Rut rut)
@@ -52,8 +53,8 @@ public class Persona implements Persistible{
     }
 
     /**
-     * Getter del nombre del guía turístico.
-     * @return el nombre del guía turístico.
+     * Getter del nombre de la persona.
+     * @return el nombre de la persona.
      */
     public String getNombre() {
 
@@ -61,40 +62,40 @@ public class Persona implements Persistible{
     }
 
     /**
-     * Setter del nombre del guía turístico.
-     * @param nombre: nombre del guía turístico.
+     * Setter del nombre de la persona.
+     * @param nombre: nombre de la persona.
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
     /**
-     * Getter de la dirección del guía turístico.
-     * @return la dirección del guía turístico.
+     * Getter de la dirección de la persona.
+     * @return la dirección de la persona.
      */
     public Direccion getDireccion() {
         return direccion;
     }
 
     /**
-     * Setter de la dirección del guía turístico.
-     * @param direccion: dirección del guía turístico.
+     * Setter de la dirección de la persona.
+     * @param direccion: dirección de la persona.
      */
     public void setDireccion(Direccion direccion) {
         this.direccion = direccion;
     }
 
     /**
-     * Getter de la edad del guía turístico.
-     * @return la edad del guía turístico.
+     * Getter de la edad de la persona.
+     * @return la edad de la persona.
      */
     public int getEdad() {
         return edad;
     }
 
     /**
-     * Setter de la edad del guía turístico.
-     * @param edadString: edad del guía turístico.
+     * Setter de la edad de la persona.
+     * @param edadString: edad de la persona.
      */
     public void setEdad(String edadString) {
         if(!util.esEntero(edadString) || !util.validarEdad(edadString)){
@@ -115,7 +116,7 @@ public class Persona implements Persistible{
 
     /**
      * sobreescribe el método toString con formato personalizado
-     * @return el texto descriptivo del guía turístico.
+     * @return el texto descriptivo de la persona.
      */
     @Override
     public String toString() {

@@ -56,6 +56,11 @@ según su tipo real (PaseoLacustre, ExcursionCultural o RutaGastronomica).
             JOptionPane.showMessageDialog(null, "Debe ingresar un tiempo mayor que 0","Error",JOptionPane.ERROR_MESSAGE);
             return false;
         }
+        if (paseoLacustre.getCapacidad() < 1 || paseoLacustre.getCapacidad() > 40)
+        {
+            JOptionPane.showMessageDialog(null, "La capacidad debe estar entre 1 y 40 personas","Error",JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
          if(isNull(paseoLacustre.getTipoEmbarcacion()))
         {
             JOptionPane.showMessageDialog(null, "Debe ingresar un tipo de embarcación válido","Error",JOptionPane.ERROR_MESSAGE);
@@ -91,6 +96,11 @@ según su tipo real (PaseoLacustre, ExcursionCultural o RutaGastronomica).
             JOptionPane.showMessageDialog(null, "Debe ingresar un tiempo mayor que 0","Error",JOptionPane.ERROR_MESSAGE);
             return false;
         }
+        if (excursionCultural.getCapacidad() < 1 || excursionCultural.getCapacidad() > 40)
+        {
+            JOptionPane.showMessageDialog(null, "La capacidad debe estar entre 1 y 40 personas","Error",JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
         if(isNull(excursionCultural.getLugarHistorico()))
         {
             JOptionPane.showMessageDialog(null, "Debe ingresar un lugar válido","Error",JOptionPane.ERROR_MESSAGE);
@@ -124,6 +134,11 @@ según su tipo real (PaseoLacustre, ExcursionCultural o RutaGastronomica).
         if (rutaGastronomica.getDuracionHoras() < 0)
         {
             JOptionPane.showMessageDialog(null, "Debe ingresar un tiempo mayor que 0","Error",JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if (rutaGastronomica.getCapacidad() < 1 || rutaGastronomica.getCapacidad() > 40)
+        {
+            JOptionPane.showMessageDialog(null, "La capacidad debe estar entre 1 y 40 personas","Error",JOptionPane.ERROR_MESSAGE);
             return false;
         }
         if (rutaGastronomica.getNumeroDeParadas()< 0)
@@ -165,6 +180,29 @@ según su tipo real (PaseoLacustre, ExcursionCultural o RutaGastronomica).
         }
         catch(NumberFormatException e){
             JOptionPane.showMessageDialog(null, "La duración debe ser número decimal y mayor que 0","Error",JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Valida que la capacidad ingresada sea un entero entre 1 y 40 personas.
+     * @param capacidad: capacidad a validar.
+     * @return true si la capacidad está en el rango permitido.
+     */
+    public boolean validarCapacidad(String capacidad)
+    {
+        try
+        {
+            int cap = Integer.parseInt(capacidad);
+            if(cap < 1 || cap > 40)
+            {
+                JOptionPane.showMessageDialog(null, "La capacidad debe estar entre 1 y 40 personas","Error",JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        }
+        catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(null, "Debe ingresar una capacidad válida (1 a 40)","Error",JOptionPane.ERROR_MESSAGE);
             return false;
         }
         return true;
